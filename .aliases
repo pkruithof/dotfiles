@@ -1,0 +1,27 @@
+# Easier navigation: .., ..., ~ and -
+alias ..="cd .."
+alias ...="cd ../.."
+alias ~="cd ~" # `cd` is probably faster to type though
+alias -- -="cd -"
+
+# List all files colorized in long format, including dot files
+alias la="ls -Gla"
+
+# IP addresses
+alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
+alias localip="ipconfig getifaddr en1"
+alias ips="ifconfig -a | perl -nle'/(\d+\.\d+\.\d+\.\d+)/ && print $1'"
+
+# View HTTP traffic
+alias sniff="sudo ngrep -d 'en1' -t '^(GET|POST) ' 'tcp and port 80'"
+alias httpdump="sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET \/.*\""
+
+for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do alias "$method"="lwp-request -m '$method'"; done
+
+
+alias ht="cd /opt/local/apache2/htdocs/"
+alias htstop="sudo /opt/local/bin/apachectl stop"
+alias htstart="sudo /opt/local/bin/apachectl start"
+alias htrestart="sudo /opt/local/bin/apachectl restart"
+alias mydump="mysqldump5 -u root --default-character-set=utf8"
+
