@@ -18,10 +18,12 @@ alias httpdump="sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET
 
 for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do alias "$method"="lwp-request -m '$method'"; done
 
-
+# Apache shortcuts
 alias ht="cd /opt/local/apache2/htdocs/"
 alias htstop="sudo /opt/local/bin/apachectl stop"
 alias htstart="sudo /opt/local/bin/apachectl start"
 alias htrestart="sudo /opt/local/bin/apachectl restart"
 alias mydump="mysqldump5 -u root --default-character-set=utf8"
 
+# top default ordered by CPU
+alias top="top -o cpu"
