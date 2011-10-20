@@ -31,6 +31,8 @@ set cursorline
 
 " Make tabs as wide as two spaces
 set tabstop=2
+set shiftwidth=2
+set expandtab
 
 " Show “invisible” characters
 set lcs=tab:▸\ ,trail:·,eol:¬,nbsp:_
@@ -96,19 +98,8 @@ set background=dark
 " enable commandline completion when in command mode
 set wildmenu
 
-" use 2 spaces instead of tabs
-set expandtab
-set tabstop=2
-set shiftwidth=2
-
 " don't wrap long lines
 set nowrap
 
-<<<<<<< HEAD
-" hightlight the line the cursor is on
-set cursorline
-
-=======
->>>>>>> updated
 " try to enable reloading the current file if it was altered by another program, however this doesn't seem to work
 set autoread
