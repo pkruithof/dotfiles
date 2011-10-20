@@ -3,6 +3,7 @@ syntax on
 
 " use the `solarized` colorscheme
 colorscheme solarized
+
 " and make it use the dark background
 set background=dark
 
@@ -22,9 +23,6 @@ set shiftwidth=2
 
 " don't wrap long lines
 set nowrap
-
-" enable autoindenting
-set autoindent
 
 " hightlight the line the cursor is on
 set cursorline
