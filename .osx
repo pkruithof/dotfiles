@@ -1,3 +1,6 @@
+# Make Dock icons of hidden applications translucent
+defaults write com.apple.dock showhidden -bool true
+
 # Expand save panel by default
 defaults write -g NSNavPanelExpandedStateForSaveMode -bool true
 
