@@ -20,6 +20,13 @@ let mapleader=","
 set binary
 set noeol
 
+" Centralize backups, swapfiles and undo history
+set backupdir=~/.vim/backups
+set directory=~/.vim/swaps
+if exists("&undodir")
+  set undodir=~/.vim/undo
+endif
+
 " Enable line numbers
 set number
 
@@ -86,10 +93,10 @@ noremap <leader>ss :call StripWhitespace ()<CR>
 
 
 " use the `solarized` colorscheme
-colorscheme solarized
+"colorscheme solarized
 
 " and make it use the dark background
-set background=dark
+"set background=dark
 
 " enable commandline completion when in command mode
 set wildmenu
