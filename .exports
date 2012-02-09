@@ -7,8 +7,3 @@ export MANPAGER="less -X"
 export HISTSIZE=32768
 export HISTFILESIZE=$HISTSIZE
 export HISTCONTROL=ignoredups
-
-export TERM=xterm-color
-
-export CLICOLOR=true
-export LSCOLORS=GxFxCxDxBxegedabagaced
