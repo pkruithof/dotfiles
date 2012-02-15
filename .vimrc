@@ -92,8 +92,8 @@ endfunction
 noremap <leader>ss :call StripWhitespace ()<CR>
 
 
-" use the `solarized` colorscheme
-"colorscheme solarized
+" use the `molokai` colorscheme
+colorscheme molokai
 
 " and make it use the dark background
 "set background=dark
