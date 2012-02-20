@@ -2,7 +2,7 @@
 alias ..="cd .."
 alias ...="cd ../.."
 alias ~="cd ~" # `cd` is probably faster to type though
-alias -- -="cd -"
+alias -="cd -"
 
 # List all files colorized in long format, including dot files
 alias la="ls -Gla"
@@ -30,9 +30,14 @@ alias whois="whois -h whois-servers.net"
 alias sniff="sudo ngrep -d 'en1' -t '^(GET|POST) ' 'tcp and port 80'"
 alias httpdump="sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET \/.*\""
 
-# Empty the Trash on all mounted volumes and the main HDD
-# Also, clear Apple’s System Logs to improve shell startup speed
-alias emptytrash="sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo rm -rfv /private/var/log/asl/*.asl"
+if [[ "$OSTYPE" =~ ^darwin ]]; then
+  # Empty the Trash on all mounted volumes and the main HDD
+  # Also, clear Apple’s System Logs to improve shell startup speed
+  alias emptytrash="sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo rm -rfv /private/var/log/asl/*.asl"
+
+  # top default ordered by CPU
+  alias top="top -o cpu"
+fi
 
 # One of @janmoesen’s ProTip™s
 for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
@@ -40,13 +45,10 @@ for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
 done
 
 # Apache shortcuts
-alias ht="cd /opt/local/apache2/htdocs/"
-alias htstop="sudo /opt/local/bin/apachectl stop"
-alias htstart="sudo /opt/local/bin/apachectl start"
-alias htrestart="sudo /opt/local/bin/apachectl restart"
-alias mydump="mysqldump -u root --default-character-set=utf8"
-alias my="mysql -u root --default-character-set=utf8"
-alias myadmin="mysqladmin -u root"
-
-# top default ordered by CPU
-alias top="top -o cpu"
+alias ht="cd $HTDOCS"
+alias htstop="sudo /opt/bin/env apachectl stop"
+alias htstart="sudo /opt/bin/env apachectl start"
+alias htrestart="sudo /opt/bin/env apachectl restart"
+alias mydump="mysqldump $MYCRED --default-character-set=utf8"
+alias my="mysql $MYCRED --default-character-set=utf8"
+alias myadmin="mysqladmin $MYCRED"
