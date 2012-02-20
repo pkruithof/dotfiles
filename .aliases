@@ -46,6 +46,7 @@ alias htstart="sudo /opt/local/bin/apachectl start"
 alias htrestart="sudo /opt/local/bin/apachectl restart"
 alias mydump="mysqldump -u root --default-character-set=utf8"
 alias my="mysql -u root --default-character-set=utf8"
+alias myadmin="mysqladmin -u root"
 
 # top default ordered by CPU
 alias top="top -o cpu"
