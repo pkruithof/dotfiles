@@ -2,7 +2,7 @@
 alias ..="cd .."
 alias ...="cd ../.."
 alias ~="cd ~" # `cd` is probably faster to type though
-alias -="cd -"
+alias -- -="cd -"
 
 # List all files colorized in long format, including dot files
 alias la="ls -Gla"
