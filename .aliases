@@ -44,8 +44,8 @@ alias ht="cd /opt/local/apache2/htdocs/"
 alias htstop="sudo /opt/local/bin/apachectl stop"
 alias htstart="sudo /opt/local/bin/apachectl start"
 alias htrestart="sudo /opt/local/bin/apachectl restart"
-alias mydump="mysqldump5 -u root --default-character-set=utf8"
-alias my="mysql5 -u root --default-character-set=utf8"
+alias mydump="mysqldump -u root --default-character-set=utf8"
+alias my="mysql -u root --default-character-set=utf8"
 
 # top default ordered by CPU
 alias top="top -o cpu"
