@@ -83,11 +83,6 @@ set title
 
 " Show the (partial) command as it’s being typed
 set showcmd
-" Use relative line numbers
-if exists("&relativenumber")
-        set relativenumber
-        au BufReadPost * set relativenumber
-endif
 
 " Start scrolling three lines before the horizontal window border
 set scrolloff=3
@@ -107,10 +102,10 @@ noremap <leader>W :w !sudo tee % > /dev/null<CR>
 
 " Automatic commands
 if has("autocmd")
-        " Enable file type detection
-        filetype on
-        " Treat .json files as .js
-        autocmd BufNewFile,BufRead *.json setfiletype json syntax=javascript
+    " Enable file type detection
+    filetype on
+    " Treat .json files as .js
+    autocmd BufNewFile,BufRead *.json setfiletype json syntax=javascript
 endif
 
 " use the `molokai` colorscheme
