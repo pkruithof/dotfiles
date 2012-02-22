@@ -43,6 +43,10 @@ if [[ "$OSTYPE" =~ ^darwin ]]; then
 
   # top default ordered by CPU
   alias top="top -o cpu"
+
+  alias mysql="mysql5"
+  alias mysqldump="mysqldump5"
+  alias mysqladmin="mysqladmin5"
 fi
 
 # One of @janmoesen’s ProTip™s
