@@ -35,3 +35,7 @@ function unidecode() {
   perl -e "binmode(STDOUT, ':utf8'); print \"$@\""
   echo # newline
 }
+
+function mytop() {
+  watch -n 2 --differences "mysqladmin $MYCRED processlist"
+}
