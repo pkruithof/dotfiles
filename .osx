@@ -100,10 +100,10 @@ defaults write com.apple.Safari DebugSnapshotsUpdatePolicy -int 2
 defaults write com.apple.Safari IncludeDebugMenu -bool true
 defaults write com.apple.Safari IncludeInternalDebugMenu -bool true
 
-# Show status bar 
+# Show status bar (doesn't work)
 defaults write com.apple.Safari ShowStatusBar -bool true
 
-# Use pie-chart progress indicator 
+# Use pie-chart progress indicator  (doesn't work)
 defaults write com.apple.Safari DebugUsePieProgressIndicator -bool true
 
 # Enable tabbed browsing 
@@ -112,7 +112,7 @@ defaults write com.apple.Safari TabbedBrowsing -bool true
 # Always show tab bar 
 defaults write com.apple.Safari AlwaysShowTabBar -bool true
 
-# Show Link URL in Tool Tip 
+# Show Link URL in Tool Tip  (doesn't work)
 defaults write com.apple.Safari WebKitShowsURLsInToolTips -bool true
 
 # Open all "new window" links in tabs 
