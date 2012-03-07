@@ -1,3 +1,6 @@
+# Disable Dashboard
+defaults write com.apple.dashboard mcx-disabled -boolean YES
+
 # Enable full keyboard access for all controls (e.g. enable Tab in modal dialogs)
 defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 
@@ -39,7 +42,7 @@ defaults write NSGlobalDomain NSTextShowsControlCharacters -bool true
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
 # Set a blazingly fast keyboard repeat rate
-defaults write NSGlobalDomain KeyRepeat -int 0
+defaults write NSGlobalDomain KeyRepeat -int 50
 
 # Disable auto-correct
 defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
@@ -88,20 +91,42 @@ defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadCornerSecondaryClick -int 2
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick -bool true
 
-# Disable Safari’s thumbnail cache for History and Top Sites
+
+## Safari 
+# Disable thumbnail cache for History and Top Sites
 defaults write com.apple.Safari DebugSnapshotsUpdatePolicy -int 2
 
-# Enable Safari’s debug menu
+# Enable debug menu
+defaults write com.apple.Safari IncludeDebugMenu -bool true
 defaults write com.apple.Safari IncludeInternalDebugMenu -bool true
 
-# Make Safari’s search banners default to Contains instead of Starts With
+# Show status bar 
+defaults write com.apple.Safari ShowStatusBar -bool true
+
+# Use pie-chart progress indicator 
+defaults write com.apple.Safari DebugUsePieProgressIndicator -bool true
+
+# Enable tabbed browsing 
+defaults write com.apple.Safari TabbedBrowsing -bool true
+
+# Always show tab bar 
+defaults write com.apple.Safari AlwaysShowTabBar -bool true
+
+# Show Link URL in Tool Tip 
+defaults write com.apple.Safari WebKitShowsURLsInToolTips -bool true
+
+# Open all "new window" links in tabs 
+defaults write com.apple.Safari TargetedClicksCreateTabs -bool true
+
+# Make search banners default to Contains instead of Starts With
 defaults write com.apple.Safari FindOnPageMatchesWordStartsOnly -bool false
 
-# Remove useless icons from Safari’s bookmarks bar
+# Remove useless icons from bookmarks bar
 defaults write com.apple.Safari ProxiesInBookmarksBar "()"
 
 # Add a context menu item for showing the Web Inspector in web views
 defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
+
 
 # Only use UTF-8 in Terminal.app
 defaults write com.apple.terminal StringEncodings -array 4
