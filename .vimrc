@@ -40,7 +40,8 @@ if has("syntax")
     " Set dark background
     set background=dark
     " Set colorscheme
-    silent! colorscheme solarized
+    colorscheme molokai
+    let g:molokai_original = 1
 endif
 
 if has("cmdline_info")
