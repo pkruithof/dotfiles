@@ -4,11 +4,18 @@ alias ...="cd ../.."
 alias ~="cd ~" # `cd` is probably faster to type though
 alias -- -="cd -"
 
+# Long form no user group, color
+alias l="ls -oG"
 # List all files colorized in long format, including dot files
-alias la="ls -Gla"
-
+alias la="ls -GFlah"
 # List only directories
-alias lsd='ls -l | grep "^d"'
+alias ld='ls -l | grep "^d"'
+# Order by last modified, long form, color
+alias lt="ls -GFlt"
+# List all files colorized in long format, including dot files, order by last modified
+alias lat="ls -GFlath"
+# List all files colorized in long format, including dot files, order by file size
+alias las="ls -GFlaSh"
 
 # Always use color output for `ls`
 if [[ "$OSTYPE" =~ ^darwin ]]; then
