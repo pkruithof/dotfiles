@@ -10,6 +10,18 @@ Thumbs.db
 .Spotlight-V100
 .Trashes
 
+# Always-ignore extensions
+*.diff
+*.err
+*.orig
+*.log
+*.rej
+*.swo
+*.swp
+*.vi
+*~
+*.sass-cache
+
 # Eclipse-specific files
 .settings
 .project
