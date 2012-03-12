@@ -1,8 +1,15 @@
 #!/bin/bash
+
 cd "$(dirname "$0")"
-git pull
+
+# Pull down the latest changes
+git pull origin master
+
+# Check out submodules
+git submodule --quiet update --init
+
 function doIt() {
-  rsync --exclude ".git/" --exclude ".DS_Store" --exclude "bootstrap.sh" --exclude "README.md" -av . ~
+  rsync -Cav --exclude ".DS_Store" --exclude "bootstrap.sh" --exclude "README.md" . ~
 }
 if [ "$1" == "--force" -o "$1" == "-f" ]; then
   doIt
