@@ -7,3 +7,4 @@
 [submodule ".vim/colors/molokai"]
 	path = .vim/colors/molokai
 	url = git://github.com/tomasr/molokai.git
+		ignore = dirty
