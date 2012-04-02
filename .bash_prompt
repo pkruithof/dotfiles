@@ -95,16 +95,21 @@ function pwdtail() {
 }
 
 # format time
-function fmt_time() { 
+function get_time() {
     date +"%H:%M:%S"|sed 's/ //g'
 }
 
-TIME=`fmt_time` # format time for prompt string
-LOAD=`uptime | awk '{gsub(",","")}{print $(NF-2)}'`
+function get_load() {
+    uptime | awk '{gsub(",","")}{print $(NF-2)}'
+}
 
 # set the titlebar to the last 2 fields of pwd
 TITLEBAR='\[\e]2;\u@\h: \w\a'
 
 
 # Build the prompt
-PS1="\[${TITLEBAR}\]\n\[$style_user\]\u\[$style_chars@\]\[$style_host\]\h\[$style_load\](${LOAD}) \[$style_time\]${TIME}\[$style_chars\]: \[$style_path\]\w\$(prompt_git)\n\[$style_chars\]\$ \[$RESET\]"
+function build_prompt() {
+    PS1="\[${TITLEBAR}\]\n\[$style_user\]\u\[$style_chars@\]\[$style_host\]\h\[$style_load\](load:$(get_load)) \[$style_time\]$(get_time)\[$style_chars\]: \[$style_path\]\w\$(prompt_git)\n\[$style_chars\]\$ \[$RESET\]"
+}
+
+PROMPT_COMMAND=build_prompt
