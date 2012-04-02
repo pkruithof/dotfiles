@@ -7,6 +7,11 @@ function server() {
   python -c $'import SimpleHTTPServer;\nmap = SimpleHTTPServer.SimpleHTTPRequestHandler.extensions_map;\nmap[""] = "text/plain";\nfor key, value in map.items():\n\tmap[key] = value + ";charset=UTF-8";\nSimpleHTTPServer.test();' "$port"
 }
 
+# Gzip-enabled `curl`
+function gurl() {
+  curl -sH "Accept-Encoding: gzip" "$@" | gunzip
+}
+
 # Syntax-highlight JSON strings or files
 function json() {
   if [ -p /dev/stdin ]; then
