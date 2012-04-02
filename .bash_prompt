@@ -20,6 +20,7 @@ if tput setaf 1 &> /dev/null; then
         SOLAR_CYAN=$(tput setaf 37)
         SOLAR_GREEN=$(tput setaf 64)
         SOLAR_WHITE=$(tput setaf 254)
+        SOLAR_GRAY=$(tput setaf 0)
     else
         SOLAR_YELLOW=$(tput setaf 5)
         SOLAR_ORANGE=$(tput setaf 4)
@@ -30,6 +31,7 @@ if tput setaf 1 &> /dev/null; then
         SOLAR_CYAN=$(tput setaf 3)
         SOLAR_GREEN=$(tput setaf 8)
         SOLAR_WHITE=$(tput setaf 9)
+        SOLAR_GRAY=$(tput setaf 0)
     fi
     BOLD=$(tput bold)
     RESET=$(tput sgr0)
@@ -43,6 +45,7 @@ else
     SOLAR_CYAN="\033[1;37m"
     SOLAR_GREEN="\033[1;38m"
     SOLAR_WHITE="\033[1;39m"
+    SOLAR_GRAY="\033[0;37m"
     BOLD=""
     RESET="\033[m"
 fi
@@ -52,6 +55,8 @@ style_host="$SOLAR_YELLOW"
 style_path="$SOLAR_GREEN"
 style_branch="$SOLAR_CYAN"
 style_chars="$SOLAR_WHITE"
+style_load="$SOLAR_GRAY"
+style_time="$SOLAR_MAGENTA"
 
 if [[ "$SSH_TTY" ]]; then
     # connected via ssh
@@ -84,6 +89,22 @@ function prompt_git() {
     echo "$style_chars on $style_branch$output"
 }
 
+# returns the last 2 fields of the working directory
+function pwdtail() { 
+    pwd | awk -F/ '{nlast = NF -1;print $nlast"/"$NF}'
+}
+
+# format time
+function fmt_time() { 
+    date +"%H:%M:%S"|sed 's/ //g'
+}
+
+TIME=`fmt_time` # format time for prompt string
+LOAD=`uptime | awk '{gsub(",","")}{print $(NF-2)}'`
+
+# set the titlebar to the last 2 fields of pwd
+TITLEBAR='\[\e]2;\u@\h: \w\a'
+
 
 # Build the prompt
-PS1="\n\[$style_user\]\u\[$style_chars@\]\[$style_host\]\h\[$style_chars\]: \[$style_path\]\w\$(prompt_git)\n\[$style_chars\]\$ \[$RESET\]"
+PS1="\[${TITLEBAR}\]\n\[$style_user\]\u\[$style_chars@\]\[$style_host\]\h\[$style_load\](${LOAD}) \[$style_time\]${TIME}\[$style_chars\]: \[$style_path\]\w\$(prompt_git)\n\[$style_chars\]\$ \[$RESET\]"
