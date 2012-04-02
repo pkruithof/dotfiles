@@ -20,7 +20,7 @@ if tput setaf 1 &> /dev/null; then
         SOLAR_CYAN=$(tput setaf 37)
         SOLAR_GREEN=$(tput setaf 64)
         SOLAR_WHITE=$(tput setaf 254)
-        SOLAR_GRAY=$(tput setaf 0)
+        SOLAR_GRAY=$(tput setaf 244)
     else
         SOLAR_YELLOW=$(tput setaf 5)
         SOLAR_ORANGE=$(tput setaf 4)
