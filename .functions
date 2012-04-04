@@ -45,6 +45,12 @@ function codepoint() {
   perl -e "use utf8; print sprintf('U+%04X', ord(\"$@\"))"
 }
 
-function mytop() {
-  watch -n 2 --differences "mysqladmin $MYCRED processlist"
-}
+# Polyfill for mytop
+if command -v mytop &>/dev/null
+then
+  alias mytop='mytop $MYCRED'
+else
+  function mytop() {
+    watch -n 2 --differences "mysqladmin $MYCRED processlist"
+  }
+fi
