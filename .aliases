@@ -6,6 +6,8 @@ alias -- -="cd -"
 
 # Long form no user group, color
 alias l="ls -oG"
+# List all files in long format
+alias ll="ls -l"
 # List all files colorized in long format, including dot files
 alias la="ls -GFlah"
 # List only directories

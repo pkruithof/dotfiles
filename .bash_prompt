@@ -50,6 +50,17 @@ else
     RESET="\033[m"
 fi
 
+export SOLAR_ORANGE
+export SOLAR_YELLOW
+export SOLAR_RED
+export SOLAR_MAGENTA
+export SOLAR_VIOLET
+export SOLAR_BLUE
+export SOLAR_CYAN
+export SOLAR_GREEN
+export SOLAR_WHITE
+export SOLAR_GRAY
+
 style_user="$SOLAR_ORANGE"
 style_host="$SOLAR_YELLOW"
 style_path="$SOLAR_GREEN"
