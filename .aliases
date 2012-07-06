@@ -51,6 +51,10 @@ alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
 alias sniff="sudo ngrep -d 'en1' -t '^(GET|POST) ' 'tcp and port 80'"
 alias httpdump="sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET \/.*\""
 
+# ps w/ grep
+alias pgrep="ps auxwww | grep"
+
+# OS X specific aliases
 if [[ "$OSTYPE" =~ ^darwin ]]; then
   # Empty the Trash on all mounted volumes and the main HDD
   # Also, clear Apple’s System Logs to improve shell startup speed
@@ -58,6 +62,9 @@ if [[ "$OSTYPE" =~ ^darwin ]]; then
 
   # top default ordered by CPU
   alias top="top -o cpu"
+
+  alias st="/Applications/Sublime\ Text\ 2.app/Contents/SharedSupport/bin/subl"
+  alias macports-clean="sudo port clean --all installed && sudo port -f uninstall inactive"
 fi
 
 # One of @janmoesen’s ProTip™s
@@ -70,9 +77,14 @@ alias ht="cd $HTDOCS"
 alias htstop="sudo /usr/bin/env apachectl stop"
 alias htstart="sudo /usr/bin/env apachectl start"
 alias htrestart="sudo /usr/bin/env apachectl restart"
+
+# Mysql shortcuts
 alias mydump="mysqldump $MYCRED --default-character-set=utf8"
 alias my="mysql $MYCRED --default-character-set=utf8"
 alias myadmin="mysqladmin $MYCRED"
 
-alias st="/Applications/Sublime\ Text\ 2.app/Contents/SharedSupport/bin/subl"
-alias macports-clean="sudo port clean --all installed && sudo port -f uninstall inactive"
+# Nginx shortcuts
+alias nginx-start="sudo nginx"
+alias nginx-stop="sudo nginx -s stop"
+alias nginx-quit="sudo nginx -s quit"
+alias nginx-reload="sudo nginx -s reload"
