@@ -111,7 +111,9 @@ defaults write NSGlobalDomain KeyRepeat -int 0
 # Display ASCII control characters using caret notation in standard text views
 # Try e.g. `cd /tmp; unidecode "\x{0000}" > cc.txt; open -e cc.txt`
 defaults write NSGlobalDomain NSTextShowsControlCharacters -bool true
-
+# Set language and text formats
+defaults write NSGlobalDomain AppleLanguages -array "nl" "en"
+defaults write NSGlobalDomain AppleLocale -string "nl_NL@currency=EUR"
 
 # Hot corner: bottom right → Mission Control
 defaults write com.apple.dock wvous-br-corner -int 2
