@@ -1,164 +1,168 @@
-# Disable Dashboard
+# Menu bar: show remaining battery time; hide percentage
+defaults write com.apple.menuextra.battery ShowPercent -string "NO"
+defaults write com.apple.menuextra.battery ShowTime -string "YES"
+
+
+# Desktop: enable snap-to-grid for desktop icons
+/usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
+# Desktop: show item info below desktop icons
+/usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:showItemInfo true" ~/Library/Preferences/com.apple.finder.plist
+# Desktop: disable Dashboard
 defaults write com.apple.dashboard mcx-disabled -boolean YES
 
-# Enable full keyboard access for all controls (e.g. enable Tab in modal dialogs)
-defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 
-# Enable subpixel font rendering on non-Apple LCDs
-defaults write NSGlobalDomain AppleFontSmoothing -int 2
-
-# Make Dock icons of hidden applications translucent
+# Dock: use the suck effect for window minimizing
+defaults write com.apple.dock mineffect suck
+# Dock: make icons of hidden applications translucent
 defaults write com.apple.dock showhidden -bool true
-
-# Enable iTunes track notifications in the Dock
-defaults write com.apple.dock itunes-notifications -bool true
-
-# Show all filename extensions in Finder
-defaults write NSGlobalDomain AppleShowAllExtensions -bool true
-
-# Show status bar in Finder
-defaults write com.apple.finder ShowStatusBar -bool true
-
-# Expand save panel by default
-defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
-
-# Expand print panel by default
-defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
-
-# Enable highlight hover effect for the grid view of a stack (Dock)
+# Dock: show indicator lights for open applications
+defaults write com.apple.dock show-process-indicators -bool true
+# Dock: don’t animate opening applications
+defaults write com.apple.dock launchanim -bool false
+# Dock: make tiles 45px
+defaults write com.apple.dock tilesize -int 45
+# Dock: don't magnify tiles
+defaults write com.apple.dock magnification -boolean false
+# Dock: enable highlight hover effect for the grid view of a stack
 defaults write com.apple.dock mouse-over-hilte-stack -bool true
-
-# Enable spring loading for all Dock items
+# Dock: enable spring loading for all items
 defaults write com.apple.dock enable-spring-load-actions-on-all-items -bool true
 
-# Show indicator lights for open applications in the Dock
-defaults write com.apple.dock show-process-indicators -bool true
 
-# Don’t animate opening applications from the Dock
-defaults write com.apple.dock launchanim -bool false
+# Finder: show status bar
+defaults write com.apple.finder ShowStatusBar -bool true
+# Finder: show all filename extensions
+defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+# Finder: disable the warning when changing a file extension
+defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
+# Finder: empty Trash securely by default
+defaults write com.apple.finder EmptyTrashSecurely -bool true
+# Finder: disable the warning before emptying the Trash
+defaults write com.apple.finder WarnOnEmptyTrash -bool false
+# Finder: disable window and Get Info animations
+defaults write com.apple.finder DisableAllAnimations -bool true
+# Finder: allow quitting via ⌘ + Q; doing so will also hide desktop icons
+defaults write com.apple.finder QuitMenuItem -bool true
+# Finder: show the ~/Library folder (in OS X Lion)
+chflags nohidden ~/Library
+# Finder: display full POSIX path as window title
+defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
+# Finder: allow text selection in Quick Look
+defaults write com.apple.finder QLEnableTextSelection -bool true
 
-# Display ASCII control characters using caret notation in standard text views
-# Try e.g. `cd /tmp; unidecode "\x{0000}" > cc.txt; open -e cc.txt`
-defaults write NSGlobalDomain NSTextShowsControlCharacters -bool true
 
-# Disable press-and-hold for keys in favor of key repeat
-defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
+# Panels: expand save panel by default
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
+# Panels: expand print panel by default
+defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
+# Panels: disable the “Are you sure you want to open this application?” dialog
+defaults write com.apple.LaunchServices LSQuarantine -bool false
+# Panels: enable full keyboard access for all controls (e.g. enable Tab in modal dialogs)
+defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 
-# Set a blazingly fast keyboard repeat rate
-defaults write NSGlobalDomain KeyRepeat -int 0
 
-# Disable auto-correct
-defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
-
-# Disable opening and closing window animations
-defaults write NSGlobalDomain NSAutomaticWindowAnimationsEnabled -bool false
-
-# Hot corners
-# Bottom right screen corner → Mission Control
-defaults write com.apple.dock wvous-br-corner -int 2
-defaults write com.apple.dock wvous-br-modifier -int 0
-# Bottom left screen corner → Start screen saver
-defaults write com.apple.dock wvous-bl-corner -int 5
-defaults write com.apple.dock wvous-bl-modifier -int 0
-
-# Enable AirDrop over Ethernet and on unsupported Macs running Lion
-defaults write com.apple.NetworkBrowser BrowseAllInterfaces -bool true
-
-# Disable disk image verification
+# Disks: avoid creating .DS_Store files on network volumes
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+# Disks: disable TimeMachine prompts
+defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
+# Disks: disable disk image verification
 defaults write com.apple.frameworks.diskimages skip-verify -bool true
 defaults write com.apple.frameworks.diskimages skip-verify-locked -bool true
 defaults write com.apple.frameworks.diskimages skip-verify-remote -bool true
-
-# Automatically open a new Finder window when a volume is mounted
+# Disks: Automatically open a new Finder window when a volume is mounted
 defaults write com.apple.frameworks.diskimages auto-open-ro-root -bool true
 defaults write com.apple.frameworks.diskimages auto-open-rw-root -bool true
 defaults write com.apple.finder OpenWindowForNewRemovableDisk -bool true
 
-# Display full POSIX path as Finder window title
-defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
 
+# iTunes: make ⌘ + F focus the search input
+defaults write com.apple.iTunes NSUserKeyEquivalents -dict-add "Target Search Field" "@F"
+# iTunes: disable the Ping sidebar in iTunes
+defaults write com.apple.iTunes disablePingSidebar -bool true
+# iTunes: disable all the other Ping stuff
+defaults write com.apple.iTunes disablePing -bool true
+# iTunes: enable track notifications in the Dock
+defaults write com.apple.dock itunes-notifications -bool true
+
+
+# Security: require password immediately after sleep or screen saver begins
+defaults write com.apple.screensaver askForPassword -int 1
+defaults write com.apple.screensaver askForPasswordDelay -int 0
+
+
+# Misc: enable subpixel font rendering on non-Apple LCDs
+defaults write NSGlobalDomain AppleFontSmoothing -int 2
+# Misc: disable Resume system-wide
+defaults write NSGlobalDomain NSQuitAlwaysKeepsWindows -bool true
+# Misc: only use UTF-8 in Terminal.app
+defaults write com.apple.terminal StringEncodings -array 4
+# Misc: disable Dictionary results
+defaults write com.apple.spotlight DictionaryLookupEnabled -bool false
+# Misc: disable auto-correct
+defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 # Increase window resize speed for Cocoa applications
 defaults write NSGlobalDomain NSWindowResizeTime -float 0.001
+# Disable opening and closing window animations
+defaults write NSGlobalDomain NSAutomaticWindowAnimationsEnabled -bool false
+# Misc: disable press-and-hold for keys in favor of key repeat
+defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
+# Misc: Set a blazingly fast keyboard repeat rate
+defaults write NSGlobalDomain KeyRepeat -int 0
+# Display ASCII control characters using caret notation in standard text views
+# Try e.g. `cd /tmp; unidecode "\x{0000}" > cc.txt; open -e cc.txt`
+defaults write NSGlobalDomain NSTextShowsControlCharacters -bool true
 
-# Avoid creating .DS_Store files on network volumes
-defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 
-# Show item info below desktop icons
-/usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:showItemInfo true" ~/Library/Preferences/com.apple.finder.plist
+# Hot corner: bottom right → Mission Control
+defaults write com.apple.dock wvous-br-corner -int 2
+defaults write com.apple.dock wvous-br-modifier -int 0
+# Hot corner: bottom left → Start screen saver
+defaults write com.apple.dock wvous-bl-corner -int 5
+defaults write com.apple.dock wvous-bl-modifier -int 0
 
-# Enable snap-to-grid for desktop icons
-/usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
 
-# Disable the warning before emptying the Trash
-defaults write com.apple.finder WarnOnEmptyTrash -bool false
-
-# Empty Trash securely by default
-defaults write com.apple.finder EmptyTrashSecurely -bool true
-
-# Enable tap to click (Trackpad)
+# Trackpad: enable tap to click
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
-
-# Map bottom right Trackpad corner to right-click
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadCornerSecondaryClick -int 2
+# Trackpad: bottom right corner to right-click
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick -bool true
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadCornerSecondaryClick -int 2
+defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryClick -bool true
+defaults -currentHost write NSGlobalDomain com.apple.trackpad.trackpadCornerClickBehavior -int 1
 
 
-## Safari 
-# Disable thumbnail cache for History and Top Sites
-# defaults write com.apple.Safari DebugSnapshotsUpdatePolicy -int 2
+# AirDrop: enable over Ethernet and on unsupported Macs running Lion
+defaults write com.apple.NetworkBrowser BrowseAllInterfaces -bool true
 
-# Enable debug menu
+
+# Safari: enable debug menu
 defaults write com.apple.Safari IncludeDebugMenu -bool true
 defaults write com.apple.Safari IncludeInternalDebugMenu -bool true
-
-# Show status bar (doesn't work)
+# Safari: show status bar
 defaults write com.apple.Safari ShowStatusBar -bool true
-
-# Use pie-chart progress indicator  (doesn't work)
+# Safari: use pie-chart progress indicator
 defaults write com.apple.Safari DebugUsePieProgressIndicator -bool true
-
-# Enable tabbed browsing 
+# Safari: enable tabbed browsing
 defaults write com.apple.Safari TabbedBrowsing -bool true
-
-# Always show tab bar 
+# Safari: always show tab bar
 defaults write com.apple.Safari AlwaysShowTabBar -bool true
-
-# Show Link URL in Tool Tip  (doesn't work)
-defaults write com.apple.Safari WebKitShowsURLsInToolTips -bool true
-
-# Open all "new window" links in tabs 
+# Safari: open all "new window" links in tabs
 defaults write com.apple.Safari TargetedClicksCreateTabs -bool true
-
-# Make search banners default to Contains instead of Starts With
+# Safari: make search banners default to Contains instead of Starts With
 defaults write com.apple.Safari FindOnPageMatchesWordStartsOnly -bool false
-
-# Remove useless icons from bookmarks bar
+# Safari: remove useless icons from bookmarks bar
 defaults write com.apple.Safari ProxiesInBookmarksBar "()"
-
-# Add a context menu item for showing the Web Inspector in web views
+# Safari: add a context menu item for showing the Web Inspector in web views
 defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
 
 
-# Only use UTF-8 in Terminal.app
-defaults write com.apple.terminal StringEncodings -array 4
-
-# Disable the Ping sidebar in iTunes
-defaults write com.apple.iTunes disablePingSidebar -bool true
-
-# Disable all the other Ping stuff in iTunes
-defaults write com.apple.iTunes disablePing -bool true
-
-# Make ⌘ + F focus the search input in iTunes
-defaults write com.apple.iTunes NSUserKeyEquivalents -dict-add "Target Search Field" "@F"
-
 # Reset Launchpad
 [ -e ~/Library/Application\ Support/Dock/*.db ] && rm ~/Library/Application\ Support/Dock/*.db
-
-# Allow text selection in Quick Look
-defaults write com.apple.finder QLEnableTextSelection -bool true
 
 # Fix for the ancient UTF-8 bug in QuickLook (http://mths.be/bbo)
 echo "0x08000100:0" > ~/.CFUserTextEncoding
 
 # Kill affected applications
-for app in Safari Finder Dock Mail SystemUIServer; do killall "$app" >/dev/null 2>&1; done
+for app in Safari Finder Dock SystemUIServer; do killall "$app" >/dev/null 2>&1; done
+
+# Open Safari again
+open Safari
