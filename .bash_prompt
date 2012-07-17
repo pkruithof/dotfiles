@@ -101,7 +101,7 @@ function prompt_git() {
 }
 
 # returns the last 2 fields of the working directory
-function pwdtail() { 
+function pwdtail() {
     pwd | awk -F/ '{nlast = NF -1;print $nlast"/"$NF}'
 }
 
@@ -119,8 +119,5 @@ TITLEBAR='\[\e]2;\u@\h: \w\a'
 
 
 # Build the prompt
-function build_prompt() {
-    PS1="\[${TITLEBAR}\]\n\[$style_user\]\u\[$style_chars@\]\[$style_host\]\h\[$style_load\](load:$(get_load)) \[$style_time\]$(get_time)\[$style_chars\]: \[$style_path\]\w\$(prompt_git)\n\[$style_chars\]\$ \[$RESET\]"
-}
-
-PROMPT_COMMAND=build_prompt
+export PS1="\[${TITLEBAR}\]\n\[$style_user\]\u\[$style_chars@\]\[$style_host\]\h\[$style_load\](load:$(get_load)) \[$style_time\]$(get_time)\[$style_chars\]: \[$style_path\]\w\$(prompt_git)\n\[$style_chars\]\$ \[$RESET\]"
+export PS2="\[$SOLAR_ORANGE\]→ \[$RESET\]"
