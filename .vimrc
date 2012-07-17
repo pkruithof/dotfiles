@@ -28,8 +28,11 @@ if has("autocmd")
     filetype indent on
     filetype plugin on
 
-    " Treat .json files as .js
-    autocmd BufNewFile,BufRead *.json setfiletype json syntax=javascript
+    " Languages with specific tabs/space requirements
+    autocmd FileType make setlocal ts=4 sts=4 sw=4 noexpandtab
+
+    " Automatically strip trailing whitespace on file save
+    autocmd BufWritePre *.css,*.html,*.js,*.json,*.md,*.php,*.py,*.rb,*.scss,*.sh,*.txt :call StripTrailingWhitespace()
 endif
 
 if has("syntax")
@@ -40,7 +43,7 @@ if has("syntax")
     " Set dark background
     set background=dark
     " Set colorscheme
-    colorscheme molokai
+    silent! colorscheme molokai
     let g:molokai_original = 1
 endif
 
@@ -130,7 +133,10 @@ set nostartofline
 " Show “invisible” characters
 set list
 " Set characters used to indicate 'invisible' characters
-set lcs=tab:▸\ ,trail:·,eol:¬,nbsp:_
+set listchars=tab:▸\
+set listchars+=trail:·
+set listchars+=nbsp:_
+"set listchars+=eol:¬
 
 " Change mapleader
 let mapleader=","
@@ -140,25 +146,24 @@ set binary
 set noeol
 
 " Centralize backups, swapfiles and undo history
-set backupdir=~/.vim/backups
-set directory=~/.vim/swaps
+set backupdir=$HOME/.vim/backups
+set directory=$HOME/.vim/swaps
 if exists("&undodir")
-  set undodir=~/.vim/undo
+  set undodir=$HOME/.vim/undo
 endif
+set viminfo+=n$HOME/.vim/.viminfo
 
 " Enable mouse in all modes
 silent! set mouse=a
 
 " Strip trailing whitespace (,ss)
-function! StripWhitespace()
-  let save_cursor = getpos(".")
-  let old_query = getreg('/')
-  :%s/\s\+$//e
-  call setpos('.', save_cursor)
-  call setreg('/', old_query)
-endfunction
 noremap <leader>ss :call StripWhitespace()<CR>
 
-" Save a file as root (,W)
-" noremap <leader>W :w !sudo tee % > /dev/null<CR>
+" Save a file as root (w!!)
 cmap w!! w !sudo tee >/dev/null %
+
+" Faster viewport scrolling (3 lines at a time)
+nnoremap <C-e> 3<C-e>
+nnoremap <C-y> 3<C-y>
+vnoremap <C-e> 3<C-e>
+vnoremap <C-y> 3<C-y>
