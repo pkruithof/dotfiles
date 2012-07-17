@@ -156,7 +156,7 @@ defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
 
 
 # Reset Launchpad
-[ -e ~/Library/Application\ Support/Dock/*.db ] && rm ~/Library/Application\ Support/Dock/*.db
+find ~/Library/Application\ Support/Dock -name "*.db" -maxdepth 1 -delete
 
 # Fix for the ancient UTF-8 bug in QuickLook (http://mths.be/bbo)
 echo "0x08000100:0" > ~/.CFUserTextEncoding
