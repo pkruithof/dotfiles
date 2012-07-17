@@ -10,6 +10,8 @@ git submodule --quiet update --init
 
 function doIt() {
   rsync -Cav --exclude ".DS_Store" --exclude "bootstrap.sh" --exclude "README.md" . ~
+  # Sync vim colors
+  cp .vim/colors/*/colors/*.vim ~/.vim/colors/
 }
 if [ "$1" == "--force" -o "$1" == "-f" ]; then
   doIt
