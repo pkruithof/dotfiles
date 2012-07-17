@@ -133,10 +133,7 @@ set nostartofline
 " Show “invisible” characters
 set list
 " Set characters used to indicate 'invisible' characters
-set listchars=tab:▸\
-set listchars+=trail:·
-set listchars+=nbsp:_
-"set listchars+=eol:¬
+set lcs=tab:→\ ,trail:·,nbsp:_
 
 " Change mapleader
 let mapleader=","
