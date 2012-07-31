@@ -10,9 +10,12 @@ export HISTSIZE=32768
 export HISTFILESIZE=$HISTSIZE
 export HISTCONTROL=ignoredups
 
+# add Homebrew bin to path
+[ command -v brew &>/dev/null ] && PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH";
+
 # if these bins exist, then add them to the PATH
 [ -d "/usr/bin" ]       && PATH="$PATH:/usr/bin";
-[ -d "/usr/sbin" ]       && PATH="$PATH:/usr/sbin";
+[ -d "/usr/sbin" ]      && PATH="$PATH:/usr/sbin";
 # add to beginning of PATH so that it always take precedence over /usr/bin
 [ -d "/usr/local/bin" ] && PATH="/usr/local/bin:$PATH";
 # add to beginning of PATH so that it always take precedence over /usr/local/bin
