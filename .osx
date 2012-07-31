@@ -166,6 +166,11 @@ defaults write com.apple.Safari FindOnPageMatchesWordStartsOnly -bool false
 defaults write com.apple.Safari ProxiesInBookmarksBar "()"
 # Safari: add a context menu item for showing the Web Inspector in web views
 defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
+# Safari: user stylesheet
+defaults write com.apple.safari UserStyleSheetEnabled 1
+defaults write com.apple.safari UserStyleSheetLocationURLString "~/safari.css"
+defaults write com.apple.safari WebKitUserStyleSheetEnabledPreferenceKey 1
+defaults write com.apple.safari WebKitUserStyleSheetLocationPreferenceKey "~/safari.css"
 
 
 # Reset Launchpad
