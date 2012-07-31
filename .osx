@@ -27,8 +27,10 @@ defaults write com.apple.dock magnification -boolean false
 defaults write com.apple.dock mouse-over-hilte-stack -bool true
 # Dock: enable spring loading for all items
 defaults write com.apple.dock enable-spring-load-actions-on-all-items -bool true
-# Speed up Mission Control animations
+# Mission Control: speed up animations
 defaults write com.apple.dock expose-animation-duration -float 0.1
+# Mission Control: group windows by application
+defaults write com.apple.dock "expose-group-by-app" -bool true
 
 
 # Finder: show status bar
@@ -96,6 +98,12 @@ defaults write com.apple.screensaver askForPassword -int 1
 defaults write com.apple.screensaver askForPasswordDelay -int 0
 
 
+# Terminal: use the Solarized theme by default
+open Solarized.terminal
+defaults write com.apple.Terminal "Default Window Settings" -string "Solarized"
+defaults write com.apple.Terminal "Startup Window Settings" -string "Solarized"
+
+
 # Misc: enable subpixel font rendering on non-Apple LCDs
 defaults write NSGlobalDomain AppleFontSmoothing -int 2
 # Misc: disable Resume system-wide
@@ -112,8 +120,10 @@ defaults write NSGlobalDomain NSWindowResizeTime -float 0.001
 defaults write NSGlobalDomain NSAutomaticWindowAnimationsEnabled -bool false
 # Misc: disable press-and-hold for keys in favor of key repeat
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
-# Misc: Set a blazingly fast keyboard repeat rate
-defaults write NSGlobalDomain KeyRepeat -int 0
+# Keyboard: set a blazingly fast repeat rate
+defaults write NSGlobalDomain KeyRepeat -int 0.02
+# Keyboard: set a shorter delay until key repeat
+defaults write NSGlobalDomain InitialKeyRepeat -int 12
 # Display ASCII control characters using caret notation in standard text views
 # Try e.g. `cd /tmp; unidecode "\x{0000}" > cc.txt; open -e cc.txt`
 defaults write NSGlobalDomain NSTextShowsControlCharacters -bool true
@@ -147,6 +157,10 @@ defaults write NSGlobalDomain AppleEnableSwipeNavigateWithScrolls -bool true
 defaults write com.apple.NetworkBrowser BrowseAllInterfaces -bool true
 
 
+# Bluetooth: Increase sound quality for headphones/headsets
+defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)" -int 40
+
+
 # Safari: enable debug menu
 defaults write com.apple.Safari IncludeDebugMenu -bool true
 defaults write com.apple.Safari IncludeInternalDebugMenu -bool true
@@ -166,6 +180,8 @@ defaults write com.apple.Safari FindOnPageMatchesWordStartsOnly -bool false
 defaults write com.apple.Safari ProxiesInBookmarksBar "()"
 # Safari: add a context menu item for showing the Web Inspector in web views
 defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
+# Safari: hide bookmarks bar by default
+defaults write com.apple.Safari ShowFavoritesBar -bool false
 # Safari: user stylesheet
 defaults write com.apple.safari UserStyleSheetEnabled 1
 defaults write com.apple.safari UserStyleSheetLocationURLString "~/safari.css"
