@@ -55,9 +55,6 @@ alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
 alias sniff="sudo ngrep -d 'en1' -t '^(GET|POST) ' 'tcp and port 80'"
 alias httpdump="sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET \/.*\""
 
-# ps w/ grep
-alias pgrep="ps auxwww | grep"
-
 # OS X specific aliases
 if [[ "$OSTYPE" =~ ^darwin ]]; then
   # Empty the Trash on all mounted volumes and the main HDD
@@ -88,7 +85,17 @@ alias my="mysql $MYCRED --default-character-set=utf8"
 alias myadmin="mysqladmin $MYCRED"
 
 # Nginx shortcuts
-alias nginx-start="sudo nginx"
-alias nginx-stop="sudo nginx -s stop"
-alias nginx-quit="sudo nginx -s quit"
-alias nginx-reload="sudo nginx -s reload"
+if [[ "$OSTYPE" =~ ^darwin ]]; then
+  alias nginx-test="sudo nginx -t"
+  alias nginx-start="nginx-test && sudo launchctl start homebrew.mxcl.nginx"
+  alias nginx-stop="nginx-test && sudo launchctl stop homebrew.mxcl.nginx"
+  alias nginx-restart="nginx-stop && nginx-start"
+  alias nginx-reload="nginx-test && nginx -s reload"
+else
+  alias nginx-test="sudo service nginx configtest"
+  alias nginx-start="nginx-test && sudo service nginx start"
+  alias nginx-stop="nginx-test && sudo service nginx stop"
+  alias nginx-restart="nginx-test && sudo service nginx restart"
+  alias nginx-reload="nginx-test && sudo service nginx reload"
+fi
+
