@@ -45,6 +45,15 @@ function codepoint() {
   perl -e "use utf8; print sprintf('U+%04X', ord(\"$@\"))"
 }
 
+function port() {
+  lsof -n -i4TCP:"$@" | grep LISTEN
+}
+
+# ps w/ grep
+function psgrep() {
+  ps auxwww | grep "$@"
+}
+
 # Polyfill for mytop
 if command -v mytop &>/dev/null
 then
