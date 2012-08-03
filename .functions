@@ -46,7 +46,7 @@ function codepoint() {
 }
 
 function port() {
-  lsof -n -i4TCP:"$@" | grep LISTEN
+  sudo lsof -n -i4TCP:"$@" | grep LISTEN
 }
 
 # ps w/ grep
