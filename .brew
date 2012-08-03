@@ -20,6 +20,8 @@ brew install ack
 brew install git
 brew install rename
 brew install tree
+brew install watch
+brew install pgrep
 brew install htop mytop
 
 # Install more recent versions of some OS X tools
