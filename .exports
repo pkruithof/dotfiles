@@ -18,6 +18,7 @@ export HISTCONTROL=ignoredups
 [ -d "/usr/sbin" ]      && PATH="$PATH:/usr/sbin";
 # add to beginning of PATH so that it always take precedence over /usr/bin
 [ -d "/usr/local/bin" ] && PATH="/usr/local/bin:$PATH";
+[ -d "/usr/local/sbin" ] && PATH="/usr/local/sbin:$PATH";
 # add to beginning of PATH so that it always take precedence over /usr/local/bin
 [ -d "/opt/local/bin" ] && PATH="/opt/local/bin:$PATH";
 # if the current user has a ~/bin, then add it to the PATH
