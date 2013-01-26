@@ -1,193 +1,352 @@
-# Menu bar: show remaining battery time; hide percentage
-defaults write com.apple.menuextra.battery ShowPercent -string "NO"
-defaults write com.apple.menuextra.battery ShowTime -string "YES"
+## System
+
+# Check for software updates daily, not just once per week
+defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
 
 
-# Desktop: enable snap-to-grid for desktop icons
-/usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
-# Desktop: show item info below desktop icons
-/usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:showItemInfo true" ~/Library/Preferences/com.apple.finder.plist
-# Desktop: disable Dashboard
-defaults write com.apple.dashboard mcx-disabled -boolean YES
+
+## Hardware
+
+# Automatically illuminate built-in MacBook keyboard in low light
+defaults write com.apple.BezelServices kDim -bool true
+
+# Turn off keyboard illumination when computer is not used for 5 minutes
+defaults write com.apple.BezelServices kDimTime -int 300
 
 
-# Dock: use the suck effect for window minimizing
-defaults write com.apple.dock mineffect suck
-# Dock: make icons of hidden applications translucent
-defaults write com.apple.dock showhidden -bool true
-# Dock: show indicator lights for open applications
-defaults write com.apple.dock show-process-indicators -bool true
-# Dock: don’t animate opening applications
-defaults write com.apple.dock launchanim -bool false
-# Dock: make tiles 45px
-defaults write com.apple.dock tilesize -int 45
-# Dock: don't magnify tiles
-defaults write com.apple.dock magnification -boolean false
-# Dock: enable highlight hover effect for the grid view of a stack
-defaults write com.apple.dock mouse-over-hilte-stack -bool true
-# Dock: enable spring loading for all items
-defaults write com.apple.dock enable-spring-load-actions-on-all-items -bool true
-# Mission Control: speed up animations
-defaults write com.apple.dock expose-animation-duration -float 0.1
-# Mission Control: group windows by application
-defaults write com.apple.dock "expose-group-by-app" -bool true
+
+## Keyboard
+
+# Set a blazingly fast repeat rate
+defaults write NSGlobalDomain KeyRepeat -int 0.02
+
+# Set a shorter delay until key repeat
+defaults write NSGlobalDomain InitialKeyRepeat -int 12
+
+# Disable press-and-hold for keys in favor of key repeat
+defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
 
-# Finder: show status bar
-defaults write com.apple.finder ShowStatusBar -bool true
-# Finder: show all filename extensions
-defaults write NSGlobalDomain AppleShowAllExtensions -bool true
-# Finder: disable the warning when changing a file extension
-defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
-# Finder: empty Trash securely by default
-defaults write com.apple.finder EmptyTrashSecurely -bool true
-# Finder: disable the warning before emptying the Trash
-defaults write com.apple.finder WarnOnEmptyTrash -bool false
-# Finder: disable window and Get Info animations
-defaults write com.apple.finder DisableAllAnimations -bool true
-# Finder: allow quitting via ⌘ + Q; doing so will also hide desktop icons
-defaults write com.apple.finder QuitMenuItem -bool true
-# Finder: show the ~/Library folder (in OS X Lion)
-chflags nohidden ~/Library
-# Finder: display full POSIX path as window title
-defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
-# Finder: allow text selection in Quick Look
-defaults write com.apple.finder QLEnableTextSelection -bool true
+
+## Text, locale & i18n
+
+# Display ASCII control characters using caret notation in standard text views. Try e.g. `cd /tmp; unidecode "\x{0000}" > cc.txt; open -e cc.txt`
+defaults write NSGlobalDomain NSTextShowsControlCharacters -bool true
+
+# Set language and text formats
+defaults write NSGlobalDomain AppleLanguages -array "nl" "en"
+defaults write NSGlobalDomain AppleLocale -string "nl_NL@currency=EUR"
+
+# Units
+defaults write NSGlobalDomain AppleMeasurementUnits -string "Centimeters"
+defaults write NSGlobalDomain AppleMetricUnits -bool true
+
+# Disable auto-correct
+defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 
 
-# Panels: expand save panel by default
-defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
-# Panels: expand print panel by default
-defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
-# Panels: disable the “Are you sure you want to open this application?” dialog
-defaults write com.apple.LaunchServices LSQuarantine -bool false
-# Panels: enable full keyboard access for all controls (e.g. enable Tab in modal dialogs)
-defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
+
+## Trackpad
+
+# Enable tap to click for this user and for the login screen
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
+defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+
+# Map bottom right corner to right-click
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick -bool true
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadCornerSecondaryClick -int 2
+defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryClick -bool true
+defaults -currentHost write NSGlobalDomain com.apple.trackpad.trackpadCornerClickBehavior -int 1
+
+# Swipe between pages with three fingers
+defaults write NSGlobalDomain AppleEnableSwipeNavigateWithScrolls -bool true
+defaults -currentHost write NSGlobalDomain com.apple.trackpad.threeFingerHorizSwipeGesture -int 1
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerHorizSwipeGesture -int 1
 
 
-# Disks: avoid creating .DS_Store files on network volumes
+
+## Airdrop
+
+# Enable over Ethernet and on unsupported Macs running Lion
+defaults write com.apple.NetworkBrowser BrowseAllInterfaces -bool true
+
+
+
+## Bluetooth
+
+# Increase sound quality for headphones/headsets
+defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)" -int 40
+
+
+
+## Disks
+
+# Avoid creating .DS_Store files on network volumes
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
-# Disks: disable TimeMachine prompts
+
+# Disable TimeMachine prompts
 defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
-# Disks: disable disk image verification
+
+# Disable disk image verification
 defaults write com.apple.frameworks.diskimages skip-verify -bool true
 defaults write com.apple.frameworks.diskimages skip-verify-locked -bool true
 defaults write com.apple.frameworks.diskimages skip-verify-remote -bool true
-# Disks: Automatically open a new Finder window when a volume is mounted
+
+# Automatically open a new Finder window when a volume is mounted
 defaults write com.apple.frameworks.diskimages auto-open-ro-root -bool true
 defaults write com.apple.frameworks.diskimages auto-open-rw-root -bool true
 defaults write com.apple.finder OpenWindowForNewRemovableDisk -bool true
 
 
-# iTunes: make ⌘ + F focus the search input
-defaults write com.apple.iTunes NSUserKeyEquivalents -dict-add "Target Search Field" "@F"
-# iTunes: disable the Ping sidebar in iTunes
-defaults write com.apple.iTunes disablePingSidebar -bool true
-# iTunes: disable all the other Ping stuff
-defaults write com.apple.iTunes disablePing -bool true
-# iTunes: enable track notifications in the Dock
-defaults write com.apple.dock itunes-notifications -bool true
-# Make iTunes arrows go to your library instead of the iTunes Store
-defaults write com.apple.iTunes invertStoreLinks -bool true
-# Disable the iTunes arrow links completely
-defaults write com.apple.iTunes show-store-arrow-links -bool false
+
+## Menu bar
+
+# Show remaining battery time and percentage
+defaults write com.apple.menuextra.battery ShowPercent -string "YES"
+defaults write com.apple.menuextra.battery ShowTime -string "YES"
+
+# Hide the useless Time Machine and Volume icons
+defaults write com.apple.systemuiserver menuExtras -array "/System/Library/CoreServices/Menu Extras/Bluetooth.menu" "/System/Library/CoreServices/Menu Extras/AirPort.menu" "/System/Library/CoreServices/Menu Extras/Battery.menu" "/System/Library/CoreServices/Menu Extras/Clock.menu"
 
 
-# Security: require password immediately after sleep or screen saver begins
+
+## Screen, system UI & window manager
+
+# Enable subpixel font rendering on non-Apple LCDs
+defaults write NSGlobalDomain AppleFontSmoothing -int 2
+
+# Increase window resize speed for Cocoa applications
+defaults write NSGlobalDomain NSWindowResizeTime -float 0.001
+
+# Disable opening and closing window animations
+defaults write NSGlobalDomain NSAutomaticWindowAnimationsEnabled -bool false
+
+# Use scroll gesture with the Ctrl (^) modifier key to zoom
+defaults write com.apple.universalaccess closeViewScrollWheelToggle -bool true
+defaults write com.apple.universalaccess HIDScrollZoomModifierMask -int 262144
+
+# Follow the keyboard focus while zoomed in
+defaults write com.apple.universalaccess closeViewZoomFollowsFocus -bool true
+
+
+
+## Security
+
+# Require password immediately after sleep or screen saver begins
 defaults write com.apple.screensaver askForPassword -int 1
 defaults write com.apple.screensaver askForPasswordDelay -int 0
 
 
-# Terminal: use the Solarized theme by default
-open Solarized.terminal
-defaults write com.apple.Terminal "Default Window Settings" -string "Solarized"
-defaults write com.apple.Terminal "Startup Window Settings" -string "Solarized"
+
+## Desktop
+
+# Disable Dashboard
+defaults write com.apple.dashboard mcx-disabled -boolean YES
+
+# Enable snap-to-grid for icons and in other icon views
+/usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
+/usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
+/usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
+
+# Show item info near icons and in other icon views
+/usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:showItemInfo true" ~/Library/Preferences/com.apple.finder.plist
+/usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:showItemInfo true" ~/Library/Preferences/com.apple.finder.plist
+/usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:showItemInfo true" ~/Library/Preferences/com.apple.finder.plist
+
+# Increase grid spacing for icons on the desktop and in other icon views
+/usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:gridSpacing 100" ~/Library/Preferences/com.apple.finder.plist
+/usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:gridSpacing 100" ~/Library/Preferences/com.apple.finder.plist
+/usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:gridSpacing 100" ~/Library/Preferences/com.apple.finder.plist
+
+# Increase the size of icons on the desktop and in other icon views
+/usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:iconSize 80" ~/Library/Preferences/com.apple.finder.plist
+/usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:iconSize 80" ~/Library/Preferences/com.apple.finder.plist
+/usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:iconSize 80" ~/Library/Preferences/com.apple.finder.plist
+
+# Show item info to the right of the icons
+/usr/libexec/PlistBuddy -c "Set DesktopViewSettings:IconViewSettings:labelOnBottom false" ~/Library/Preferences/com.apple.finder.plist
 
 
-# Misc: enable subpixel font rendering on non-Apple LCDs
-defaults write NSGlobalDomain AppleFontSmoothing -int 2
-# Misc: disable Resume system-wide
-defaults write NSGlobalDomain NSQuitAlwaysKeepsWindows -bool true
-# Misc: only use UTF-8 in Terminal.app
-defaults write com.apple.terminal StringEncodings -array 4
-# Misc: disable Dictionary results
-defaults write com.apple.spotlight DictionaryLookupEnabled -bool false
-# Misc: disable auto-correct
-defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
-# Increase window resize speed for Cocoa applications
-defaults write NSGlobalDomain NSWindowResizeTime -float 0.001
-# Disable opening and closing window animations
-defaults write NSGlobalDomain NSAutomaticWindowAnimationsEnabled -bool false
-# Misc: disable press-and-hold for keys in favor of key repeat
-defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
-# Keyboard: set a blazingly fast repeat rate
-defaults write NSGlobalDomain KeyRepeat -int 0.02
-# Keyboard: set a shorter delay until key repeat
-defaults write NSGlobalDomain InitialKeyRepeat -int 12
-# Display ASCII control characters using caret notation in standard text views
-# Try e.g. `cd /tmp; unidecode "\x{0000}" > cc.txt; open -e cc.txt`
-defaults write NSGlobalDomain NSTextShowsControlCharacters -bool true
-# Set language and text formats
-defaults write NSGlobalDomain AppleLanguages -array "nl" "en"
-defaults write NSGlobalDomain AppleLocale -string "nl_NL@currency=EUR"
-# AppleMeasurementUnits
-defaults write NSGlobalDomain AppleMeasurementUnits -string "Centimeters"
-defaults write NSGlobalDomain AppleMetricUnits -bool true
 
-# Hot corner: bottom right → Mission Control
+## Dock
+
+# Use the suck effect for window minimizing
+defaults write com.apple.dock mineffect suck
+
+# Make icons of hidden applications translucent
+defaults write com.apple.dock showhidden -bool true
+
+# Show indicator lights for open applications
+defaults write com.apple.dock show-process-indicators -bool true
+
+# Don’t animate opening applications
+defaults write com.apple.dock launchanim -bool false
+
+# Make tiles 45px
+defaults write com.apple.dock tilesize -int 45
+
+# Don't magnify tiles
+defaults write com.apple.dock magnification -boolean false
+
+# Enable highlight hover effect for the grid view of a stack
+defaults write com.apple.dock mouse-over-hilte-stack -bool true
+
+# Enable spring loading for all items
+defaults write com.apple.dock enable-spring-load-actions-on-all-items -bool true
+
+# Automatically hide and show the Dock
+defaults write com.apple.dock autohide -bool true
+
+# Remove the auto-hiding Dock delay
+defaults write com.apple.Dock autohide-delay -float 0
+
+
+
+## Mission Control & Hot Corners
+
+# Speed up animations
+defaults write com.apple.dock expose-animation-duration -float 0.1
+# Group windows by application
+defaults write com.apple.dock "expose-group-by-app" -bool true
+
+# Bottom right → Mission Control
 defaults write com.apple.dock wvous-br-corner -int 2
 defaults write com.apple.dock wvous-br-modifier -int 0
-# Hot corner: bottom left → Start screen saver
+
+# Bottom left → Start screen saver
 defaults write com.apple.dock wvous-bl-corner -int 5
 defaults write com.apple.dock wvous-bl-modifier -int 0
 
 
-# Trackpad: enable tap to click
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
-# Trackpad: bottom right corner to right-click
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick -bool true
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadCornerSecondaryClick -int 2
-defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryClick -bool true
-defaults -currentHost write NSGlobalDomain com.apple.trackpad.trackpadCornerClickBehavior -int 1
-# Trackpad: swipe between pages with three fingers
-defaults write NSGlobalDomain AppleEnableSwipeNavigateWithScrolls -bool true
+
+## Finder
+
+# Show status bar
+defaults write com.apple.finder ShowStatusBar -bool true
+
+# Show all filename extensions
+defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+
+# Disable the warning when changing a file extension
+defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
+
+# Empty Trash securely by default
+defaults write com.apple.finder EmptyTrashSecurely -bool true
+
+# Disable the warning before emptying the Trash
+defaults write com.apple.finder WarnOnEmptyTrash -bool false
+
+# Disable window and Get Info animations
+defaults write com.apple.finder DisableAllAnimations -bool true
+
+# Allow quitting via ⌘ + Q; doing so will also hide desktop icons
+defaults write com.apple.finder QuitMenuItem -bool true
+
+# Show the ~/Library folder (in OS X Lion)
+chflags nohidden ~/Library
+
+# Display full POSIX path as window title
+defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
+
+# Allow text selection in Quick Look
+defaults write com.apple.finder QLEnableTextSelection -bool true
+
+# Use list view in all Finder windows by default
+# Four-letter codes for the other view modes: `icnv`, `clmv`, `Flwv`
+defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
 
 
-# AirDrop: enable over Ethernet and on unsupported Macs running Lion
-defaults write com.apple.NetworkBrowser BrowseAllInterfaces -bool true
+
+## Panels
+
+# Expand save panel by default
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
+
+# Expand print panel by default
+defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
+
+# Disable the “Are you sure you want to open this application?” dialog
+defaults write com.apple.LaunchServices LSQuarantine -bool false
+
+# Enable full keyboard access for all controls (e.g. enable Tab in modal dialogs)
+defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 
 
-# Bluetooth: Increase sound quality for headphones/headsets
-defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)" -int 40
 
+## Safari
 
-# Safari: enable debug menu
+# Enable debug menu
 defaults write com.apple.Safari IncludeDebugMenu -bool true
 defaults write com.apple.Safari IncludeInternalDebugMenu -bool true
-# Safari: show status bar
-defaults write com.apple.Safari ShowStatusBar -bool true
-# Safari: use pie-chart progress indicator
-defaults write com.apple.Safari DebugUsePieProgressIndicator -bool true
-# Safari: enable tabbed browsing
-defaults write com.apple.Safari TabbedBrowsing -bool true
-# Safari: always show tab bar
-defaults write com.apple.Safari AlwaysShowTabBar -bool true
-# Safari: open all "new window" links in tabs
-defaults write com.apple.Safari TargetedClicksCreateTabs -bool true
-# Safari: make search banners default to Contains instead of Starts With
-defaults write com.apple.Safari FindOnPageMatchesWordStartsOnly -bool false
-# Safari: remove useless icons from bookmarks bar
-defaults write com.apple.Safari ProxiesInBookmarksBar "()"
-# Safari: add a context menu item for showing the Web Inspector in web views
-defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
-# Safari: hide bookmarks bar by default
-defaults write com.apple.Safari ShowFavoritesBar -bool false
-# Safari: user stylesheet
-defaults write com.apple.safari UserStyleSheetEnabled 1
-defaults write com.apple.safari UserStyleSheetLocationURLString "~/safari.css"
-defaults write com.apple.safari WebKitUserStyleSheetEnabledPreferenceKey 1
-defaults write com.apple.safari WebKitUserStyleSheetLocationPreferenceKey "~/safari.css"
 
+# Show status bar
+defaults write com.apple.Safari ShowStatusBar -bool true
+
+# Use pie-chart progress indicator
+defaults write com.apple.Safari DebugUsePieProgressIndicator -bool true
+
+# Enable tabbed browsing
+defaults write com.apple.Safari TabbedBrowsing -bool true
+
+# Always show tab bar
+defaults write com.apple.Safari AlwaysShowTabBar -bool true
+
+# Open all "new window" links in tabs
+defaults write com.apple.Safari TargetedClicksCreateTabs -bool true
+
+# Make search banners default to Contains instead of Starts With
+defaults write com.apple.Safari FindOnPageMatchesWordStartsOnly -bool false
+
+# Remove useless icons from bookmarks bar
+defaults write com.apple.Safari ProxiesInBookmarksBar "()"
+
+# Add a context menu item for showing the Web Inspector in web views
+defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
+
+# Hide bookmarks bar by default
+defaults write com.apple.Safari ShowFavoritesBar -bool false
+
+# User stylesheet
+defaults write com.apple.safari UserStyleSheetEnabled 1
+defaults write com.apple.safari UserStyleSheetLocationURLString "$HOME/init/safari.css"
+defaults write com.apple.safari WebKitUserStyleSheetEnabledPreferenceKey 1
+defaults write com.apple.safari WebKitUserStyleSheetLocationPreferenceKey "$HOME/init/safari.css"
+
+
+
+## Terminal
+
+# Use the Solarized theme by default
+open "$HOME/init/Solarized.terminal"
+sleep 1 # Wait a bit to make sure the theme is loaded
+defaults write com.apple.Terminal "Default Window Settings" -string "Solarized"
+defaults write com.apple.Terminal "Startup Window Settings" -string "Solarized"
+
+# Only use UTF-8
+defaults write com.apple.terminal StringEncodings -array 4
+
+
+
+## Spotlight
+
+# Disable Dictionary results
+defaults write com.apple.spotlight DictionaryLookupEnabled -bool false
+
+
+
+## TextEdit
+
+# Use plain text mode for new documents
+defaults write com.apple.TextEdit RichText -int 0
+
+# Open and save files as UTF-8
+defaults write com.apple.TextEdit PlainTextEncoding -int 4
+defaults write com.apple.TextEdit PlainTextEncodingForWrite -int 4
+
+
+
+## Bootstrap
 
 # Reset Launchpad
 find ~/Library/Application\ Support/Dock -name "*.db" -maxdepth 1 -delete
@@ -195,8 +354,8 @@ find ~/Library/Application\ Support/Dock -name "*.db" -maxdepth 1 -delete
 # Fix for the ancient UTF-8 bug in QuickLook (http://mths.be/bbo)
 echo "0x08000100:0" > ~/.CFUserTextEncoding
 
-# Kill affected applications
-for app in Safari Finder Dock SystemUIServer; do killall "$app" >/dev/null 2>&1; done
-
-# Open Safari again
-open Safari
+for app in "Address Book" "Calendar" "Contacts" "Dashboard" "Dock" "Finder" \
+    "Mail" "Safari" "SizeUp" "SystemUIServer" "Terminal" "iTunes"; do
+    killall "$app" > /dev/null 2>&1
+done
+echo "Done. Note that some of these changes require a logout/restart to take effect."

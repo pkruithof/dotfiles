@@ -1,12 +1,29 @@
 [alias]
+    # Custom pretty log
+    logshort = log --pretty=nice --date-order
+
+    # Diffstat log
+    logdiff = log --stat --format=short --abbrev-commit
+    # Long format diffstat log
+    logdifflong = log --stat --format=full
+    # Longer format diffstat log
+    logdifflonger = log --stat --format=fuller
+
+    # Custom graph log (append any tree-ish)
+    loggraphline = log --pretty=nice --date-order --graph
     # View the SHA, description, and history graph of the latest 20 commits
-    l = log --pretty=oneline -n 20 --graph
+    loggraphshort = log --pretty=short --date-order --graph
+
+    # Display the number of commits per author in numerical order
+    who = shortlog -sn --
 
     # View the current working tree status using the short format
     s = status -s
 
-    # Diff
-    d = diff --patch-with-stat
+    # Show the diff between the latest commit and the current state
+    d = !"git diff-index --quiet HEAD -- || clear; git diff --patch-with-stat"
+    # `git di $number` shows the diff between the state `$number` revisions ago and the current state
+    di = !"d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d"
 
     # Pull in remote changes for the current repository and all its submodules
     p = !"git pull; git submodule foreach git pull origin master"
@@ -20,8 +37,20 @@
     # Switch to a branch, creating it if necessary
     go = checkout -B
 
+    # Show verbose output about tags, branches or remotes
+    tags = tag -l
+    branches = branch -a
+    remotes = remote -v
+
     # Undo a `git push`
     undopush = push -f origin HEAD^:master
+
+    # `git remote prune origin`: remove remote-tracking branches that were deleted from the remote repo
+    # `git gc`: cleanup unnecessary files and optimize the local repository
+    # `git clean -df`: remove untracked files and directories from the working tree
+    # `git stash clear`: remove all stashed states
+    trim = !git remote prune origin && git gc
+    cleanup = !git clean -df && git stash clear
 
 [apply]
     # Detect whitespace errors when applying a patch
@@ -31,6 +60,9 @@
     # Use custom `.gitignore` and `.gitattributes`
     excludesfile = ~/.gitignore
     attributesfile = ~/.gitattributes
+
+[credential]
+    helper = osxkeychain
 
 [color]
     # Use colors in Git commands that are capable of colored output when outputting to the terminal
