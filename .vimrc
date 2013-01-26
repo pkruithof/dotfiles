@@ -4,6 +4,9 @@
 " Make vim more useful
 set nocompatible
 
+" Use the OS clipboard by default (on versions compiled with `+clipboard`)
+set clipboard=unnamed
+
 " Point to location of pathogen submodule (since it's not in .vim/autoload)
 silent! runtime .vim/bundle/vim-pathogen/autoload/pathogen.vim
 
@@ -120,9 +123,6 @@ set number
 
 " Highlight current line
 set cursorline
-
-" Increase default number of lines
-set lines=40
 
 " Start scrolling three lines before the horizontal window border
 set scrolloff=3

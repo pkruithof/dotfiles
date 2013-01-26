@@ -16,6 +16,7 @@ brew install findutils
 brew install wget --enable-iri
 
 # Install nifty utilities
+brew install bash-completion
 brew install ack
 brew install git
 brew install rename
@@ -29,15 +30,8 @@ brew tap homebrew/dupes
 brew install homebrew/dupes/grep
 brew install homebrew/dupes/rsync
 
-# Install LEMP
-brew tap josegonzalez/homebrew-php
-brew install php54 --with-fpm --with-mysql --with-intl
-brew install php54-apc php54-http php54-xdebug php54--imagick php54-solr php54-yaml
-brew install mysql
-brew install nginx
-brew install redis
-
-
 # Node.js and npm
 brew install node
 npm install less -g
+
+brew cleanup
