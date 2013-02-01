@@ -16,6 +16,7 @@ brew install findutils
 brew install wget --enable-iri
 
 # Install nifty utilities
+brew install bash
 brew install bash-completion
 brew install ack
 brew install git
