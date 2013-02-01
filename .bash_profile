@@ -34,3 +34,6 @@ if [ command -v brew &>/dev/null ]; then
     source $(brew --prefix)/etc/bash_completion
   fi
 fi
+
+# Load RVM into a shell session *as a function*
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"

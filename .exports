@@ -20,17 +20,26 @@ export HISTCONTROL=ignoredups
 export COMPOSER_PROCESS_TIMEOUT=4000
 
 # add Homebrew bin to path
-[ command -v brew &>/dev/null ] && PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH";
+command -v brew &>/dev/null && PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH";
+
+# add Homebrew's Ruby bin to path
+command -v brew &>/dev/null && PATH="$(brew --prefix)/bin:$(brew --prefix)/sbin:$(brew --prefix ruby)/bin:$PATH";
 
 # if these bins exist, then add them to the PATH
-[ -d "/usr/bin" ]       && PATH="$PATH:/usr/bin";
-[ -d "/usr/sbin" ]      && PATH="$PATH:/usr/sbin";
+[ -d "/usr/bin" ]        && PATH="$PATH:/usr/bin";
+[ -d "/usr/sbin" ]       && PATH="$PATH:/usr/sbin";
+
 # add to beginning of PATH so that it always take precedence over /usr/bin
-[ -d "/usr/local/bin" ] && PATH="/usr/local/bin:$PATH";
+[ -d "/usr/local/bin" ]  && PATH="/usr/local/bin:$PATH";
 [ -d "/usr/local/sbin" ] && PATH="/usr/local/sbin:$PATH";
+
 # add to beginning of PATH so that it always take precedence over /usr/local/bin
-[ -d "/opt/local/bin" ] && PATH="/opt/local/bin:$PATH";
+[ -d "/opt/local/bin" ]  && PATH="/opt/local/bin:$PATH";
+
 # if the current user has a ~/bin, then add it to the PATH
-[ -d "$HOME/bin" ]      && PATH="$PATH:$HOME/bin";
+[ -d "$HOME/bin" ]       && PATH="$PATH:$HOME/bin";
+
+# Add RVM to PATH for scripting
+[ -d "$HOME/.rvm/bin" ]  && PATH=$PATH:$HOME/.rvm/bin;
 
 export PATH
