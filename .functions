@@ -57,3 +57,9 @@ function port() {
 function psgrep() {
   ps auxwww | grep "$@"
 }
+
+# generates a password
+# see http://en.wikipedia.org/wiki/Random_password_generator#Bash
+function passgen() {
+  head /dev/urandom | uuencode -m - | sed -n 2p | cut -c1-${1:-12};
+}
