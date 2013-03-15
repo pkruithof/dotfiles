@@ -9,6 +9,7 @@ brew upgrade
 # Install GNU core utilities (those that come with OS X are outdated)
 brew install coreutils
 echo "Don’t forget to add $(brew --prefix coreutils)/libexec/gnubin to \$PATH."
+
 # Install GNU `find`, `locate`, `updatedb`, and `xargs`, g-prefixed
 brew install findutils
 
@@ -16,15 +17,16 @@ brew install findutils
 brew install wget --enable-iri
 
 # Install nifty utilities
-brew install bash
-brew install bash-completion
-brew install ack
-brew install git
-brew install rename
-brew install tree
-brew install watch
-brew install pgrep
-brew install htop mytop
+brew install \
+\ bash
+\ bash-completion
+\ ack
+\ git
+\ rename
+\ tree
+\ watch
+\ pgrep
+\ htop
 
 # Install more recent versions of some OS X tools
 brew tap homebrew/dupes

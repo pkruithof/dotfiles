@@ -23,4 +23,15 @@ else
     fi
 fi
 unset doIt
-source ~/.bash_profile
+
+if [[ $BASH ]]; then
+  source ~/.bash_profile
+elif [[ $ZSH_NAME ]]; then
+  setopt EXTENDED_GLOB
+  for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/*; do
+    if [[ `basename "${rcfile}"` != "README.md" ]]; then
+      ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
+    fi
+  done
+  source ~/.zsh_profile
+fi

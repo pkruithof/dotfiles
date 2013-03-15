@@ -1,1 +1,7 @@
-[ -n "$PS1" ] && source ~/.bash_profile
+source ~/.bash/prompt
+source ~/.bash/profile
+source ~/.bash/input
+
+source ~/.common/aliases
+source ~/.common/functions
+source ~/.common/exports

@@ -19,12 +19,6 @@ export HISTCONTROL=ignoredups
 # Increase timeout for composer (for slow connections)
 export COMPOSER_PROCESS_TIMEOUT=4000
 
-# add Homebrew bin to path
-command -v brew &>/dev/null && PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH";
-
-# add Homebrew's Ruby bin to path
-command -v brew &>/dev/null && PATH="$(brew --prefix)/bin:$(brew --prefix)/sbin:$(brew --prefix ruby)/bin:$PATH";
-
 # if these bins exist, then add them to the PATH
 [ -d "/usr/bin" ]        && PATH="$PATH:/usr/bin";
 [ -d "/usr/sbin" ]       && PATH="$PATH:/usr/sbin";
