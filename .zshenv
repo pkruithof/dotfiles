@@ -19,9 +19,9 @@ fi
 
 # TODO doesnt work
 if [ which subl &> /dev/null ]; then
-  echo 'subl -w'
+  #echo 'subl -w'
 else
-  echo 'nano'
+  #echo 'nano'
 fi
 export VISUAL="$EDITOR"
 export PAGER='less'
