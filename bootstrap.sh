@@ -1,8 +1,8 @@
-#!/bin/sh
+#!/bin/bash
 cd "`dirname $0`"
 
 # Pull down the latest changes
-#git pull
+git pull
 
 # Check out submodules
 git submodule --quiet update --init
