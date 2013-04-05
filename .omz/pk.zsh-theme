@@ -25,42 +25,6 @@ function virtualenv_info {
 function git_prompt_status {
 }
 
-# Solarized Dark colour scheme
-typeset -Ag solar solar_bold
-solar[base03]=${FG[234]}
-solar[base02]=${FG[235]}
-solar[base01]=${FG[240]}
-solar[base00]=${FG[241]}
-solar[base0]=${FG[244]}
-solar[base1]=${FG[245]}
-solar[base2]=${FG[254]}
-solar[base3]=${FG[230]}
-solar[yellow]=${FG[136]}
-solar[orange]=${FG[166]}
-solar[red]=${FG[160]}
-solar[magenta]=${FG[125]}
-solar[violet]=${FG[061]}
-solar[blue]=${FG[033]}
-solar[cyan]=${FG[037]}
-solar[green]=${FG[064]}
-
-solar_bold[base03]=${FX[bold]}${FG[234]}
-solar_bold[base02]=${FX[bold]}${FG[235]}
-solar_bold[base01]=${FX[bold]}${FG[240]}
-solar_bold[base00]=${FX[bold]}${FG[241]}
-solar_bold[base0]=${FX[bold]}${FG[244]}
-solar_bold[base1]=${FX[bold]}${FG[245]}
-solar_bold[base2]=${FX[bold]}${FG[254]}
-solar_bold[base3]=${FX[bold]}${FG[230]}
-solar_bold[yellow]=${FX[bold]}${FG[136]}
-solar_bold[orange]=${FX[bold]}${FG[166]}
-solar_bold[red]=${FX[bold]}${FG[160]}
-solar_bold[magenta]=${FX[bold]}${FG[125]}
-solar_bold[violet]=${FX[bold]}${FG[061]}
-solar_bold[blue]=${FX[bold]}${FG[033]}
-solar_bold[cyan]=${FX[bold]}${FG[037]}
-solar_bold[green]=${FX[bold]}${FG[064]}
-
 precmd () {
   # Current directory in tab/window title
   print -Pn "\e]2;%~\a"

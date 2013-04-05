@@ -27,6 +27,8 @@ brew install \
 \ watch
 \ pgrep
 \ htop
+\ zsh
+\ zsh-completions
 
 # Install more recent versions of some OS X tools
 brew tap homebrew/dupes

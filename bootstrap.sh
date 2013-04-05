@@ -1,14 +1,32 @@
-#!/bin/bash
-cd "$(dirname "${BASH_SOURCE}")"
+#!/bin/sh
+cd "`dirname $0`"
 
 # Pull down the latest changes
-git pull
+#git pull
 
 # Check out submodules
 git submodule --quiet update --init
 
 function doIt() {
-    rsync --exclude ".git/" --exclude ".DS_Store" --exclude "bootstrap.sh" --exclude "README.md" -av . ~
+    rsync -av \
+      --exclude ".git/" \
+      --exclude "git" \
+      --exclude "prezto" \
+      --exclude ".DS_Store" \
+      --exclude "bootstrap.sh" \
+      --exclude "README.md" \
+      . ~
+
+    # sync prezto
+    rsync -av --delete \
+      --exclude ".git/" \
+       prezto/ ~/.zprezto
+
+    # copy git files
+    cp -R git/config ~/.gitconfig
+    cp -R git/ignore ~/.gitignore
+    cp -R git/attributes ~/.gitattributes
+
     # Sync vim colors
     cp .vim/colors/*/colors/*.vim ~/.vim/colors/
 }
@@ -24,14 +42,8 @@ else
 fi
 unset doIt
 
-if [[ $BASH ]]; then
-  source ~/.bash_profile
-elif [[ $ZSH_NAME ]]; then
-  setopt EXTENDED_GLOB
-  for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/*; do
-    if [[ `basename "${rcfile}"` != "README.md" ]]; then
-      ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
-    fi
-  done
-  source ~/.zsh_profile
-fi
+#if [[ $ZSH_NAME ]]; then
+#  source ~/.zshrc
+#else
+#  source ~/.bashrc
+#fi
