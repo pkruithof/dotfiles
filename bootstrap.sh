@@ -11,7 +11,6 @@ function doIt() {
     rsync -av \
       --exclude ".git/" \
       --exclude "git" \
-      --exclude "prezto" \
       --exclude ".DS_Store" \
       --exclude "bootstrap.sh" \
       --exclude "README.md" \
