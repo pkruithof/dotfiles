@@ -21,10 +21,10 @@ solar[yellow]=${FG[136]}
 solar[orange]=${FG[166]}
 solar[red]=${FG[160]}
 solar[magenta]=${FG[125]}
-solar[violet]=${FG[61]}
+solar[violet]=${FG[061]}
 solar[blue]=${FG[033]}
-solar[cyan]=${FG[37]}
-solar[green]=${FG[64]}
+solar[cyan]=${FG[037]}
+solar[green]=${FG[064]}
 
 solar_bold[base03]=${FX[bold]}${FG[234]}
 solar_bold[base02]=${FX[bold]}${FG[235]}
