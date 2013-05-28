@@ -23,15 +23,11 @@ alias la="ls -Flah"
 # List only directories
 alias lsd='ls -Flh | grep "^d"'
 # Order by last modified, long form
-alias lt="ls -Flht"
+alias lm="ls -Flht"
 # Order by last modified, long form, all files
-alias lat="ls -Flaht"
+alias lam="ls -Flaht"
 # Order by file size, long form, all files
 alias las="ls -FlahS"
-
-
-# Always use N (line numbers) and M (more detailed prompt, including file position)
-alias less="less -NM"
 
 # Enable aliases to be sudo’ed
 alias sudo='sudo '
@@ -46,12 +42,6 @@ alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | echo '=> Public key copied to pa
 
 # Enhanced WHOIS lookups
 alias whois="whois -h whois-servers.net"
-
-# Flush Directory Service cache
-alias flushdns="dscacheutil -flushcache"
-
-# Recursively delete `.DS_Store` files
-alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
 
 # View HTTP traffic
 alias sniff="sudo ngrep -d 'en1' -t '^(GET|POST) ' 'tcp and port 80'"

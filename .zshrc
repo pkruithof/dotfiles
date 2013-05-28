@@ -3,17 +3,19 @@ source "$HOME/.zsh/config"
 
 typeset -ga sources
 sources+="$HOME/.zsh/input"
-sources+="$HOME/.common/environment"
-sources+="$HOME/.common/aliases"
-sources+="$HOME/.common/exports"
-sources+="$HOME/.common/functions"
+sources+="$HOME/.environment"
+sources+="$HOME/.aliases"
+sources+="$HOME/.exports"
+sources+="$HOME/.functions"
 
-# Check for a system specific file
-systemFile=`uname -s | tr "[:upper:]" "[:lower:]"`
-sources+="$HOME/.system/$systemFile"
+# Check for a system-specific file
+[[ -f "$HOME/.systemrc" ]] && sources+="$HOME/.systemrc"
 
 # use .localrc for settings specific to one system
 [[ -f "$HOME/.localrc" ]] && sources+="$HOME/.localrc"
+
+# Load RVM into a shell session *as a function*
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && sources+="$HOME/.rvm/scripts/rvm"
 
 # plugins
 sources+="$HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
