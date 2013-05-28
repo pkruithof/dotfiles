@@ -17,11 +17,6 @@ function doIt() {
       --exclude "README.md" \
       . ~
 
-    # sync prezto
-    rsync -av --delete \
-      --exclude ".git/" \
-       prezto/ ~/.zprezto
-
     # copy git files
     cp -R git/config ~/.gitconfig
     cp -R git/ignore ~/.gitignore
