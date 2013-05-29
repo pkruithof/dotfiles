@@ -3,19 +3,17 @@
 run_brew() {
     if type_exists 'brew'; then
         # Make sure we’re using the latest Homebrew
-        e_header "Updating Homebrew..."
+        e_info "Updating Homebrew..."
         brew update
-        [[ $? ]] && e_success "Done"
 
         # Upgrade any already-installed formulae
-        e_header "Updating any existing Homebrew formulae..."
+        e_info "Updating outdated brews..."
         brew upgrade
-        [[ $? ]] && e_success "Done"
 
         # Tap dupes (be quiet if already tapped)
         brew tap homebrew/dupes &> /dev/null
 
-        e_header "Checking status of desired Homebrew formulae..."
+        e_info "Checking status of desired Homebrew formulae..."
         local list_formulae
         local -a missing_formulae
         local -a desired_formulae=(
@@ -53,14 +51,13 @@ run_brew() {
             # Convert the array of missing formula into a list of space-separate strings
             list_formulae=$( printf "%s " "${missing_formulae[@]}" )
 
-            e_header "Installing missing Homebrew formulae..."
+            e_info "Installing missing Homebrew formulae..."
             # Install all missing formulae
             brew install $list_formulae
-
-            [[ $? ]] && e_success "Done"
         fi
 
         # Remove outdated versions from the Cellar
+        e_info "Cleaning up..."
         brew cleanup
 
     else

@@ -5,6 +5,11 @@ e_header() {
     printf "\n$(tput setaf 7)%s$(tput sgr0)\n" "$@"
 }
 
+# Info logging
+e_info() {
+    printf "$(tput setaf 7)%s$(tput sgr0)\n" "$@"
+}
+
 # Success logging
 e_success() {
     printf "$(tput setaf 64)✓ %s$(tput sgr0)\n" "$@"
@@ -54,10 +59,8 @@ type_exists() {
 # $1 - formula name (may include options)
 formula_exists() {
     if $(brew list $1 >/dev/null); then
-        printf "%s already installed.\n" "$1"
         return 0
     fi
 
-    e_warning "Missing formula: $1"
     return 1
 }

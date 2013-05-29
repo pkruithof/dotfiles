@@ -1,8 +1,74 @@
 #!/bin/bash
 
-DOTFILES_DIRECTORY="${HOME}/dotfiles"
-DOTFILES_TARBALL_PATH="https://github.com/pkruithof/dotfiles/tarball/master"
-DOTFILES_GIT_REMOTE="https://github.com/pkruithof/dotfiles"
+export DOTFILES_DIRECTORY="${HOME}/dotfiles"
+export DOTFILES_TARBALL_PATH="https://github.com/pkruithof/dotfiles/tarball/master"
+export DOTFILES_GIT_REMOTE="https://github.com/pkruithof/dotfiles"
+
+link() {
+    # Force create/replace the symlink.
+    ln -fs "${DOTFILES_DIRECTORY}/${1}" "${HOME}/${2}"
+}
+
+mirrorfiles() {
+    e_header "Symlinking dotfiles into home directory"
+
+    # Ask before potentially overwriting files
+    seek_confirmation "Warning: This step may overwrite your existing dotfiles."
+
+    if is_confirmed; then
+        # Copy `.gitconfig`.
+        # Any global git commands in `~/.localrc` will be written to
+        # `.gitconfig`. This prevents them being committed to the repository.
+        rsync -avz --quiet ${DOTFILES_DIRECTORY}/git/config  ${HOME}/.gitconfig
+
+        # Force remove the vim directory if it's already there.
+        if [ -e "${HOME}/.vim" ]; then
+            rm -rf "${HOME}/.vim"
+        fi
+
+        # Create the necessary symbolic links between the `.dotfiles` and `HOME`
+        # directory. The `bash_profile` sources other files directly from the
+        # `.dotfiles` repository.
+
+        # ZSH files
+        link "zsh"                 ".zsh"
+        link "zsh/rc"              ".zshrc"
+        link "zsh/env"             ".zshenv"
+        link "zsh/login"           ".zlogin"
+
+        # Bash files
+        link "bash"                ".bash"
+        link "bash/rc"             ".bashrc"
+        link "bash/profile"        ".bash_profile"
+        link "bash/prompt"         ".bash_prompt"
+
+        # Common scripts
+        link "common/aliases"      ".aliases"
+        link "common/environment"  ".environment"
+        link "common/exports"      ".exports"
+        link "common/functions"    ".functions"
+
+        # Git
+        link "git/attributes"      ".gitattributes"
+        link "git/ignore"          ".gitignore"
+
+        # Vim
+        link "vim"                 ".vim"
+        link "vim/gvimrc"          ".gvimrc"
+        link "vim/vimrc"           ".vimrc"
+
+        # Plugins
+        link "dircolors-solarized" "dircolors-solarized"
+
+        sys=`uname -s | tr "[:upper:]" "[:lower:]"`
+        link "system/$sys"         ".systemrc"
+
+        e_success "Dotfiles update complete!"
+    else
+        e_error "Aborting..."
+        exit 1
+    fi
+}
 
 # If missing, download and extract the dotfiles repository
 if [[ ! -d ${DOTFILES_DIRECTORY} ]]; then
@@ -38,8 +104,8 @@ if [[ "$systemName" == "darwin" ]]; then
   # Before relying on Homebrew, check that packages can be compiled
   if ! type_exists 'gcc'; then
       e_error "The XCode Command Line Tools must be installed first."
-      printf "  Download them from: https://developer.apple.com/downloads\n"
-      printf "  Then run: bash ~/.dotfiles/bin/dotfiles\n"
+      e_info "  Download them from: https://developer.apple.com/downloads"
+      e_info "  Then run: bash $BASH_SOURCE"
       exit 1
   fi
 
@@ -73,93 +139,33 @@ fi
 
 # Conditionally sync with the remote repository
 if [[ $no_sync ]]; then
-    e_warning "Skipped dotfiles sync.\n"
+    e_warning "Skipped dotfiles sync."
 else
     e_header "Syncing dotfiles..."
     # Pull down the latest changes
     # git pull --rebase origin master
     # Update submodules
     # git submodule update --recursive --init --quiet
+    e_success "Done"
 fi
 
 if [[ "$systemName" == "darwin" ]]; then
   # Install and update packages
   if [[ $no_packages ]]; then
-      e_header "Skipped package installations."
+      e_warning "Skipped package installations."
   else
       e_header "Updating packages..."
       # Install/update Homebrew formulae
       run_brew
+      e_success "Done"
   fi
 fi
 
-link() {
-    # Force create/replace the symlink.
-    ln -fs "${DOTFILES_DIRECTORY}/${1}" "${HOME}/${2}"
-}
-
-mirrorfiles() {
-    # Copy `.gitconfig`.
-    # Any global git commands in `~/.localrc` will be written to
-    # `.gitconfig`. This prevents them being committed to the repository.
-    rsync -avz --quiet ${DOTFILES_DIRECTORY}/git/config  ${HOME}/.gitconfig
-
-    # Force remove the vim directory if it's already there.
-    if [ -e "${HOME}/.vim" ]; then
-        rm -rf "${HOME}/.vim"
-    fi
-
-    # Create the necessary symbolic links between the `.dotfiles` and `HOME`
-    # directory. The `bash_profile` sources other files directly from the
-    # `.dotfiles` repository.
-
-    # ZSH files
-    link "zsh"                 ".zsh"
-    link ".zshrc"              ".zshrc"
-    link ".zshenv"             ".zshenv"
-    link ".zlogin"             ".zlogin"
-
-    # Bash files
-    link "bash"                ".bash"
-    link "bash/profile"        ".bash_profile"
-    link "bash/prompt"         ".bash_prompt"
-
-    # Common scripts
-    link "common/aliases"      ".aliases"
-    link "common/environment"  ".environment"
-    link "common/exports"      ".exports"
-    link "common/functions"    ".functions"
-
-    # Git
-    link "git/attributes"      ".gitattributes"
-    link "git/config"          ".gitconfig"
-    link "git/ignore"          ".gitignore"
-
-    # Vim
-    link "vim"                 ".vim"
-    link "vim/gvimrc"          ".gvimrc"
-    link "vim/vimrc"           ".vimrc"
-
-    # Plugins
-    link "dircolors-solarized" "dircolors-solarized"
-
-    sys=`uname -s | tr "[:upper:]" "[:lower:]"`
-    link "system/$sys"         ".systemrc"
-
-    e_success "Dotfiles update complete!"
-}
-
-# Ask before potentially overwriting files
-seek_confirmation "Warning: This step may overwrite your existing dotfiles."
-
-if is_confirmed; then
-    mirrorfiles
-else
-    printf "Aborting...\n"
-    exit 1
-fi
+mirrorfiles
 
 if [[ "$systemName" == "darwin" ]]; then
+  e_header "Updating OS X settings"
+
   # Ask before potentially overwriting OS X defaults
   seek_confirmation "Warning: This step may modify your OS X system defaults."
 
@@ -167,6 +173,6 @@ if [[ "$systemName" == "darwin" ]]; then
       bash ./bin/osxdefaults
       e_success "OS X settings updated! You may need to restart."
   else
-      printf "Skipped OS X settings update.\n"
+      e_warning "Skipped OS X settings update."
   fi
 fi

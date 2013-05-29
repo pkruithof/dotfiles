@@ -311,16 +311,16 @@ defaults write com.apple.Safari ShowFavoritesBar -bool false
 
 # User stylesheet
 defaults write com.apple.safari UserStyleSheetEnabled 1
-defaults write com.apple.safari UserStyleSheetLocationURLString "./osx/safari.css"
+defaults write com.apple.safari UserStyleSheetLocationURLString "${DOTFILES_DIRECTORY}/osx/safari.css"
 defaults write com.apple.safari WebKitUserStyleSheetEnabledPreferenceKey 1
-defaults write com.apple.safari WebKitUserStyleSheetLocationPreferenceKey "./osx/safari.css"
+defaults write com.apple.safari WebKitUserStyleSheetLocationPreferenceKey "${DOTFILES_DIRECTORY}/osx/safari.css"
 
 
 
 ## Terminal
 
 # Use the Solarized theme by default
-open "./osx/Solarized Dark.terminal"
+open "${DOTFILES_DIRECTORY}/osx/Solarized Dark.terminal"
 sleep 1 # Wait a bit to make sure the theme is loaded
 defaults write com.apple.Terminal "Default Window Settings" -string "Solarized"
 defaults write com.apple.Terminal "Startup Window Settings" -string "Solarized"

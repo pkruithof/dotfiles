@@ -14,8 +14,7 @@ function virtualenv_info {
 }
 
 function update_current_git_vars() {
-  local gitstatus="$HOME/.zsh/gitstatus.py"
-  _GIT_STATUS=`python ${gitstatus}`
+  _GIT_STATUS="`python ${DOTFILES_DIRECTORY}/lib/gitstatus`"
   __CURRENT_GIT_STATUS=("${(@f)_GIT_STATUS}")
   GIT_BRANCH=$__CURRENT_GIT_STATUS[1]
   GIT_REMOTE=$__CURRENT_GIT_STATUS[2]
