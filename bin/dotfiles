@@ -1,8 +1,10 @@
 #!/bin/bash
 
-export DOTFILES_DIRECTORY="${HOME}/dotfiles"
-export DOTFILES_TARBALL_PATH="https://github.com/pkruithof/dotfiles/tarball/master"
-export DOTFILES_GIT_REMOTE="https://github.com/pkruithof/dotfiles"
+DOTFILES_DIRECTORY="${HOME}/dotfiles"
+DOTFILES_TARBALL_PATH="https://github.com/pkruithof/dotfiles/tarball/zsh"
+DOTFILES_GIT_REMOTE="https://github.com/pkruithof/dotfiles"
+
+export $DOTFILES_DIRECTORY
 
 link() {
     # Force create/replace the symlink.
