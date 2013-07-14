@@ -1,10 +1,12 @@
 #!/bin/bash
 
-DOTFILES_DIRECTORY="${HOME}/dotfiles"
+# TODO
+# - general exports, like dotfiles dir
+# - variables which is depended on, like LANGUAGE
+
+export DOTFILES_DIRECTORY="${HOME}/dotfiles"
 DOTFILES_TARBALL_PATH="https://github.com/pkruithof/dotfiles/tarball/zsh"
 DOTFILES_GIT_REMOTE="https://github.com/pkruithof/dotfiles"
-
-export $DOTFILES_DIRECTORY
 
 link() {
     # Force create/replace the symlink.
@@ -79,7 +81,7 @@ if [[ ! -d ${DOTFILES_DIRECTORY} ]]; then
     # Get the tarball
     curl -fsSLo ${HOME}/dotfiles.tar.gz ${DOTFILES_TARBALL_PATH}
     # Extract to the dotfiles directory
-    tar -zxf ${HOME}/dotfiles.tar.gz --strip-components 1 -C ${DOTFILES_DIRECTORY}
+    tar -zxmf ${HOME}/dotfiles.tar.gz --strip-components 1 -C ${DOTFILES_DIRECTORY}
     # Remove the tarball
     rm -rf ${HOME}/dotfiles.tar.gz
 fi
@@ -132,6 +134,8 @@ if ! is_git_repo; then
     git init
     git remote add origin ${DOTFILES_GIT_REMOTE}
     git fetch origin master
+    git fetch origin zsh
+    git checkout zsh
 
     # Reset the index and working tree to the fetched HEAD
     # (submodules are cloned in the subsequent sync step)
@@ -155,6 +159,9 @@ else
 
     e_success "Done"
 fi
+
+# Install oh-my-zsh
+curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
 
 if [[ "$systemName" == "darwin" ]]; then
   # Install and update packages
