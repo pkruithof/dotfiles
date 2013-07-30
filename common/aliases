@@ -1,0 +1,67 @@
+##
+## cd
+##
+
+# Easier navigation: .., ..., ...., ....., ~ and -
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias ~="cd ~" # `cd` is probably faster to type though
+alias -- -="cd -"
+
+
+##
+## ls
+##
+
+# Long form
+alias l="ls -Flh"
+alias ll="l"
+# List all files
+alias la="ls -Flah"
+# List only directories
+alias lsd='ls -Flh | grep "^d"'
+# Order by last modified, long form
+alias lm="ls -Flht"
+# Order by last modified, long form, all files
+alias lam="ls -Flaht"
+# Order by file size, long form, all files
+alias las="ls -FlahS"
+
+# IP addresses
+alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
+alias localip="ipconfig getifaddr en1"
+alias ips="ifconfig -a | grep -o 'inet6\? \(\([0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+\)\|[a-fA-F0-9:]\+\)' | sed -e 's/inet6* //'"
+
+# Copy my public key to my clipboard
+alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
+
+# Enhanced WHOIS lookups
+alias whois="whois -h whois-servers.net"
+
+# View HTTP traffic
+alias sniff="sudo ngrep -d 'en1' -t '^(GET|POST) ' 'tcp and port 80'"
+alias httpdump="sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET \/.*\""
+
+# shortcuts for HTTP methods
+for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
+  alias "$method"="curl -X '$method'"
+done
+
+# Apache shortcuts
+alias htstop="sudo /usr/bin/env apachectl stop"
+alias htstart="sudo /usr/bin/env apachectl start"
+alias htrestart="sudo /usr/bin/env apachectl restart"
+
+# Mysql shortcuts
+alias mydump="mysqldump --default-character-set=utf8"
+alias my="mysql --default-character-set=utf8"
+alias myadmin="mysqladmin"
+
+# Nginx shortcuts
+alias nginx-test="sudo service nginx configtest"
+alias nginx-start="nginx-test && sudo service nginx start"
+alias nginx-stop="nginx-test && sudo service nginx stop"
+alias nginx-restart="nginx-test && sudo service nginx restart"
+alias nginx-reload="nginx-test && sudo service nginx reload"
