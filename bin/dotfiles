@@ -1,0 +1,193 @@
+#!/bin/bash
+
+# TODO
+# - general exports, like dotfiles dir
+# - variables which is depended on, like LANGUAGE
+
+export DOTFILES_DIRECTORY="${HOME}/dotfiles"
+DOTFILES_TARBALL_PATH="https://github.com/pkruithof/dotfiles/tarball/zsh"
+DOTFILES_GIT_REMOTE="https://github.com/pkruithof/dotfiles"
+
+link() {
+  # Force create/replace the symlink.
+  ln -fs "${DOTFILES_DIRECTORY}/${1}" "${HOME}/${2}"
+}
+
+mirrorfiles() {
+  e_header "Symlinking dotfiles into home directory"
+
+  # Ask before potentially overwriting files
+  seek_confirmation "Warning: This step may overwrite your existing dotfiles."
+
+  if is_confirmed; then
+    # Copy `.gitconfig`.
+    # Any global git commands in `~/.localrc` will be written to
+    # `.gitconfig`. This prevents them being committed to the repository.
+    rsync -avz --quiet ${DOTFILES_DIRECTORY}/git/config  ${HOME}/.gitconfig
+
+    # Force remove the vim directory if it's already there.
+    if [ -e "${HOME}/.vim" ]; then
+        rm -rf "${HOME}/.vim"
+    fi
+
+    # Create the necessary symbolic links between the `.dotfiles` and `HOME`
+    # directory. The `bash_profile` sources other files directly from the
+    # `.dotfiles` repository.
+
+    # ZSH files
+    link "zsh"                 ".zsh"
+    link "zsh/rc"              ".zshrc"
+    link "zsh/env"             ".zshenv"
+    link "zsh/login"           ".zlogin"
+
+    # Bash files
+    link "bash"                ".bash"
+    link "bash/rc"             ".bashrc"
+    link "bash/profile"        ".bash_profile"
+    link "bash/prompt"         ".bash_prompt"
+
+    # Common scripts
+    link "common/aliases"      ".aliases"
+    link "common/environment"  ".environment"
+    link "common/exports"      ".exports"
+    link "common/functions"    ".functions"
+
+    # Git
+    link "git/attributes"      ".gitattributes"
+    link "git/ignore"          ".gitignore"
+
+    # Vim
+    link "vim"                 ".vim"
+    link "vim/gvimrc"          ".gvimrc"
+    link "vim/vimrc"           ".vimrc"
+
+    # Plugins
+    link "dircolors-solarized" "dircolors-solarized"
+
+    # System-specific config
+    sys=`uname -s | tr "[:upper:]" "[:lower:]"`
+    link "system/$sys"         ".systemrc"
+
+    e_success "Dotfiles update complete!"
+  else
+    e_error "Aborting..."
+    exit 1
+  fi
+}
+
+# If missing, download and extract the dotfiles repository
+if [[ ! -d ${DOTFILES_DIRECTORY} ]]; then
+  printf "$(tput setaf 7)Downloading dotfiles...\033[m\n"
+  mkdir ${DOTFILES_DIRECTORY}
+  # Get the tarball
+  curl -fsSLo ${HOME}/dotfiles.tar.gz ${DOTFILES_TARBALL_PATH}
+  # Extract to the dotfiles directory
+  tar -zxmf ${HOME}/dotfiles.tar.gz --strip-components 1 -C ${DOTFILES_DIRECTORY}
+  # Remove the tarball
+  rm -rf ${HOME}/dotfiles.tar.gz
+fi
+
+cd ${DOTFILES_DIRECTORY}
+
+# Source utils
+source ./lib/utils
+source ./lib/brew
+
+# Test for known flags
+for opt in $@
+do
+  case $opt in
+    --no-packages) no_packages=true ;;
+    --no-sync) no_sync=true ;;
+    -*|--*) e_warning "Warning: invalid option $opt" ;;
+  esac
+done
+
+systemName=`uname -s | tr "[:upper:]" "[:lower:]"`
+
+if [[ "$systemName" == "darwin" ]]; then
+  # Before relying on Homebrew, check that packages can be compiled
+  if ! type_exists 'gcc'; then
+    e_error "The XCode Command Line Tools must be installed first."
+    e_info "  Download them from: https://developer.apple.com/downloads"
+    e_info "  Then run: bash $BASH_SOURCE"
+    exit 1
+  fi
+
+  # Check for Homebrew
+  if ! type_exists 'brew'; then
+    e_header "Installing Homebrew..."
+    ruby -e "$(curl -fsSkL raw.github.com/mxcl/homebrew/go)"
+  fi
+
+  # Check for git
+  if ! type_exists 'git'; then
+    e_header "Updating Homebrew..."
+    brew update
+    e_header "Installing Git..."
+    brew install git
+  fi
+fi
+
+# Initialize the git repository if it's missing
+if ! is_git_repo; then
+  e_header "Initializing git repository..."
+  git init
+  git remote add origin ${DOTFILES_GIT_REMOTE}
+  git fetch origin master
+  git fetch origin zsh
+  git checkout zsh
+
+  # Reset the index and working tree to the fetched HEAD
+  # (submodules are cloned in the subsequent sync step)
+  git reset --hard FETCH_HEAD
+
+  # Remove any untracked files
+  git clean -fd
+fi
+
+# Conditionally sync with the remote repository
+if [[ $no_sync ]]; then
+  e_warning "Skipped dotfiles sync."
+else
+  e_header "Syncing dotfiles..."
+
+  # Pull down the latest changes
+  git pull --rebase origin master
+
+  # Update submodules
+  git submodule update --recursive --init --quiet
+
+  e_success "Done"
+fi
+
+# Install oh-my-zsh
+curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
+
+if [[ "$systemName" == "darwin" ]]; then
+  # Install and update packages
+  if [[ $no_packages ]]; then
+    e_warning "Skipped package installations."
+  else
+    e_header "Updating packages..."
+    # Install/update Homebrew formulae
+    run_brew
+    e_success "Done"
+  fi
+fi
+
+mirrorfiles
+
+if [[ "$systemName" == "darwin" ]]; then
+  e_header "Updating OS X settings"
+
+  # Ask before potentially overwriting OS X defaults
+  seek_confirmation "Warning: This step may modify your OS X system defaults."
+
+  if is_confirmed; then
+    bash ./bin/osxdefaults
+    e_success "OS X settings updated! You may need to restart."
+  else
+    e_warning "Skipped OS X settings update."
+  fi
+fi

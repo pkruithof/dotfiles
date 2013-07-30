@@ -1,59 +1,80 @@
 # My dotfiles
 
+## About
+This is my collection of dotfiles. It contains shell setup instructions, aliases, functions, plugins, etc. Most of it I did not write but collected from other dotfiles repositories.
+
+## CAUTION
+**NOT FOR BASH USERS!**
+
+I recently switched to zsh as my default shell. Therefore the installation assumes you're using zsh. If you're using bash, chances are your environment could be messed up.
+
+Will overwrite existing dotfiles in your HOME and `.vim` directories. 
+
+Use at your own risk.
+
+
 ## Installation
 
-### Using Git and the bootstrap script
+Installing will clone this repo, and symlink/copy files and directories to your home directory. It also determines the type of system you're using (Linux/OSX) and configures some things specific to that OS.
 
-You can clone the repository wherever you want. (I like to keep it in `~/dotfiles`.) The bootstrapper script will pull in the latest version and copy the files to your home folder.
+The installation requires the [XCode Command Line
+Tools](https://developer.apple.com/downloads) if you're on a Mac. 
 
-```bash
-git clone https://github.com/pkruithof/dotfiles.git && cd dotfiles && source bootstrap.sh
-```
-
-To update, `cd` into your local `dotfiles` repository and then:
+### One line install
+This will download a shell script that clones the repository into `~/dotfiles`.
 
 ```bash
-source bootstrap.sh
+bash -c "$(curl -fsSL raw.github.com/pkruithof/dotfiles/master/bin/dotfiles)"
 ```
 
-Alternatively, to update while avoiding the confirmation prompt:
+### Using Git
+You can manually checkout the repo if you want to, and run the install script afterwards.
 
 ```bash
-set -- -f; source bootstrap.sh
+git clone https://github.com/pkruithof/dotfiles.git ~/dotfiles && ~/dotfiles/bin/dotfiles
 ```
 
-### Git-free install
+## How to update
+You should run the update when:
 
-To install these dotfiles without Git:
+* You make a change to `~/.dotfiles/git/gitconfig` (the only file that is copied rather than symlinked).
+* You want to pull changes from the remote repository.
+* You want to update Homebrew formulae and Node packages.
+
+Run the dotfiles command:
 
 ```bash
-cd; curl -#L https://github.com/pkruithof/dotfiles/tarball/master | tar -xzv --strip-components 1 --exclude={README.md,bootstrap.sh}
+~/dotfiles/bin/dotfiles
 ```
 
-To update later on, just run that command again.
+Options:
 
-### Add custom commands without creating a new fork
+<table>
+    <tr>
+        <td><code>--no-packages</code></td>
+        <td>Suppress package updates</td>
+    </tr>
+    <tr>
+        <td><code>--no-sync</code></td>
+        <td>Suppress pulling from the remote repository</td>
+    </tr>
+</table>
 
-If `~/.extra` exists, it will be sourced along with the other files. You can use this to add a few custom commands without the need to fork this entire repository, or to add commands you don’t want to commit to a public repository.
-
-You could also use `~/.extra` to override settings, functions and aliases from my dotfiles repository. It’s probably better to [fork this repository](https://github.com/pkruithof/dotfiles/fork_select) instead, though.
-
-### Sensible OS X defaults
-
-When setting up a new Mac, you may want to set some sensible OS X defaults:
+### Custom OS X defaults
+Custom OS X settings can be applied during the `dotfiles` process. They can also be applied independently by running the following command:
 
 ```bash
-./.osx
+~/dotfiles/bin/osxdefaults
 ```
 
-### Install Homebrew formulae
+### Oh My Zsh
+The wonderful [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh) is installed along with a custom prompt theme, inspired by [necolas' one](https://github.com/necolas/dotfiles/blob/master/README.md#custom-bash-prompt).
 
-When setting up a new Mac, you may want to install some common Homebrew formulae (after installing Homebrew, of course):
+## TODO
+Document local settings
 
-```bash
-./.brew
-```
+## Acknowledgements
+Thanks to:
 
-## Thanks to…
-
-* [Mathias Bynens](http://mathiasbynens.be/) for (probably without knowing) letting me copy me his [collection of dotfiles](https://github.com/mathiasbynens/dotfiles)
+* [Mathias Bynens](http://mathiasbynens.be) for (probably without knowing) letting me copy me his [collection of dotfiles](https://github.com/mathiasbynens/dotfiles)
+* [Nicolas Gallagher](http://nicolasgallagher.com) for his awesome [installation procedure](https://github.com/necolas/dotfiles/)

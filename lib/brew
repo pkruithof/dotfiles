@@ -1,0 +1,69 @@
+#!/bin/bash
+
+run_brew() {
+    if type_exists 'brew'; then
+        # Make sure we’re using the latest Homebrew
+        e_info "Updating Homebrew..."
+        brew update
+
+        # Upgrade any already-installed formulae
+        e_info "Updating outdated brews..."
+        brew upgrade
+
+        # Tap dupes (be quiet if already tapped)
+        brew tap homebrew/dupes &> /dev/null
+
+        e_info "Checking status of desired Homebrew formulae..."
+        local list_formulae
+        local -a missing_formulae
+        local -a desired_formulae=(
+            'coreutils' # GNU core utilities (those that come with OS X are outdated)
+            'findutils'
+            'ack'
+            'bash'
+            'bash-completion'
+            'htop'
+            'git'
+            'jpeg'
+            'macvim --override-system-vim'
+            'node'
+            'optipng'
+            'pgrep'
+            'rename'
+            'tree'
+            'watch'
+            'wget --enable-iri'
+            'zsh'
+            'zsh-completions'
+            'homebrew/dupes/grep'
+            'homebrew/dupes/rsync' # Avoid using any custom OS X version of rsync
+        )
+
+        for index in ${!desired_formulae[*]}
+        do
+            if ! formula_exists ${desired_formulae[$index]}; then
+                # Store the name (and options) of every missing formula
+                missing_formulae=("${missing_formulae[@]}" "${desired_formulae[$index]}")
+            fi
+        done
+
+        if [[ "$missing_formulae" ]]; then
+            # Convert the array of missing formula into a list of space-separate strings
+            list_formulae=$( printf "%s " "${missing_formulae[@]}" )
+
+            e_info "Installing missing Homebrew formulae..."
+            # Install all missing formulae
+            brew install $list_formulae
+        fi
+
+        # Remove outdated versions from the Cellar
+        e_info "Cleaning up..."
+        brew cleanup
+
+    else
+        printf "\n"
+        e_error "Error: Homebrew not found."
+        printf "Aborting...\n"
+        exit
+    fi
+}
