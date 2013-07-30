@@ -29,9 +29,6 @@ alias lam="ls -Flaht"
 # Order by file size, long form, all files
 alias las="ls -FlahS"
 
-# Enable aliases to be sudo’ed
-alias sudo='sudo '
-
 # IP addresses
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias localip="ipconfig getifaddr en1"
@@ -53,7 +50,6 @@ for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
 done
 
 # Apache shortcuts
-alias ht="cd $HTDOCS"
 alias htstop="sudo /usr/bin/env apachectl stop"
 alias htstart="sudo /usr/bin/env apachectl start"
 alias htrestart="sudo /usr/bin/env apachectl restart"
