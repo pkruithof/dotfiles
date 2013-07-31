@@ -135,8 +135,6 @@ if ! is_git_repo; then
   git init
   git remote add origin ${DOTFILES_GIT_REMOTE}
   git fetch origin master
-  git fetch origin zsh
-  git checkout zsh
 
   # Reset the index and working tree to the fetched HEAD
   # (submodules are cloned in the subsequent sync step)
