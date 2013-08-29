@@ -35,7 +35,7 @@ fi
 alias top="top -o cpu"
 
 # Sublime Text shortcut
-alias subl="/Applications/Sublime\ Text\ 2.app/Contents/SharedSupport/bin/subl"
+alias subl="/Applications/Sublime\ Text\ 3.app/Contents/SharedSupport/bin/subl"
 export EDITOR='subl -w'
 git config --global core.editor "subl -n -w"
 
