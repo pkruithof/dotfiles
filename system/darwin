@@ -39,6 +39,13 @@ alias subl="/Applications/Sublime\ Text\ 3.app/Contents/SharedSupport/bin/subl"
 export EDITOR='subl -w'
 git config --global core.editor "subl -n -w"
 
+# Vagrant aliases
+alias vu='vagrant up'
+alias vup='vagrant up --provision'
+alias vssh='vagrant ssh'
+alias vr='vagrant reload'
+alias vrp='vagrant reload --provision'
+
 # Get OS X Software Updates, and update installed Ruby gems, Homebrew, npm, and their installed packages
 alias updatesystem="sudo softwareupdate -i -a; brew update; brew upgrade; brew cleanup; npm update npm -g; npm update -g; sudo gem update"
 
