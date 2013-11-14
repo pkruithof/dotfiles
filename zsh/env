@@ -86,4 +86,14 @@ if (( $+commands[lesspipe.sh] )); then
   export LESSOPEN='| /usr/bin/env lesspipe.sh %s 2>&-'
 fi
 
+#
+# Various
+#
+
+# expose the dotfiles directory in the environment
 export DOTFILES_DIRECTORY="${HOME}/dotfiles"
+
+# compinit complains when run as root (sudo -s), because the files it processes
+# are not owned by root.
+# To ignore this make sure it always runs with the -u option
+alias compinit='compinit -u'
