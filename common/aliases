@@ -48,20 +48,3 @@ alias httpdump="sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET
 for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
   alias "$method"="curl -X '$method'"
 done
-
-# Apache shortcuts
-alias htstop="sudo /usr/bin/env apachectl stop"
-alias htstart="sudo /usr/bin/env apachectl start"
-alias htrestart="sudo /usr/bin/env apachectl restart"
-
-# Mysql shortcuts
-alias mydump="mysqldump --default-character-set=utf8"
-alias my="mysql --default-character-set=utf8"
-alias myadmin="mysqladmin"
-
-# Nginx shortcuts
-alias nginx-test="sudo service nginx configtest"
-alias nginx-start="nginx-test && sudo service nginx start"
-alias nginx-stop="nginx-test && sudo service nginx stop"
-alias nginx-restart="nginx-test && sudo service nginx restart"
-alias nginx-reload="nginx-test && sudo service nginx reload"
