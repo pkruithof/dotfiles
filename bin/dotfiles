@@ -61,6 +61,12 @@ mirrorfiles() {
     link "vim/gvimrc"          ".gvimrc"
     link "vim/vimrc"           ".vimrc"
 
+    # Ruby
+    link "ruby/gemrc"          ".gemrc"
+
+    # SSH
+    link "ssh/config"          ".ssh/config"
+
     # Plugins
     link "dircolors-solarized" "dircolors-solarized"
 
