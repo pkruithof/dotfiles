@@ -28,7 +28,7 @@ e_warning() {
 # Ask for confirmation before proceeding
 seek_confirmation() {
   # only do this in interactive shell
-  if [ -v PS1 ]; then
+  if [[ $- == *i* ]]; then
     printf "\n"
     e_warning "$@"
     read -p "Continue? (y/n) " -n 1
@@ -39,7 +39,7 @@ seek_confirmation() {
 # Test whether the result of an 'ask' is a confirmation
 is_confirmed() {
   # only do this in interactive shell
-  if [ -v PS1 ]; then
+  if [[ $- == *i* ]]; then
     if [[ "$REPLY" =~ ^[Yy]$ ]]; then
       return 0
     fi
