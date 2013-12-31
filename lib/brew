@@ -24,6 +24,7 @@ run_brew() {
             'bash-completion'
             'htop'
             'git'
+            'hub'
             'jpeg'
             'macvim --override-system-vim'
             'node'
