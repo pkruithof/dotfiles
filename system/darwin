@@ -1,15 +1,15 @@
 # darwin specific fixes / alignments
 
 # add Homebrew bins before path
-if ! type "brew" > /dev/null; then
-    path=(
-        "$(brew --prefix coreutils)/libexec/gnubin"
-        "$(brew --prefix)/bin"
-        "$(brew --prefix)/sbin"
-        "$(brew --prefix ruby)/bin"
-        path
-    )
-fi
+for dir in \
+    "$(brew --prefix coreutils)/libexec/gnubin" \
+    "$(brew --prefix)/bin"                      \
+    "$(brew --prefix)/sbin"                     \
+    "$(brew --prefix ruby)/bin"                 \
+    "$(brew --prefix php55)/bin"
+; do
+    if [[ -d $dir ]]; then path[1,0]=$dir; fi
+done
 
 # use GNU coreutils
 alias ls='/usr/local/bin/gls --color'
@@ -35,7 +35,7 @@ fi
 alias top="top -o cpu"
 
 # Sublime Text shortcut
-alias subl="/Applications/Sublime\ Text\ 3.app/Contents/SharedSupport/bin/subl"
+alias subl="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
 export EDITOR='subl -w'
 git config --global core.editor "subl -n -w"
 
@@ -43,6 +43,7 @@ git config --global core.editor "subl -n -w"
 alias vu='vagrant up'
 alias vup='vagrant up --provision'
 alias vssh='vagrant ssh'
+alias vp='vagrant provision'
 alias vr='vagrant reload'
 alias vrp='vagrant reload --provision'
 
