@@ -7,6 +7,7 @@ AddressFamily inet
 
 # Enable SSH Connection Sharing and Persistence
 # see http://interrobeng.com/2013/08/25/speed-up-git-5x-to-50x/
-ControlMaster auto
-ControlPath /tmp/%r@%h:%p
-ControlPersist yes
+#ControlMaster auto
+#ControlPath /tmp/%r@%h:%p
+#ControlPersist yes
+
