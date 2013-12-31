@@ -11,6 +11,7 @@ Thumbs.db
 .Trashes
 
 # Always-ignore extensions
+*.idea
 *.diff
 *.err
 *.orig
