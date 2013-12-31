@@ -1,6 +1,7 @@
 [submodule "dircolors-solarized"]
 	path = dircolors-solarized
 	url = git://github.com/seebi/dircolors-solarized.git
+	ignore = dirty
 [submodule "vim/bundle/vim-pathogen"]
 	path = vim/bundle/vim-pathogen
 	url = git://github.com/tpope/vim-pathogen.git
