@@ -36,8 +36,6 @@ alias top="top -o cpu"
 
 # Sublime Text shortcut
 alias subl="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
-export EDITOR='subl -w'
-git config --global core.editor "subl -n -w"
 
 # Vagrant aliases
 alias vu='vagrant up'
