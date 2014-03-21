@@ -52,15 +52,27 @@
     trim = !git remote prune origin && git gc
     cleanup = !git clean -df && git stash clear
 
+    # updates fork to latest upstream version:
+    # 1. checkout master
+    # 2. fetch upstream
+    # 3. reset upstream
+    # 4. push origin
+    sync = !git checkout master && git fetch upstream && git reset --hard upstream/master && git push origin master
+
 [apply]
     # Detect whitespace errors when applying a patch
     whitespace = fix
+
+# Use `origin` as the default remote on the `master` branch in all cases
+[branch "master"]
+    remote = origin
+    merge = refs/heads/master
 
 [core]
     # Use custom `.gitignore` and `.gitattributes`
     excludesfile = ~/.gitignore
     attributesfile = ~/.gitattributes
-	editor = subl -n -w
+	editor = vim
 
 [credential]
     helper = osxkeychain
@@ -96,16 +108,14 @@
     # Include summaries of merged commits in newly created merge commit messages
     log = true
 
-# Use `origin` as the default remote on the `master` branch in all cases
-[branch "master"]
-    remote = origin
-    merge = refs/heads/master
-
 [pretty]
     # tut: http://gitimmersion.com/lab_10.html
     # ref: http://linux.die.net/man/1/git-log
     # Result: abc1234 Commit message (HEAD, origin/master, master) -- Nicolas Gallagher; 5 hours ago
     nice = "%C(yellow)%h%C(reset) %C(white)%s%C(cyan)%d%C(reset) -- %an; %ar"
+
+[push]
+    default = simple
 
 # URL shorthands
 [url "git@github.com:"]
