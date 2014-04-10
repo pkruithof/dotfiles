@@ -5,7 +5,7 @@
 # - variables which is depended on, like LANGUAGE
 
 export DOTFILES_DIRECTORY="${HOME}/dotfiles"
-DOTFILES_TARBALL_PATH="https://github.com/pkruithof/dotfiles/tarball/zsh"
+DOTFILES_TARBALL_PATH="https://github.com/pkruithof/dotfiles/tarball/master"
 DOTFILES_GIT_REMOTE="https://github.com/pkruithof/dotfiles"
 
 link() {
