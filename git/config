@@ -45,12 +45,16 @@
     # Undo a `git push`
     undopush = push -f origin HEAD^:master
 
+    # Removes obsolete files/branches and optimizes the local repository
     # `git remote prune origin`: remove remote-tracking branches that were deleted from the remote repo
+    # `git branch --merged master | grep -v "\* master" | xargs -n 1 git branch -d`: remove local branches which have been merged 
     # `git gc`: cleanup unnecessary files and optimize the local repository
+    trim = !git remote prune origin; git branch --merged master | grep -v \"\* master\" | xargs -n 1 git branch -d; git gc
+
+    # Clears any changes made to the repository
     # `git clean -df`: remove untracked files and directories from the working tree
     # `git stash clear`: remove all stashed states
-    trim = !git remote prune origin && git gc
-    cleanup = !git clean -df && git stash clear
+    clear = !git clean -df && git reset --hard && git stash clear
 
     # updates fork to latest upstream version:
     # 1. checkout master
