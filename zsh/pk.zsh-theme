@@ -72,7 +72,7 @@ PROMPT+='%{$solar[green]%}${PWD/#$HOME/~}'       # pwd
 PROMPT+='%{$reset_color%} '                      #
 PROMPT+='$(git_super_status)'                    # git branch status
 PROMPT+='
-%{$reset_color%}% %# '                           # newline + prompt char
+%{$reset_color%}% %#> '                          # newline + prompt char
 
 SOLAR_BLUE=$(tput setaf 33)
 
@@ -97,5 +97,5 @@ ZSH_THEME_GIT_PROMPT_RENAMED="➜"
 ZSH_THEME_GIT_PROMPT_UNMERGED="═"
 #ZSH_THEME_GIT_PROMPT_UNTRACKED="?"
 
-RPROMPT='%{$solar[base02]%}load:$(get_load)'
-RPROMPT+=' · %{$solar_bold[cyan]%}%*%{$reset_color%}'
+#RPROMPT='%{$solar[base02]%}load:$(get_load)'
+#RPROMPT+=' · %{$solar_bold[cyan]%}%*%{$reset_color%}'
