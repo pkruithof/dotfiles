@@ -10,8 +10,10 @@ run_brew() {
         e_info "Updating outdated brews..."
         brew upgrade
 
-        # Tap dupes (be quiet if already tapped)
+        # Tap stuff (be quiet if already tapped)
         brew tap homebrew/dupes &> /dev/null
+        brew tap homebrew/versions &> /dev/null
+        brew tap homebrew/homebrew-php &> /dev/null
 
         e_info "Checking status of desired Homebrew formulae..."
         local list_formulae
@@ -22,15 +24,23 @@ run_brew() {
             'ack'
             'bash'
             'bash-completion'
+            'curl'
             'htop'
             'git'
+            'htop-osx'
             'hub'
             'jpeg'
             'macvim --override-system-vim'
+            'ncdu'
             'node'
             'optipng'
             'pgrep'
+            'php55 --with-fpm --with-intl'
+            'php-cs-fixer'
+            'phpmd'
+            'composer'
             'rename'
+            'ssh-copy-id'
             'tree'
             'watch'
             'wget --enable-iri'
