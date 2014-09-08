@@ -47,7 +47,7 @@
 
     # Removes obsolete files/branches and optimizes the local repository
     # `git remote prune origin`: remove remote-tracking branches that were deleted from the remote repo
-    # `git branch --merged master | grep -v "\* master" | xargs -n 1 git branch -d`: remove local branches which have been merged 
+    # `git branch --merged master | grep -v "\* master" | xargs -n 1 git branch -d`: remove local branches which have been merged
     # `git gc`: cleanup unnecessary files and optimize the local repository
     trim = !git remote prune origin; git branch --merged master | grep -v \"\* master\" | xargs -n 1 git branch -d; git gc
 
@@ -63,6 +63,8 @@
     # 4. push origin
     sync = !git checkout master && git fetch upstream && git reset --hard upstream/master && git push origin master
 
+    # shortcut for squashing commits
+    squash = rebase -i upstream/master
 [apply]
     # Detect whitespace errors when applying a patch
     whitespace = fix
