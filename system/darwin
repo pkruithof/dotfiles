@@ -2,11 +2,11 @@
 
 # add Homebrew bins before path
 for dir in \
-    "$(brew --prefix coreutils)/libexec/gnubin" \
     "$(brew --prefix)/bin"                      \
-    "$(brew --prefix)/sbin"                     \
-    "$(brew --prefix ruby)/bin"                 \
-    "$(brew --prefix php55)/bin"
+    "$(brew --prefix)/sbin"
+#    "$(brew --prefix coreutils)/libexec/gnubin" \
+#    "$(brew --prefix ruby)/bin"                 \
+#    "$(brew --prefix php55)/bin"                 \
 ; do
     if [[ -d $dir ]]; then path[1,0]=$dir; fi
 done
@@ -44,9 +44,6 @@ alias vssh='vagrant ssh'
 alias vp='vagrant provision'
 alias vr='vagrant reload'
 alias vrp='vagrant reload --provision'
-
-# Hub alias
-#eval "$(hub alias -s)"
 
 # Get OS X Software Updates, and update installed Ruby gems, Homebrew, npm, and their installed packages
 alias updatesystem="sudo softwareupdate -i -a; brew update; brew upgrade; brew cleanup; npm update npm -g; npm update -g; sudo gem update --system; sudo gem update"
