@@ -63,16 +63,16 @@ precmd () {
 
 # Build the main prompt
 PROMPT='
-'                                                # start with empty line
-PROMPT+='%{$solar[orange]%}%n$(virtualenv_info)' # user
-PROMPT+='%{$solar[base3]%}@'                     # @
-PROMPT+='%{$solar[yellow]%}%m'                   # host
-PROMPT+='%{$solar[base3]%}:'                     # path char
-PROMPT+='%{$solar[green]%}${PWD/#$HOME/~}'       # pwd
-PROMPT+='%{$reset_color%} '                      #
-PROMPT+='$(git_super_status)'                    # git branch status
+'                                          # start with empty line
+PROMPT+='%{$solar[orange]%}%n'             # user
+PROMPT+='%{$solar[base3]%}@'               # @
+PROMPT+='%{$solar[yellow]%}%m'             # host
+PROMPT+='%{$solar[base3]%}:'               # path char
+PROMPT+='%{$solar[green]%}${PWD/#$HOME/~}' # pwd
+PROMPT+='%{$reset_color%} '                #
+PROMPT+='$(git_super_status)'              # git branch status
 PROMPT+='
-%{$reset_color%}% %#> '                          # newline + prompt char
+%{$reset_color%}% %#> '                    # newline + prompt char
 
 SOLAR_BLUE=$(tput setaf 33)
 
@@ -89,13 +89,11 @@ ZSH_THEME_GIT_PROMPT_UNTRACKED="…"
 ZSH_THEME_GIT_PROMPT_CLEAN="%{$FX[bold]$FG[064]%}✔"
 
 ZSH_THEME_GIT_PROMPT_DIRTY=""
-#ZSH_THEME_GIT_PROMPT_CLEAN=""
 ZSH_THEME_GIT_PROMPT_ADDED="✚"
 ZSH_THEME_GIT_PROMPT_MODIFIED="!"
-ZSH_THEME_GIT_PROMPT_DELETED="✖"
+ZSH_THEME_GIT_PROMPT_DELETED="-"
 ZSH_THEME_GIT_PROMPT_RENAMED="➜"
-ZSH_THEME_GIT_PROMPT_UNMERGED="═"
-#ZSH_THEME_GIT_PROMPT_UNTRACKED="?"
+ZSH_THEME_GIT_PROMPT_UNMERGED="≠"
 
 #RPROMPT='%{$solar[base02]%}load:$(get_load)'
 #RPROMPT+=' · %{$solar_bold[cyan]%}%*%{$reset_color%}'
