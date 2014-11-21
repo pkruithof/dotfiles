@@ -21,9 +21,13 @@ mirrorfiles() {
 
   if is_confirmed; then
     # Copy `.gitconfig`.
-    # Any global git commands in `~/.localrc` will be written to
+    # Any global git commands in `~/.gitrc` will be written to
     # `.gitconfig`. This prevents them being committed to the repository.
     rsync -avz --quiet ${DOTFILES_DIRECTORY}/git/config  ${HOME}/.gitconfig
+
+    if [ -f "${HOME}/.gitrc" ]; then
+        cat "${HOME}/.gitrc" >> ${HOME}/.gitconfig
+    fi
 
     # Force remove the vim directory if it's already there.
     if [ -e "${HOME}/.vim" ]; then
