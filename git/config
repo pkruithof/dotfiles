@@ -56,6 +56,9 @@
     # `git stash clear`: remove all stashed states
     clear = !git clean -df && git reset --hard && git stash clear
 
+    # forks current repo and updates remotes
+    fork = !hub fork && git remote rename origin upstream && git remote rename pkruithof origin
+
     # updates fork to latest upstream version:
     # 1. checkout master
     # 2. fetch upstream
