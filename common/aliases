@@ -48,3 +48,6 @@ alias httpdump="sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET
 for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
   alias "$method"="curl -X '$method'"
 done
+
+# shortcut to Symfony console
+alias "cons"="if [ -x app/console ]; then app/console; elif [ -x bin/console ]; then bin/console; else printf \"console not found or not executable\n\" && /bin/false; fi;"
