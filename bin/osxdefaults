@@ -367,8 +367,11 @@ defaults write com.apple.TextEdit PlainTextEncodingForWrite -int 4
 # Reset Launchpad
 find ~/Library/Application\ Support/Dock -name "*.db" -maxdepth 1 -delete
 
-
+# Kill all affected apps
 for app in "Address Book" "Calendar" "Contacts" "Dashboard" "Dock" "Finder" \
     "Mail" "Safari" "SystemUIServer" "iTunes"; do
     killall "$app" > /dev/null 2>&1
 done
+
+# Safari is almost always open
+open -a safari
