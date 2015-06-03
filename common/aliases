@@ -50,7 +50,7 @@ for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
 done
 
 # shortcut to Symfony console
-alias "cons"="if [ -x app/console ]; then app/console; elif [ -x bin/console ]; then bin/console; else printf \"console not found or not executable\n\" && /bin/false; fi;"
+alias "console"="_console"
 
 # shortcut for PHPUnit executable
 alias "punit"="_phpunit"
