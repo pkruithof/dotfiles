@@ -8,7 +8,7 @@ run_brew() {
 
         # Upgrade any already-installed formulae
         e_info "Updating outdated brews..."
-        brew upgrade
+        brew upgrade --all
 
         # Tap stuff (be quiet if already tapped)
         brew tap homebrew/dupes &> /dev/null
