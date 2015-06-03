@@ -72,7 +72,7 @@ mirrorfiles() {
     link "ssh/config"          ".ssh/config"
 
     # Plugins
-    link "dircolors-solarized" "dircolors-solarized"
+    link "dircolors-solarized" "."
 
     # System-specific config
     sys=`uname -s | tr "[:upper:]" "[:lower:]"`
