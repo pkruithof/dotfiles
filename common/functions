@@ -63,3 +63,17 @@ function psgrep() {
 function passgen() {
   head /dev/urandom | uuencode -m - | sed -n 2p | cut -c1-${1:-12};
 }
+
+# finds the nearest phpunit executable
+function _phpunit()
+{
+  for bin in ./bin/phpunit ./vendor/bin/phpunit; do
+    if [ -x "$bin" ]; then
+      "$bin" $@
+      return
+    fi
+  done
+
+  # fall back
+  phpunit $@
+}
