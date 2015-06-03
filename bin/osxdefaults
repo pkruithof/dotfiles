@@ -36,8 +36,8 @@ defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 defaults write NSGlobalDomain NSTextShowsControlCharacters -bool true
 
 # Set language and text formats
-defaults write NSGlobalDomain AppleLanguages -array "nl" "en"
-defaults write NSGlobalDomain AppleLocale -string "nl_NL@currency=EUR"
+defaults write NSGlobalDomain AppleLanguages -array "en" "nl"
+defaults write NSGlobalDomain AppleLocale -string "en_GB@currency=EUR"
 
 # Units
 defaults write NSGlobalDomain AppleMeasurementUnits -string "Centimeters"
