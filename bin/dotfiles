@@ -39,13 +39,11 @@ mirrorfiles() {
     # `.dotfiles` repository.
 
     # ZSH files
-    link "zsh"                 ".zsh"
     link "zsh/rc"              ".zshrc"
     link "zsh/env"             ".zshenv"
     link "zsh/login"           ".zlogin"
 
     # Bash files
-    link "bash"                ".bash"
     link "bash/rc"             ".bashrc"
     link "bash/profile"        ".bash_profile"
     link "bash/prompt"         ".bash_prompt"
