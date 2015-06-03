@@ -62,6 +62,8 @@ mirrorfiles() {
 
     # Vim
     link "vim"                 ".vim"
+    link "vim/bundle/vim-pathogen/autoload/pathogen.vim" \
+                               ".vim/autoload/pathogen.vim"
     link "vim/gvimrc"          ".gvimrc"
     link "vim/vimrc"           ".vimrc"
 
