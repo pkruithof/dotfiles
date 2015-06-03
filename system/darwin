@@ -37,7 +37,7 @@ alias subl="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
 # Vagrant aliases
 alias vu='vagrant up'
 alias vup='vagrant up --provision'
-alias vssh='vagrant ssh'
+alias vssh='vagrant ssh -p'
 alias vp='vagrant provision'
 alias vr='vagrant reload'
 alias vrp='vagrant reload --provision'
