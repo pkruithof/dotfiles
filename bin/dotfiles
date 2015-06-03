@@ -65,6 +65,12 @@ mirrorfiles() {
     link "vim/gvimrc"          ".gvimrc"
     link "vim/vimrc"           ".vimrc"
 
+    # Curl
+    link "curl/rc"             ".curlrc"
+
+    # Screen
+    link "screen/rc"           ".screenrc"
+
     # Ruby
     link "ruby/gemrc"          ".gemrc"
 
