@@ -41,6 +41,7 @@ run_brew() {
             'composer'
             'rename'
             'ssh-copy-id'
+            'tmux'
             'tree'
             'watch'
             'wget --enable-iri'

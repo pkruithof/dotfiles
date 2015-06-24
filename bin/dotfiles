@@ -77,6 +77,9 @@ mirrorfiles() {
     # SSH
     link "ssh/config"          ".ssh/config"
 
+    # Tmux
+    link "tmux/conf"           ".tmux.conf"
+
     # Plugins
     link "dircolors-solarized" "."
 
