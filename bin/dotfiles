@@ -42,6 +42,9 @@ mirrorfiles() {
     link "zsh/rc"              ".zshrc"
     link "zsh/env"             ".zshenv"
     link "zsh/login"           ".zlogin"
+    link "zsh/config"          ".zsh/config"
+    link "zsh/input"           ".zsh/input"
+    link "zsh/pk.zsh-theme"    ".oh-my-zsh/themes/pk.zsh-theme"
 
     # Bash files
     link "bash/rc"             ".bashrc"
