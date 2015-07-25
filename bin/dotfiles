@@ -34,6 +34,11 @@ mirrorfiles() {
         rm -rf "${HOME}/.vim"
     fi
 
+    # Create the zsh directory if it's not there yet.
+    if [ ! -d "${HOME}/.zsh" ]; then
+        mkdir "${HOME}/.zsh"
+    fi
+ 
     # Create the necessary symbolic links between the `.dotfiles` and `HOME`
     # directory. The `bash_profile` sources other files directly from the
     # `.dotfiles` repository.
