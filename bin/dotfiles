@@ -11,6 +11,7 @@ DOTFILES_GIT_REMOTE="https://github.com/pkruithof/dotfiles"
 link() {
   # Force create/replace the symlink.
   ln -fs "${DOTFILES_DIRECTORY}/${1}" "${HOME}/${2}"
+  e_info "-> ${DOTFILES_DIRECTORY}/${1} => ${HOME}/${2}"
 }
 
 mirrorfiles() {
@@ -38,7 +39,7 @@ mirrorfiles() {
     if [ ! -d "${HOME}/.zsh" ]; then
         mkdir "${HOME}/.zsh"
     fi
- 
+
     # Create the necessary symbolic links between the `.dotfiles` and `HOME`
     # directory. The `bash_profile` sources other files directly from the
     # `.dotfiles` repository.
@@ -97,8 +98,7 @@ mirrorfiles() {
 
     e_success "Dotfiles update complete!"
   else
-    e_error "Aborting..."
-    exit 1
+    e_warning "Skipped symlinking of dotfiles."
   fi
 }
 
