@@ -5,6 +5,9 @@
 # Check for software updates daily, not just once per week
 defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
 
+# Remove duplicates in the 'Open With' menu"
+/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user
+
 
 
 ## Hardware
@@ -46,24 +49,39 @@ defaults write NSGlobalDomain AppleMetricUnits -bool true
 # Disable auto-correct
 defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 
+# Disable smart quotes as they're annoying when typing code
+defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
+
+# Disable smart dashes as they're annoying when typing code
+defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
+
+
+
+## Mouse
+
+# Disable smart zoom (double-tap with one finger)
+defaults write com.apple.driver.AppleBluetoothMultitouch.mouse MouseOneFingerDoubleTapGesture -int 0
+
+# Enable secondary click (click on right side)
+defaults write com.apple.driver.AppleBluetoothMultitouch.mouse MouseButtonMode -string "TwoButton"
+
+# Double-tap with two fingers for Mission Control
+defaults write com.apple.driver.AppleBluetoothMultitouch.mouse MouseTwoFingerDoubleTapGesture -int 3
+
+# Swipe between full-screen apps with two fingers
+defaults write com.apple.driver.AppleBluetoothMultitouch.mouse MouseTwoFingerHorizSwipeGesture -int 2
+
 
 
 ## Trackpad
 
 # Enable tap to click for this user and for the login screen
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
-defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
-defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 
-# Map bottom right corner to right-click
+# Enable secondary click with two fingers
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick -bool true
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadCornerSecondaryClick -int 2
-defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryClick -bool true
-defaults -currentHost write NSGlobalDomain com.apple.trackpad.trackpadCornerClickBehavior -int 1
 
 # Swipe between pages with three fingers
-defaults write NSGlobalDomain AppleEnableSwipeNavigateWithScrolls -bool true
-defaults -currentHost write NSGlobalDomain com.apple.trackpad.threeFingerHorizSwipeGesture -int 1
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerHorizSwipeGesture -int 1
 
 
@@ -104,12 +122,20 @@ defaults write com.apple.finder OpenWindowForNewRemovableDisk -bool true
 
 ## Menu bar
 
+defaults write com.apple.menuextra.clock DateFormat -string "EEE d MMM@HH:mm"
+defaults write com.apple.menuextra.clock IsAnalog -bool false
+defaults write com.apple.menuextra.clock FlashDateSeparators -bool true
+
 # Show remaining battery time and percentage
 defaults write com.apple.menuextra.battery ShowPercent -string "YES"
 defaults write com.apple.menuextra.battery ShowTime -string "YES"
 
 # Hide the useless Time Machine and Volume icons
-defaults write com.apple.systemuiserver menuExtras -array "/System/Library/CoreServices/Menu Extras/Bluetooth.menu" "/System/Library/CoreServices/Menu Extras/AirPort.menu" "/System/Library/CoreServices/Menu Extras/Battery.menu" "/System/Library/CoreServices/Menu Extras/Clock.menu"
+defaults write com.apple.systemuiserver menuExtras -array   \
+  "/System/Library/CoreServices/Menu Extras/Bluetooth.menu" \
+  "/System/Library/CoreServices/Menu Extras/AirPort.menu"   \
+  "/System/Library/CoreServices/Menu Extras/Battery.menu"   \
+  "/System/Library/CoreServices/Menu Extras/Clock.menu"     \
 
 
 
@@ -130,6 +156,9 @@ defaults write com.apple.universalaccess HIDScrollZoomModifierMask -int 262144
 
 # Follow the keyboard focus while zoomed in
 defaults write com.apple.universalaccess closeViewZoomFollowsFocus -bool true
+
+# Disable the menubar transparency
+defaults write com.apple.universalaccess reduceTransparency -bool true
 
 
 
@@ -207,18 +236,39 @@ defaults write com.apple.Dock autohide-delay -float 0
 
 ## Mission Control & Hot Corners
 
-# Speed up animations
-defaults write com.apple.dock expose-animation-duration -float 0.1
-# Group windows by application
-defaults write com.apple.dock "expose-group-by-app" -bool true
+# Possible values:
+#  0: no-op
+#  2: Mission Control
+#  3: Show application windows
+#  4: Desktop
+#  5: Start screen saver
+#  6: Disable screen saver
+#  7: Dashboard
+# 10: Put display to sleep
+# 11: Launchpad
+# 12: Notification Center
+
+# Bottom left → Start screen saver
+defaults write com.apple.dock wvous-bl-corner -int 0
+defaults write com.apple.dock wvous-bl-modifier -int 0
 
 # Bottom right → Mission Control
 defaults write com.apple.dock wvous-br-corner -int 2
 defaults write com.apple.dock wvous-br-modifier -int 0
 
-# Bottom left → Start screen saver
-defaults write com.apple.dock wvous-bl-corner -int 5
-defaults write com.apple.dock wvous-bl-modifier -int 0
+# Top left → Start screen saver
+defaults write com.apple.dock wvous-tl-corner -int 5
+defaults write com.apple.dock wvous-tl-modifier -int 0
+
+# Top right → Show desktop
+defaults write com.apple.dock wvous-tl-corner -int 5
+defaults write com.apple.dock wvous-tl-modifier -int 0
+
+# Speed up animations
+defaults write com.apple.dock expose-animation-duration -float 0.1
+
+# Group windows by application
+defaults write com.apple.dock "expose-group-by-app" -bool true
 
 
 
@@ -286,38 +336,51 @@ defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 ## Safari
 
 # Enable debug menu
-defaults write com.apple.Safari IncludeDebugMenu -bool true
-defaults write com.apple.Safari IncludeInternalDebugMenu -bool true
+defaults write com.apple.safari IncludeDebugMenu -bool true
+defaults write com.apple.safari IncludeInternalDebugMenu -bool true
+
+# Disable plugins (and Java)
+defaults write com.apple.safari WebKitPluginsEnabled -bool false
+defaults write com.apple.safari WebKitJavaEnabled -bool false
 
 # Show status bar
-defaults write com.apple.Safari ShowStatusBar -bool true
+defaults write com.apple.safari ShowStatusBar -bool true
 
 # Use pie-chart progress indicator
-defaults write com.apple.Safari DebugUsePieProgressIndicator -bool true
+defaults write com.apple.safari DebugUsePieProgressIndicator -bool true
 
 # Enable tabbed browsing
-defaults write com.apple.Safari TabbedBrowsing -bool true
+defaults write com.apple.safari TabbedBrowsing -bool true
 
 # Always show tab bar
-defaults write com.apple.Safari AlwaysShowTabBar -bool true
+defaults write com.apple.safari AlwaysShowTabBar -bool true
 
 # Open all "new window" links in tabs
-defaults write com.apple.Safari TargetedClicksCreateTabs -bool true
+defaults write com.apple.safari TargetedClicksCreateTabs -bool true
 
 # Make search banners default to Contains instead of Starts With
-defaults write com.apple.Safari FindOnPageMatchesWordStartsOnly -bool false
+defaults write com.apple.safari FindOnPageMatchesWordStartsOnly -bool false
 
 # Remove useless icons from bookmarks bar
-defaults write com.apple.Safari ProxiesInBookmarksBar "()"
+defaults write com.apple.safari ProxiesInBookmarksBar "()"
 
 # Add a context menu item for showing the Web Inspector in web views
-defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
+defaults write com.apple.safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
 
 # Hide bookmarks bar by default
-defaults write com.apple.Safari ShowFavoritesBar -bool false
+defaults write com.apple.safari ShowFavoritesBar -bool false
 
 # Show the full URL in the address bar (note: this still hides the scheme)
-defaults write com.apple.Safari ShowFullURLInSmartSearchField -bool true
+defaults write com.apple.safari ShowFullURLInSmartSearchField -bool true
+
+# Disable automatic spelling correction
+defaults write com.apple.safari WebAutomaticSpellingCorrectionEnabled -bool false
+
+# Send "Do-Not-Track" header
+defaults write com.apple.safari SendDoNotTrackHTTPHeader -bool true
+
+# Only prompt once per site for use of geolocation services
+defaults write com.apple.safari SafariGeolocationPermissionPolicy -int 2
 
 # User stylesheet
 defaults write com.apple.safari UserStyleSheetEnabled 1
