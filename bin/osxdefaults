@@ -427,6 +427,12 @@ defaults write com.apple.TextEdit PlainTextEncodingForWrite -int 4
 
 
 
+## Tweetbot
+
+# Open t.co urls directly, since Twitter obviously doesn't use Safari
+defaults write com.tapbots.TweetbotMac OpenURLsDirectly -bool true
+
+
 ## Bootstrap
 
 # Reset Launchpad
