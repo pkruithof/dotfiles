@@ -18,9 +18,11 @@ mirrorfiles() {
   e_header "Symlinking dotfiles into home directory"
 
   # Ask before potentially overwriting files
-  seek_confirmation "Warning: This step may overwrite your existing dotfiles."
+  if [ ! ${force_yes} ]; then
+	seek_confirmation "Warning: This step may overwrite your existing dotfiles."
+  fi
 
-  if is_confirmed; then
+  if [ ${force_yes} -o is_confirmed ]; then
     # Copy `.gitconfig`.
     # Any global git commands in `~/.gitrc` will be written to
     # `.gitconfig`. This prevents them being committed to the repository.
@@ -126,6 +128,7 @@ do
   case $opt in
     --no-packages) no_packages=true ;;
     --no-sync) no_sync=true ;;
+    -y) force_yes=true ;;
     -*|--*) e_warning "Warning: invalid option $opt" ;;
   esac
 done
@@ -207,9 +210,11 @@ if [[ "$systemName" == "darwin" ]]; then
   e_header "Updating OS X settings"
 
   # Ask before potentially overwriting OS X defaults
-  seek_confirmation "Warning: This step may modify your OS X system defaults."
+  if [ ! ${force_yes} ]; then
+	  seek_confirmation "Warning: This step may modify your OS X system defaults."
+  fi
 
-  if is_confirmed; then
+  if [ ${force_yes} -o is_confirmed ]; then
     bash ./bin/osxdefaults
     e_success "OS X settings updated! You may need to restart."
   else
