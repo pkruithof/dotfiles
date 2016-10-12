@@ -1,0 +1,28 @@
+bind r source-file ~/.tmux.conf \; display "Reloaded!" # Reload with ctrl-r
+
+# Default termtype. If the rcfile sets $TERM, that overrides this value.
+set -g default-terminal "screen-256color"
+
+# Ring the bell if any background window rang a bell
+set -g bell-action any
+
+# Watch for activity in background windows
+setw -g monitor-activity on
+
+# scrollback size
+set -g history-limit 10000
+
+# remap prefix to Control + a
+set -g prefix C-a
+unbind C-b
+bind C-a send-prefix
+
+# Window splits
+bind - split-window -v
+bind \ split-window -h
+
+# navigation with option-arrow -- NO PREFIX
+bind-key -n M-Left  select-pane -L
+bind-key -n M-Right select-pane -R
+bind-key -n M-Up    select-pane -U
+bind-key -n M-Down  select-pane -D

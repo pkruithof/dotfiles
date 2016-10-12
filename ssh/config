@@ -1,0 +1,6 @@
+ServerAliveInterval 300
+ServerAliveCountMax 3
+
+# only use IPv4
+Host *
+AddressFamily inet
