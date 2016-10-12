@@ -1,0 +1,146 @@
+#!/usr/bin/env bash
+
+set -e
+
+cd "$(dirname "${BASH_SOURCE}")/../"
+
+source ./environment
+source ${DOTFILES_ROOT}/lib/output
+source ${DOTFILES_ROOT}/lib/input
+source ${DOTFILES_ROOT}/lib/tests
+source ${DOTFILES_ROOT}/lib/utils
+source ${DOTFILES_ROOT}/lib/zsh
+
+usage () {
+  e_error "$1"
+
+  cat <<HELP
+Usage: $(basename "$0") [--no-sync] [--no-packages] [-y]
+  -y            Answer "yes" to all confirmation questions
+  --no-sync     Don't pull the latest changes from the upstream
+  --no-packages Don't install/update packages
+
+See the README for documentation:
+${DOTFILES_REPO}/README.md
+HELP
+
+  exit 1
+}
+
+assert_prerequisites () {
+  type_exists 'git' || die "git is required"
+}
+
+update_dotfiles () {
+  e_info "==> syncing dotfiles..."
+  git pull --rebase origin master
+  git submodule update --recursive --init --quiet
+  success "==> done"
+}
+
+mirror_files () {
+  e_header "Symlinking dotfiles into home directory"
+
+  if ! confirm 'Warning: This step may overwrite your existing dotfiles.'; then
+    e_warning "==> skipped symlinking of dotfiles"
+  else
+    # ZSH files
+    mkdir -p "${HOME}/.zsh"
+    dotfile "zsh/rc"              ".zshrc"
+    dotfile "zsh/env"             ".zshenv"
+    dotfile "zsh/login"           ".zlogin"
+    dotfile "zsh/zplug"           ".zsh/zplug"
+    dotfile "zsh/aliases"         ".zsh/aliases"
+    dotfile "zsh/functions"       ".zsh/functions"
+    dotfile "zsh/history"         ".zsh/history"
+    dotfile "zsh/input"           ".zsh/input"
+
+    # Git
+    dotfile "git/config"          ".gitconfig"
+    dotfile "git/attributes"      ".gitattributes"
+    dotfile "git/ignore"          ".gitignore"
+
+    # append custom git configuration
+    if [ -f "${GITRC_FILE}" ]; then
+      source "${GITRC_FILE}"
+    fi
+
+    # Curl
+    dotfile "curl/rc"             ".curlrc"
+
+    # Screen
+    dotfile "screen/rc"           ".screenrc"
+
+    # Ruby
+    dotfile "ruby/gemrc"          ".gemrc"
+
+    # SSH
+    dotfile "ssh/config"          ".ssh/config"
+
+    # Tmux
+    dotfile "tmux/conf"           ".tmux.conf"
+
+    # System-specific config
+    # dotfile "system/${SYSTEM_NAME}" ".systemrc"
+  fi
+}
+
+confirm() {
+  if [ ${force_yes} ]; then
+    return 0
+  fi
+
+  if seek_confirmation "$@"; then
+    return 0
+  else
+    return 1
+  fi
+}
+
+# Test for known flags
+for opt in $@; do
+  case $opt in
+    --no-packages) no_packages=true ;;
+    --no-sync) no_sync=true ;;
+    -y) force_yes=true ;;
+    -*|--*) usage "Warning: invalid option $opt" ;;
+  esac
+done
+
+# make sure everything we need is here
+assert_prerequisites
+
+e_header "Updating dotfiles"
+
+if [[ ${no_sync} ]]; then
+  e_warning "==> skipping sync"
+else
+  update_dotfiles
+fi
+
+if [[ ${no_packages} ]]; then
+  e_warning "==> skipping packages"
+else
+  # install_packages
+  echo "packages"
+fi
+
+if [ ! -f ${GITRC_FILE} ]; then
+  if seek_confirmation "Would you like to specify your git username/email address?"; then
+    read -p "username: " username
+    read -p "email: " email
+    echo -e "git config --global user.name \"${username}\"\ngit config --global user.email \"${email}\"" > ${GITRC_FILE}
+  else
+    echo "# put `git config` commands here" ${GITRC_FILE}
+  fi
+  chmod +x ${GITRC_FILE}
+fi
+
+# symlink files
+mirror_files
+
+# ensure ZSH shell
+zsh_ensure
+
+# ensure zplug
+zplug_ensure

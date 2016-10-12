@@ -1,0 +1,40 @@
+zsh_ensure () {
+  if ! type_exists 'zsh'; then
+    zsh_install
+  fi
+
+  if [[ ! ${SHELL} =~ zsh ]]; then
+    e_info "==> changing shell to zsh"
+    chsh -s /bin/zsh
+  fi
+}
+
+zsh_install () {
+  if is_macos; then
+    # should be installed by Homebrew
+    die "zsh should have been installed by Homebrew"
+  elif is_ubuntu; then
+    e_header "Installing zsh"
+    sudo apt-get install -y zsh
+  else
+    die "Unsupported OS: $(cat /etc/issue)"
+  fi
+}
+
+zplug_ensure () {
+  if [ ! -d "$HOME/.zplug" ]; then
+    zplug_install
+  fi
+}
+
+zplug_install () {
+  e_header "Installing zplug"
+  curl -sL zplug.sh/installer | zsh
+}
+
+zplug_update() {
+  source "$HOME/.zplug/init.zsh"
+  zplug update --self
+  zplug update
+  zplug clean
+}
