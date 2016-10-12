@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+: ${INSTALL_DIR:="${HOME}/.dotfiles"}
+DOTFILES_REPO="https://github.com/pkruithof/dotfiles"
+
+if [ ! -d ${INSTALL_DIR} ]; then
+  printf "\n[ \033[00;34m..\033[0m ] Downloading dotfiles to ${INSTALL_DIR}\n"
+  git clone --recursive ${DOTFILES_REPO} ${INSTALL_DIR}
+fi
+
+./bin/dotfiles
