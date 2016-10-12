@@ -1,0 +1,52 @@
+# Decode \x{ABCD}-style Unicode escape sequences
+unidecode () {
+  perl -e "binmode(STDOUT, ':utf8'); print \"$@\""
+  echo # newline
+}
+
+# Get a character's unicode codepoint
+codepoint () {
+  perl -e "use utf8; print sprintf('U+%04X', ord(\"$@\"))"
+}
+
+port () {
+  sudo lsof -n -i4TCP:"$@" | grep LISTEN
+}
+
+# ps w/ grep
+psgrep () {
+  ps auxwww | grep "$@"
+}
+
+# generates a password
+# see http://en.wikipedia.org/wiki/Random_password_generator#Bash
+passgen () {
+  head /dev/urandom | uuencode -m - | sed -n 2p | cut -c1-${1:-12};
+}
+
+# finds the nearest Symfony console
+_console ()
+{
+  if [ -x app/console ]; then
+    app/console $@
+  elif [ -x bin/console ]; then
+    bin/console $@
+  else
+    printf \"console not found or not executable\n\"
+    return 1
+  fi
+}
+
+# finds the nearest phpunit executable
+_phpunit ()
+{
+  for bin in ./bin/phpunit ./vendor/bin/phpunit; do
+    if [ -x "$bin" ]; then
+      "$bin" $@
+      return
+    fi
+  done
+
+  # fall back
+  phpunit $@
+}

@@ -55,6 +55,10 @@ mirror_files () {
     dotfile "zsh/history"         ".zsh/history"
     dotfile "zsh/input"           ".zsh/input"
 
+    # Bin
+    mkdir -p "${HOME}/bin"
+    dotfile "bin/dotfiles"        "bin/dotfiles"
+
     # Git
     dotfile "git/config"          ".gitconfig"
     dotfile "git/attributes"      ".gitattributes"
