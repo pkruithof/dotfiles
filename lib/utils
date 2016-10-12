@@ -1,0 +1,12 @@
+dotfile() {
+  local from="${DOTFILES_ROOT}/${1}"
+  local to="${HOME}/${2}"
+
+  if [ ! -f ${from} ]; then
+    die "${from} does not exist"
+  fi
+
+  # Force create/replace the symlink.
+  ln -fs "${from}" "${to}"
+  e_info "==> ${from} => ${to}"
+}
