@@ -1,0 +1,21 @@
+typeset -ga sources
+sources+="$HOME/.zsh/zplug"
+sources+="$HOME/.zsh/history"
+sources+="$HOME/.zsh/input"
+sources+="$HOME/.zsh/functions"
+sources+="$HOME/.zsh/aliases"
+
+# Check for a system-specific file
+[[ -f "$HOME/.systemrc" ]] && sources+="$HOME/.systemrc"
+
+# use .localrc for settings specific to one system
+[[ -f "$HOME/.localrc" ]] && sources+="$HOME/.localrc"
+
+# include sources
+foreach file (`echo $sources`)
+  source $file
+end
+
+# Remove duplicates (copied from http://unix.stackexchange.com/a/14896)
+PATH=$(echo "$PATH" | awk -v RS=':' -v ORS=":" '!a[$1]++')
+export PATH

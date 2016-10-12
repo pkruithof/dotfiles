@@ -1,0 +1,4 @@
+# enable unlimited history
+HISTFILE=${HOME}/.zsh_history
+HISTSIZE=999999999
+SAVEHIST=${HISTSIZE}
