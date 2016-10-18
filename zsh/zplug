@@ -7,24 +7,11 @@ zplug "zplug/zplug"
 zplug "mafredri/zsh-async"
 zplug "sindresorhus/pure"
 
-# some ease of use plugins
+# input/search plugins
 zplug "zsh-users/zsh-autosuggestions", nice:10
 zplug "zsh-users/zsh-completions"
-zplug "zsh-users/zsh-history-substring-search", nice:19 # Should be loaded last.
 zplug "zsh-users/zsh-syntax-highlighting", nice:18 # Should be loaded 2nd last.
-
-# autosuggestions config
-if zplug check zsh-users/zsh-autosuggestions; then
-  ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(history-substring-search-up history-substring-search-down) # Add history-substring-search-* widgets to list of widgets that clear the autosuggestion
-  ZSH_AUTOSUGGEST_CLEAR_WIDGETS=("${(@)ZSH_AUTOSUGGEST_CLEAR_WIDGETS:#(up|down)-line-or-history}") # Remove *-line-or-history widgets from list of widgets that clear the autosuggestion to avoid conflict with history-substring-search-* widgets
-fi
-
-# Bind UP and DOWN arrow keys for subsstring search.
-if zplug check zsh-users/zsh-history-substring-search; then
-  zmodload zsh/terminfo
-  bindkey "$terminfo[cuu1]" history-substring-search-up
-  bindkey "$terminfo[cud1]" history-substring-search-down
-fi
+zplug "zsh-users/zsh-history-substring-search", nice:19 # Should be loaded last.
 
 # install plugins if there are plugins that have not been installed
 if ! zplug check --verbose; then
@@ -39,3 +26,16 @@ zplug clean
 
 # load plugins
 zplug load
+
+# autosuggestions config
+if zplug check zsh-users/zsh-autosuggestions; then
+  ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(history-substring-search-up history-substring-search-down) # Add history-substring-search-* widgets to list of widgets that clear the autosuggestion
+  ZSH_AUTOSUGGEST_CLEAR_WIDGETS=("${(@)ZSH_AUTOSUGGEST_CLEAR_WIDGETS:#(up|down)-line-or-history}") # Remove *-line-or-history widgets from list of widgets that clear the autosuggestion to avoid conflict with history-substring-search-* widgets
+fi
+
+# Bind UP and DOWN arrow keys for subsstring search.
+if zplug check zsh-users/zsh-history-substring-search; then
+  zmodload zsh/terminfo
+  bindkey "$terminfo[cuu1]" history-substring-search-up
+  bindkey "$terminfo[cud1]" history-substring-search-down
+fi

@@ -126,8 +126,9 @@ fi
 if [[ ${no_packages} ]]; then
   e_warning "==> skipping packages"
 else
-  # install_packages
-  echo "packages"
+  # run system-specific setup
+  is_macos && ${DOTFILES_ROOT}/macos/setup
+  is_ubuntu && ${DOTFILES_ROOT}/ubuntu/setup
 fi
 
 if [ ! -f ${GITRC_FILE} ]; then
