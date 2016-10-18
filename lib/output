@@ -1,6 +1,6 @@
 # Header logging
 e_header() {
-  printf "\n$(tput setaf 7)%s$(tput sgr0)\n" "$@"
+  printf "\n$(tput setaf 4)%s$(tput sgr0)\n" "$@"
 }
 
 # Info logging
@@ -23,6 +23,7 @@ e_error() {
   printf "$(tput setaf 1)x %s$(tput sgr0)\n" "$@"
 }
 
+# Log error and exit
 die () {
   e_error "$1"
   echo ''

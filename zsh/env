@@ -25,10 +25,6 @@ export LESS_TERMCAP_ue=$(printf "\e[0m")
 export LESS_TERMCAP_us=$(printf "\e[1;32m")
 
 
-# Increase timeout for composer (for slow connections)
-export COMPOSER_PROCESS_TIMEOUT=4000
-
-
 #
 # Prefer US English and use UTF-8
 #
@@ -36,45 +32,5 @@ export LC_ALL="en_US.UTF-8"
 export LANG="en_US"
 
 
-#
-# Paths
-#
-typeset -gU cdpath fpath mailpath manpath path
-typeset -gUT INFOPATH infopath
-
-# Set the the list of directories that cd searches.
-# cdpath=(
-#   $cdpath
-# )
-
-# Set the list of directories that Zsh searches for programs.
-
-path=(
-  /opt/local/bin
-  /usr/local/{bin,sbin}
-  $path
-  /usr/{bin,sbin}
-  $HOME/bin
-)
-
-infopath=(
-  $HOME/.local/share/info
-  $HOME/.local/opt/share/info
-  /usr/local/share/info
-  /usr/share/info
-  $infopath
-)
-
-manpath=(
-  $HOME/.local/share/man
-  $HOME/.local/opt/share/man
-  /usr/local/share/man
-  /usr/share/man
-  $manpath
-)
-
-fpath=(
-  $HOME/.zsh
-  $HOME/.zfunctions
-  $fpath
-)
+# Increase timeout for composer (for slow connections)
+export COMPOSER_PROCESS_TIMEOUT=4000

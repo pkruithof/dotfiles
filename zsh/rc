@@ -1,9 +1,13 @@
 typeset -ga sources
-sources+="$HOME/.zsh/zplug"
 sources+="$HOME/.zsh/history"
 sources+="$HOME/.zsh/input"
 sources+="$HOME/.zsh/functions"
+sources+="$HOME/.zsh/zplug"
 sources+="$HOME/.zsh/aliases"
+sources+="$HOME/.zsh/paths"
+
+# Check for phpbrew
+[[ -f "$HOME/.phpbrew/bashrc" ]] && sources+="$HOME/.phpbrew/bashrc"
 
 # Check for a system-specific file
 [[ -f "$HOME/.systemrc" ]] && sources+="$HOME/.systemrc"
@@ -15,7 +19,3 @@ sources+="$HOME/.zsh/aliases"
 foreach file (`echo $sources`)
   source $file
 end
-
-# Remove duplicates (copied from http://unix.stackexchange.com/a/14896)
-PATH=$(echo "$PATH" | awk -v RS=':' -v ORS=":" '!a[$1]++')
-export PATH
