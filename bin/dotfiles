@@ -35,7 +35,7 @@ update_dotfiles () {
   e_info "==> syncing dotfiles..."
   git pull --rebase origin master
   git submodule update --recursive --init --quiet
-  success "==> done"
+  e_success "==> done"
 }
 
 mirror_files () {

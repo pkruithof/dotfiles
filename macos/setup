@@ -19,4 +19,4 @@ phpbrew_ensure
 phpbrew_update
 
 # install system default settings
-./bin/defaults
+${DOTFILES_ROOT}/macos/bin/defaults
