@@ -15,6 +15,9 @@ sources+="$HOME/.zsh/paths"
 # use .localrc for settings specific to one system
 [[ -f "$HOME/.localrc" ]] && sources+="$HOME/.localrc"
 
+# Check for a system-specific git config
+[[ -f "$HOME/.gitrc" ]] && sources+="$HOME/.gitrc"
+
 # include sources
 foreach file (`echo $sources`)
   source $file

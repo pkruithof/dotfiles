@@ -1,4 +1,4 @@
-dotfile() {
+dotfile () {
   local from="${DOTFILES_ROOT}/${1}"
   local to="${HOME}/${2}"
 
@@ -8,5 +8,18 @@ dotfile() {
 
   # Force create/replace the symlink.
   ln -fs "${from}" "${to}"
+  e_info "==> ${from} => ${to}"
+}
+
+copy () {
+  local from="${DOTFILES_ROOT}/${1}"
+  local to="${HOME}/${2}"
+
+  if [ ! -f ${from} ]; then
+    die "${from} does not exist"
+  fi
+
+  # create/replace the file.
+  cp -f "${from}" "${to}"
   e_info "==> ${from} => ${to}"
 }
