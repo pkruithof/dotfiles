@@ -19,7 +19,13 @@ phpbrew_update () {
 
   phpbrew self-update
   phpbrew update
-  phpbrew install 7.0 +default
+
+  version=$(phpbrew known | tr -s ", " "\012" | grep -E '^7\.0\.' | head -1)
+  installed=$(phpbrew list | grep php | sed 's/^ *php-//' | head -1 | sed 's/ *$//' )
+
+  if [ "${version}" != "${installed}" ]; then
+    phpbrew install ${version} +default
+  fi
 }
 
 phpbrew_apps () {
@@ -27,6 +33,5 @@ phpbrew_apps () {
 
   phpbrew app get composer
   phpbrew app get phpunit
-  phpbrew app get php-cs-fixer
-  composer global install friendsofphp/php-cs-fixer  
+  composer global install friendsofphp/php-cs-fixer
 }
