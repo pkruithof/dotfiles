@@ -60,16 +60,6 @@ Options:
     </tr>
 </table>
 
-### Custom OS X defaults
-Custom OS X settings can be applied during the `dotfiles` process. They can also be applied independently by running the following command:
-
-```bash
-~/dotfiles/bin/osxdefaults
-```
-
-### Oh My Zsh
-The wonderful [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh) is installed along with a custom prompt theme, inspired by [necolas' one](https://github.com/necolas/dotfiles/blob/master/README.md#custom-bash-prompt).
-
 ## TODO
 Document local settings
 
@@ -77,4 +67,3 @@ Document local settings
 Thanks to:
 
 * [Mathias Bynens](http://mathiasbynens.be) for (probably without knowing) letting me copy me his [collection of dotfiles](https://github.com/mathiasbynens/dotfiles)
-* [Nicolas Gallagher](http://nicolasgallagher.com) for his awesome [installation procedure](https://github.com/necolas/dotfiles/)
