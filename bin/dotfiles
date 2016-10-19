@@ -130,9 +130,9 @@ if [ ! -f ${GITRC_FILE} ]; then
   if seek_confirmation "Would you like to specify your git username/email address?"; then
     read -p "username: " username
     read -p "email: " email
-    echo -e "git config --global user.name \"${username}\"\ngit config --global user.email \"${email}\"" > ${GITRC_FILE}
+    echo -e "git config --global user.name \"${username}\"\ngit config --global user.email \"${email}\"\n" > ${GITRC_FILE}
   else
-    echo "# put 'git config' commands here" > ${GITRC_FILE}
+    echo -e "# put 'git config' commands here\n" > ${GITRC_FILE}
   fi
   chmod +x ${GITRC_FILE}
 fi
