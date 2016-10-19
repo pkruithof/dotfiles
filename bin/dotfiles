@@ -132,7 +132,7 @@ if [ ! -f ${GITRC_FILE} ]; then
     read -p "email: " email
     echo -e "git config --global user.name \"${username}\"\ngit config --global user.email \"${email}\"" > ${GITRC_FILE}
   else
-    echo "# put `git config` commands here" ${GITRC_FILE}
+    echo "# put 'git config' commands here" ${GITRC_FILE}
   fi
   chmod +x ${GITRC_FILE}
 fi
