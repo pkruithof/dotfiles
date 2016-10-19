@@ -24,27 +24,26 @@ Tools](https://developer.apple.com/downloads) if you're on a Mac.
 This will download a shell script that clones the repository into `~/dotfiles`.
 
 ```bash
-bash -c "$(curl -fsSL raw.github.com/pkruithof/dotfiles/master/bin/dotfiles)"
+bash -c "$(curl -fsSL raw.github.com/pkruithof/dotfiles/master/bootstrap)"
 ```
 
 ### Using Git
 You can manually checkout the repo if you want to, and run the install script afterwards.
 
 ```bash
-git clone https://github.com/pkruithof/dotfiles.git ~/dotfiles && ~/dotfiles/bin/dotfiles
+git clone https://github.com/pkruithof/dotfiles.git ~/.dotfiles && ~/.dotfiles/bin/dotfiles
 ```
 
 ## How to update
 You should run the update when:
 
-* You make a change to `~/.dotfiles/git/gitconfig` (the only file that is copied rather than symlinked).
 * You want to pull changes from the remote repository.
 * You want to update Homebrew formulae and Node packages.
 
 Run the dotfiles command:
 
 ```bash
-~/dotfiles/bin/dotfiles
+~/.dotfiles/bin/dotfiles
 ```
 
 Options:
