@@ -20,12 +20,22 @@ phpbrew_update () {
   phpbrew self-update
   phpbrew update
 
-  version=$(phpbrew known | tr -s ", " "\012" | grep -E '^7\.0\.' | head -1)
-  installed=$(phpbrew list | grep php | sed 's/^ *php-//' | head -1 | sed 's/ *$//' )
+  latest=$(phpbrew_latest)
+  installed=$(phpbrew_installed)
 
-  if [ "${version}" != "${installed}" ]; then
-    phpbrew install ${version} +default
+  if [ "${latest}" != "${installed}" ]; then
+    phpbrew install ${latest} +default
   fi
+
+  phpbrew switch ${latest}
+}
+
+phpbrew_latest () {
+  phpbrew known | tr -s ", " "\012" | grep -E '^7\.0\.' | head -1
+}
+
+phpbrew_installed () {
+  phpbrew list | grep php | sed 's/^ *php-//' | head -1 | sed 's/ *$//'
 }
 
 phpbrew_apps () {
