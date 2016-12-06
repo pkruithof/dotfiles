@@ -1,7 +1,18 @@
 # My dotfiles
 
 ## About
-This is my collection of dotfiles. It contains shell setup instructions, aliases, functions, plugins, etc. Most of it I did not write but collected from other dotfiles repositories.
+
+This is my collection of dotfiles. There are many like it but this one is mine.
+
+It does the following:
+
+* installs zsh as the default shell
+* installs zplug as plugin manager
+* installs some useful zsh plugins
+* sets up pure prompt
+* sets up configuration files for various programs like git, curl, ssh, etc.
+* performs OS-specific setup
+
 
 ## CAUTION
 **NOT FOR BASH USERS!**
