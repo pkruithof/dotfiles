@@ -1,0 +1,24 @@
+gem_ensure () {
+  if ! type_exists 'bundler'; then
+    bundler_install
+  fi
+
+  if [[ ! -f ${GEMFILE} ]]; then
+    cp ${DOTFILES_ROOT}/$(os_shortname)/Gemfile ${GEMFILE}
+  fi
+}
+
+bundler_install () {
+  e_header "Installing Bundler"
+  gem install bundler
+}
+
+gem_install () {
+  e_header "Installing gems"
+  bundle install --gemfile ${GEMFILE}
+}
+
+gem_update () {
+  e_header "Updating gems"
+  bundle update
+}

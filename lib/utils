@@ -23,3 +23,11 @@ copy () {
   cp -f "${from}" "${to}"
   e_info "==> ${from} => ${to}"
 }
+
+os_shortname () {
+  if is_macos; then
+    echo "macos"
+  elif is_ubuntu; then
+    echo "ubuntu"
+  fi
+}

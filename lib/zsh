@@ -3,9 +3,17 @@ zsh_ensure () {
     zsh_install
   fi
 
-  if [[ ! ${SHELL} =~ zsh ]]; then
+  zshpath=$(which zsh)
+
+  # make sure zsh is listed in shells
+  if ! grep -q ${zshpath} /etc/shells; then
+    e_info "==> registering zsh shell"
+    echo ${zshpath} | sudo tee -a /etc/shells
+  fi
+
+  if [[ ! ${SHELL} = ${zshpath} ]]; then
     e_info "==> changing shell to zsh"
-    chsh -s /bin/zsh
+    chsh -s ${zshpath}
   fi
 }
 
@@ -29,12 +37,12 @@ zplug_ensure () {
 
 zplug_install () {
   e_header "Installing zplug"
-  curl -sL zplug.sh/installer | zsh
+  curl -sL https://zplug.sh/installer | zsh
 }
 
 zplug_update() {
-  source "$HOME/.zplug/init.zsh"
-  zplug update --self
-  zplug update
-  zplug clean
+  e_header "Updating zplug"
+
+  # run in subshell since dotfiles can be run in bash
+  /usr/bin/env zsh -ic 'zplug --self-manage || zplug update --self; zplug update; zplug clean'
 }
