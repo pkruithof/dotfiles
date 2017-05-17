@@ -1,17 +1,26 @@
 #!/bin/bash
 
+set -e
+
+cd ${DOTFILES_ROOT}
+
+source ${DOTFILES_ROOT}/environment
+source ${DOTFILES_ROOT}/lib/run
+
+e_header "Setting preferences for MacOS system"
+e_warning "==> this may require sudo rights for some parts"
+
 ## System
 
 # Set computer name
-sudo scutil --set ComputerName "mekboek"
-sudo scutil --set LocalHostName "mekboek"
-
-# Remove duplicates in the 'Open With' menu"
-/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user
+e_info "==> set computer name to $(tput bold)mekboek$(tput sgr0)"
+if [[ $(scutil --get ComputerName) != "mekboek" ]]; then sudo scutil --set ComputerName "mekboek"; fi
+if [[ $(scutil --get LocalHostName) != "mekboek" ]]; then sudo scutil --set LocalHostName "mekboek"; fi
 
 
 
 ## Hardware
+e_info "==> hardware settings"
 
 # Automatically illuminate built-in MacBook keyboard in low light
 defaults write com.apple.BezelServices kDim -bool true
@@ -22,6 +31,7 @@ defaults write com.apple.BezelServices kDimTime -int 300
 
 
 ## Keyboard
+e_info "==> keyboard settings"
 
 # Set a blazingly fast repeat rate
 defaults write NSGlobalDomain KeyRepeat -int 2
@@ -35,6 +45,7 @@ defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
 
 ## Text, locale & i18n
+e_info "==> locale/i18n settings"
 
 # Display ASCII control characters using caret notation in standard text views. Try e.g. `cd /tmp; unidecode "\x{0000}" > cc.txt; open -e cc.txt`
 defaults write NSGlobalDomain NSTextShowsControlCharacters -bool true
@@ -59,6 +70,7 @@ defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
 
 
 ## Mouse
+e_info "==> mouse settings"
 
 # Disable smart zoom (double-tap with one finger)
 defaults write com.apple.driver.AppleBluetoothMultitouch.mouse MouseOneFingerDoubleTapGesture -int 0
@@ -75,6 +87,7 @@ defaults write com.apple.driver.AppleBluetoothMultitouch.mouse MouseTwoFingerHor
 
 
 ## Trackpad
+e_info "==> trackpad settings"
 
 # Enable tap to click for this user and for the login screen
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
@@ -87,6 +100,7 @@ defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeF
 
 
 ## Airdrop
+e_info "==> airdrop settings"
 
 # Enable over Ethernet and on unsupported Macs running Lion
 defaults write com.apple.NetworkBrowser BrowseAllInterfaces -bool true
@@ -94,6 +108,7 @@ defaults write com.apple.NetworkBrowser BrowseAllInterfaces -bool true
 
 
 ## Bluetooth
+e_info "==> bluetooth settings"
 
 # Increase sound quality for headphones/headsets
 defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)" -int 40
@@ -101,6 +116,7 @@ defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)" -int
 
 
 ## Disks
+e_info "==> disk settings"
 
 # Avoid creating .DS_Store files on network volumes
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
@@ -121,6 +137,7 @@ defaults write com.apple.finder OpenWindowForNewRemovableDisk -bool true
 
 
 ## Menu bar
+e_info "==> menu bar settings"
 
 defaults write com.apple.menuextra.clock DateFormat -string "EEE d MMM@HH:mm"
 defaults write com.apple.menuextra.clock IsAnalog -bool false
@@ -130,23 +147,10 @@ defaults write com.apple.menuextra.clock FlashDateSeparators -bool true
 defaults write com.apple.menuextra.battery ShowPercent -string "YES"
 defaults write com.apple.menuextra.battery ShowTime -string "YES"
 
-# Menu bar: hide the Time Machine, Volume, and User icons
-for domain in ~/Library/Preferences/ByHost/com.apple.systemuiserver.*; do
-  defaults write "${domain}" dontAutoLoad -array \
-	"/System/Library/CoreServices/Menu Extras/TimeMachine.menu" \
-	"/System/Library/CoreServices/Menu Extras/Volume.menu" \
-	"/System/Library/CoreServices/Menu Extras/User.menu"
-done
-
-defaults write com.apple.systemuiserver menuExtras -array   \
-  "/System/Library/CoreServices/Menu Extras/Bluetooth.menu" \
-  "/System/Library/CoreServices/Menu Extras/AirPort.menu"   \
-  "/System/Library/CoreServices/Menu Extras/Battery.menu"   \
-  "/System/Library/CoreServices/Menu Extras/Clock.menu"
-
 
 
 ## Screen, system UI & window manager
+e_info "==> screen/windowing settings"
 
 # Enable subpixel font rendering on non-Apple LCDs
 defaults write NSGlobalDomain AppleFontSmoothing -int 2
@@ -170,6 +174,7 @@ defaults write com.apple.universalaccess reduceTransparency -bool true
 
 
 ## Security
+e_info "==> security settings"
 
 # Require password immediately after sleep or screen saver begins
 defaults write com.apple.screensaver askForPassword -int 1
@@ -178,6 +183,7 @@ defaults write com.apple.screensaver askForPasswordDelay -int 0
 
 
 ## Desktop
+e_info "==> desktop settings"
 
 # Disable Dashboard
 defaults write com.apple.dashboard mcx-disabled -boolean YES
@@ -208,6 +214,7 @@ defaults write com.apple.dashboard mcx-disabled -boolean YES
 
 
 ## Dock
+e_info "==> dock settings"
 
 # Use the suck effect for window minimizing
 defaults write com.apple.dock mineffect suck
@@ -242,6 +249,7 @@ defaults write com.apple.Dock autohide-delay -float 0
 
 
 ## Mission Control & Hot Corners
+e_info "==> mission control/hot corner settings"
 
 # Possible values:
 #  0: no-op
@@ -279,14 +287,8 @@ defaults write com.apple.dock "expose-group-by-app" -bool true
 
 
 
-## Launchpad
-
-# Add iOS Simulator to Launchpad
-sudo ln -sf "/Applications/Xcode.app/Contents/Developer/Applications/iOS Simulator.app" "/Applications/iOS Simulator.app"
-
-
-
 ## Finder
+e_info "==> finder settings"
 
 # Show status bar
 defaults write com.apple.finder ShowStatusBar -bool true
@@ -327,6 +329,7 @@ defaults write com.apple.Finder FXPreferredViewStyle Nlsv
 
 
 ## Panels
+e_info "==> panels settings"
 
 # Expand save panel by default
 defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
@@ -343,6 +346,7 @@ defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 
 
 ## Safari
+e_info "==> safari settings"
 
 # Enable debug menu
 defaults write com.apple.safari IncludeDebugMenu -bool true
@@ -400,6 +404,7 @@ defaults write com.apple.safari WebKitUserStyleSheetLocationPreferenceKey "${DOT
 
 
 ## Terminal
+e_info "==> terminal settings"
 
 # Use the Solarized theme by default
 TERM_PROFILE='appsignal-dark';
@@ -416,14 +421,8 @@ defaults write com.apple.terminal StringEncodings -array 4
 
 
 
-## Spotlight
-
-# Disable Dictionary results
-defaults write com.apple.spotlight DictionaryLookupEnabled -bool false
-
-
-
 ## TextEdit
+e_info "==> textedit settings"
 
 # Use plain text mode for new documents
 defaults write com.apple.TextEdit RichText -int 0
@@ -431,19 +430,3 @@ defaults write com.apple.TextEdit RichText -int 0
 # Open and save files as UTF-8
 defaults write com.apple.TextEdit PlainTextEncoding -int 4
 defaults write com.apple.TextEdit PlainTextEncodingForWrite -int 4
-
-
-
-## Bootstrap
-
-# Reset Launchpad
-find ~/Library/Application\ Support/Dock -name "*.db" -maxdepth 1 -delete
-
-# Kill all affected apps
-for app in "Address Book" "Calendar" "Contacts" "Dashboard" "Dock" "Finder" \
-  "Mail" "Safari" "SystemUIServer" "iTunes"; do
-  killall "$app" > /dev/null 2>&1
-done
-
-# Safari is almost always open
-open -a safari

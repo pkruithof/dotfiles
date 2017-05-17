@@ -15,6 +15,15 @@ alias -- -="cd -"
 ## ls
 ##
 
+# use GNU coreutils
+if test -f /usr/local/bin/gls; then
+  alias ls='/usr/local/bin/gls'
+fi
+
+# colorize output
+alias ls='ls --color'
+
+
 # Long form
 alias l="ls -Flh"
 alias ll="l"
@@ -29,19 +38,72 @@ alias lam="ls -Flaht"
 # Order by file size, long form, all files
 alias las="ls -FlahS"
 
+
+##
+## Vagrant
+##
+if ! type -f 'vagrant' > /dev/null; then
+  alias vu='vagrant up'
+  alias vup='vagrant up --provision'
+  alias vssh='vagrant ssh -p'
+  alias vp='vagrant provision'
+  alias vr='vagrant reload'
+  alias vrp='vagrant reload --provision'
+fi
+
+
+##
+## MacOS specific
+##
+if [[ "$OSTYPE" =~ ^darwin ]]; then
+  # Clean up LaunchServices to remove duplicates in the “Open With” menu
+  alias cleanup="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user && killall Finder"
+
+  # Empty the Trash on all mounted volumes and the main HDD
+  # Also, clear Apple’s System Logs to improve shell startup speed
+  alias emptytrash="sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo rm -rfv /private/var/log/asl/*.asl"
+
+  # Flush Directory Service cache
+  alias flushdns="dscacheutil -flushcache"
+fi
+
+
+##
+## systemd
+##
+if ! type -f 'systemctl' > /dev/null; then
+  alias start=" sudo systemctl start"
+  alias stop=" sudo systemctl stop"
+  alias status=" sudo systemctl status"
+  alias reload=" sudo systemctl reload"
+  alias restart=" sudo systemctl restart"
+fi
+
+
+##
+## aptitude
+##
+if ! type -f 'apt-get' > /dev/null; then
+  alias ag='sudo apt-get'
+  alias agi='sudo apt-get install'
+  alias agu='sudo apt-get update'
+  alias acs='apt-cache show'
+fi
+
+
+##
+## various
+##
 # IP addresses
-alias localip="ipconfig getifaddr en1"
-alias ips="ifconfig -a | grep -o 'inet6\? \(\([0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+\)\|[a-fA-F0-9:]\+\)' | sed -e 's/inet6* //'"
+alias myip='dig +short myip.opendns.com @resolver1.opendns.com'
 
-# Copy my public key to my clipboard
-alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | echo '=> Public key copied to clipboard.'"
+# Get public key, and optionally copy it to clipboard
+if type -f 'pbcopy' > /dev/null; then
+  alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | echo '=> Public key copied to clipboard.'"
+else
+  alias pubkey="more ~/.ssh/id_rsa.pub"
+fi
 
-# Enhanced WHOIS lookups
-alias whois="whois -h whois-servers.net"
-
-# View HTTP traffic
-alias sniff="sudo ngrep -d 'en1' -t '^(GET|POST) ' 'tcp and port 80'"
-alias httpdump="sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET \/.*\""
 
 # shortcut to Symfony console
 alias "console"="_console"

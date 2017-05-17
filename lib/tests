@@ -1,7 +1,7 @@
 # Test whether a command exists
 # $1 - cmd to test
 type_exists() {
-  if [ $(type -P $1) ]; then
+  if type -f $1 > /dev/null 2>&1; then
     return 0
   fi
   return 1
@@ -17,4 +17,16 @@ is_macos () {
 
 is_ubuntu () {
   [[ "$(cat /etc/issue 2> /dev/null)" =~ Ubuntu ]] || return 1
+}
+
+in_array () {
+  local array="$1[@]"
+  local seeking=$2
+
+  for element in "${!array}"; do
+    if [[ $element == $seeking ]]; then
+      return 0
+    fi
+  done
+  return 1
 }

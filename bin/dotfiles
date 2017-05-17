@@ -5,143 +5,67 @@ set -e
 cd "$(dirname "${BASH_SOURCE}")/../"
 
 source ./environment
-source ${DOTFILES_ROOT}/lib/output
-source ${DOTFILES_ROOT}/lib/input
-source ${DOTFILES_ROOT}/lib/tests
-source ${DOTFILES_ROOT}/lib/utils
-source ${DOTFILES_ROOT}/lib/zsh
+source ${DOTFILES_ROOT}/lib/run
 
-usage () {
-  e_error "$1"
+# parse options
+while getopts "y-:" optchar; do
+  case "${optchar}" in
+    -)
+      case "${OPTARG}" in
+        skip*)
+          if [[ $OPTARG == *"="* ]]; then
+            val=${OPTARG#*=}
+          else
+            val="${!OPTIND}"; OPTIND=$(( $OPTIND + 1 ))
+          fi
 
-  cat <<HELP
-Usage: $(basename "$0") [--no-sync] [--no-packages] [-y]
-  -y            Answer "yes" to all confirmation questions
-  --no-sync     Don't pull the latest changes from the upstream
-  --no-packages Don't install/update packages
-
-See the README for documentation:
-${DOTFILES_REPO}/README.md
-HELP
-
-  exit 1
-}
-
-assert_prerequisites () {
-  type_exists 'git' || die "git is required"
-}
-
-update_dotfiles () {
-  e_info "==> syncing dotfiles..."
-  git pull --rebase origin master
-  git submodule update --recursive --init --quiet
-  e_success "==> done"
-}
-
-mirror_files () {
-  e_header "Symlinking dotfiles into home directory"
-
-  if ! confirm 'Warning: This step may overwrite your existing dotfiles.'; then
-    e_warning "==> skipped symlinking of dotfiles"
-  else
-    # ZSH files
-    mkdir -p "${HOME}/.zsh"
-    dotfile "zsh/rc"              ".zshrc"
-    dotfile "zsh/env"             ".zshenv"
-    dotfile "zsh/login"           ".zlogin"
-    dotfile "zsh/zplug"           ".zsh/zplug"
-    dotfile "zsh/aliases"         ".zsh/aliases"
-    dotfile "zsh/functions"       ".zsh/functions"
-    dotfile "zsh/history"         ".zsh/history"
-    dotfile "zsh/input"           ".zsh/input"
-    dotfile "zsh/paths"           ".zsh/paths"
-
-    # Bin
-    mkdir -p "${HOME}/bin"
-    dotfile "bin/dotfiles"        "bin/dotfiles"
-
-    # Git
-    copy    "git/config"          ".gitconfig"
-    dotfile "git/attributes"      ".gitattributes"
-    dotfile "git/ignore"          ".gitignore"
-
-    # Curl
-    dotfile "curl/rc"             ".curlrc"
-
-    # Screen
-    dotfile "screen/rc"           ".screenrc"
-
-    # Ruby
-    dotfile "ruby/gemrc"          ".gemrc"
-
-    # SSH
-    dotfile "ssh/config"          ".ssh/config"
-
-    # Tmux
-    dotfile "tmux/conf"           ".tmux.conf"
-
-    # System-specific config
-    # dotfile "system/${SYSTEM_NAME}" ".systemrc"
-  fi
-}
-
-confirm() {
-  if [ ${force_yes} ]; then
-    return 0
-  fi
-
-  if seek_confirmation "$@"; then
-    return 0
-  else
-    return 1
-  fi
-}
-
-# Test for known flags
-for opt in $@; do
-  case $opt in
-    --no-packages) no_packages=true ;;
-    --no-sync) no_sync=true ;;
-    -y) force_yes=true ;;
-    -*|--*) usage "Warning: invalid option $opt" ;;
+          case $val in
+            sync) sync=false ;;
+            install) install=false ;;
+            update) update=false ;;
+            *) usage "Warning: invalid skip value \"$val\"" ;;
+          esac
+        ;;
+        *) usage "Warning: invalid option \"$OPTARG\"" ;;
+      esac
+    ;;
+    y) force_yes=true ;;
+    *) usage "Warning: invalid option \"-$OPTARG\"" ;;
   esac
 done
 
 # make sure everything we need is here
 assert_prerequisites
 
-e_header "Updating dotfiles"
-
-if [[ ${no_sync} ]]; then
-  e_warning "==> skipping sync"
-else
-  update_dotfiles
+if ${sync:-true}; then
+  sync_dotfiles_repo
 fi
 
-if [[ ${no_packages} ]]; then
-  e_warning "==> skipping packages"
-else
-  # run system-specific setup
-  is_macos && ${DOTFILES_ROOT}/macos/setup
-  is_ubuntu && ${DOTFILES_ROOT}/ubuntu/setup
-fi
-
-if [ ! -f ${GITRC_FILE} ]; then
-  if seek_confirmation "Would you like to specify your git username/email address?"; then
-    read -p "username: " username
-    read -p "email: " email
-    echo -e "git config --global user.name \"${username}\"\ngit config --global user.email \"${email}\"\n" > ${GITRC_FILE}
+if ${install:-true}; then
+  # run system-specific setup first
+  if is_macos; then
+    ${DOTFILES_ROOT}/macos/bin/install
+  elif is_ubuntu; then
+    ${DOTFILES_ROOT}/ubuntu/bin/install
   else
-    echo -e "# put 'git config' commands here\n" > ${GITRC_FILE}
+    die "Unsupported OS: $(cat /etc/issue)"
   fi
-  chmod +x ${GITRC_FILE}
+
+  # ensure zsh/zplug
+  zsh_ensure
+  zplug_ensure
+
+  # symlink dotfiles
+  mirror_files
+
+  # create/update ~/.gitconfig
+  install_git_config
 fi
 
-# symlink files
-mirror_files
+if ${update:-true}; then
+  zplug_update
 
-# ensure ZSH shell
-zsh_ensure
-
-# ensure zplug
-zplug_ensure
+  # system-specific updates
+  is_macos && ${DOTFILES_ROOT}/macos/bin/update
+  is_ubuntu && ${DOTFILES_ROOT}/ubuntu/bin/update
+fi

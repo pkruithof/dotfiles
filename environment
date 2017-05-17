@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
-
-cd "$(dirname "${BASH_SOURCE}")"
-
-export DOTFILES_ROOT="$(pwd -P)"
+export DOTFILES_ROOT=$(exec 2>/dev/null;cd -- $(dirname "$BASH_SOURCE"); unset PWD; /usr/bin/pwd || /bin/pwd || pwd)
 export DOTFILES_REPO="https://github.com/pkruithof/dotfiles"
 export GITRC_FILE="${HOME}/.gitrc"
+export GEMFILE="${HOME}/Gemfile"
