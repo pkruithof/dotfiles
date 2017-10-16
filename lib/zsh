@@ -37,12 +37,12 @@ zplug_ensure () {
 
 zplug_install () {
   e_header "Installing zplug"
-  curl -sL https://zplug.sh/installer | zsh
+  curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
 }
 
 zplug_update() {
   e_header "Updating zplug"
 
   # run in subshell since dotfiles can be run in bash
-  /usr/bin/env zsh -ic 'zplug --self-manage || zplug update --self; zplug update; zplug clean'
+  /usr/bin/env zsh -ic 'zplug update; zplug clean'
 }
