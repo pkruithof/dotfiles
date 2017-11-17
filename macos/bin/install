@@ -15,7 +15,7 @@ php_ensure
 php_ensure_apps
 
 # install system default settings
-${DOTFILES_ROOT}/macos/bin/defaults
+#${DOTFILES_ROOT}/macos/bin/defaults
 
 # install vagrant sudoers file
 sudoers_file=/private/etc/sudoers.d/vagrant
