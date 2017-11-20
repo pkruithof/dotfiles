@@ -1,2 +1,3 @@
+.installed
 vim/.viminfo
 vim/autoload/pathogen.vim

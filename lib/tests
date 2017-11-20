@@ -30,3 +30,7 @@ in_array () {
   done
   return 1
 }
+
+is_installed () {
+  [[ -f ${DOTFILES_ROOT}/.installed ]] || return 1
+}

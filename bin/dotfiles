@@ -2,10 +2,11 @@
 
 set -e
 
-cd "$(dirname "${BASH_SOURCE}")/../"
+cd "$(dirname $(readlink -f "${BASH_SOURCE}"))/../"
 
 source ./environment
 source ${DOTFILES_ROOT}/lib/run
+source ${DOTFILES_ROOT}/lib/tests
 
 # parse options
 while getopts "y-:" optchar; do
@@ -41,7 +42,9 @@ if ${sync:-true}; then
   sync_dotfiles_repo
 fi
 
-if ${install:-true}; then
+# check if we need installation
+[[ is_installed ]] && needs_install=false || needs_install=true
+if ${install:-${needs_install}}; then
   # run system-specific setup first
   if is_macos; then
     ${DOTFILES_ROOT}/macos/bin/install
@@ -60,6 +63,9 @@ if ${install:-true}; then
 
   # create/update ~/.gitconfig
   install_git_config
+
+  # mark that install has completed, so it won't run next time
+  mark_installed
 fi
 
 if ${update:-true}; then

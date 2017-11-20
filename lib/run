@@ -100,9 +100,6 @@ mirror_files () {
 
     # Tmux
     dotfile "tmux/conf"           ".tmux.conf"
-
-    # System-specific config
-    # dotfile "system/${SYSTEM_NAME}" ".systemrc"
   fi
 }
 
@@ -117,4 +114,8 @@ install_git_config () {
     fi
     chmod +x ${GITRC_FILE}
   fi
+}
+
+mark_installed () {
+  touch ${DOTFILES_ROOT}/.installed
 }
