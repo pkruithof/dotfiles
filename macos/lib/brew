@@ -12,10 +12,10 @@ brew_install () {
 brew_update() {
   e_header "Updating Homebrew"
 
-  e_info "==> installing missing formulae/casks"
+  e_info "==> installing missing formulae"
   brew bundle --file="${DOTFILES_ROOT}/macos/Brewfile"
 
-  e_info "==> upgrading existing formulae/casks"
+  e_info "==> upgrading existing formulae"
   brew upgrade
 
   # Remove outdated versions from the Cellar
