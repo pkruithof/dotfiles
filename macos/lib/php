@@ -48,8 +48,7 @@ phpbrew_installed () {
 php_ensure_apps () {
   source ${HOME}/.phpbrew/bashrc
 
-  php_ensure_app composer
-  php_ensure_app phpunit
+  composer_install
 
   composer config --global bin-dir ${PHPBREW_BIN}
   composer_require_package d11wtq/boris
@@ -64,19 +63,30 @@ php_update_apps () {
   fi
 }
 
-php_ensure_app () {
-  if [[ ! $(phpbrew app list | grep $1) ]]; then
-    e_info "==> installing application $1"
-    phpbrew app get $1
+composer_install () {
+  if type_exists 'composer'; then
+    return
   fi
+
+  e_info "Installing Composer"
+
+  EXPECTED_SIGNATURE=$(curl -s -- https://composer.github.io/installer.sig)
+  php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+  ACTUAL_SIGNATURE=$(php -r "echo hash_file('SHA384', 'composer-setup.php');")
+
+  if [ "$EXPECTED_SIGNATURE" != "$ACTUAL_SIGNATURE" ]
+  then
+    rm composer-setup.php
+    die 'ERROR: Invalid installer signature'
+  fi
+
+  php composer-setup.php --install-dir=/usr/local/bin --filename=composer
+  rm composer-setup.php
 }
 
 composer_require_package () {
   if [[ ! $(composer global show $1 2> /dev/null) ]]; then
     e_info "==> installing package $1"
-    composer global require -q $1
-  elif [[ $(composer global show -o 2> /dev/null | grep $1) ]]; then
-    e_info "==> upgrading package $1"
     composer global require -q $1
   fi
 }
