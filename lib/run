@@ -95,6 +95,7 @@ mirror_files () {
     dotfile "ruby/gemrc"          ".gemrc"
 
     # SSH
+    mkdir -p "${HOME}/.ssh"
     dotfile "ssh/config"          ".ssh/config"
 
     # Tmux
