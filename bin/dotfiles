@@ -6,6 +6,7 @@ cd "$(dirname $(readlink -f "${BASH_SOURCE}"))/../"
 
 source ./environment
 source ${DOTFILES_ROOT}/lib/run
+source ${DOTFILES_ROOT}/lib/output
 source ${DOTFILES_ROOT}/lib/tests
 
 # parse options
@@ -66,6 +67,8 @@ if ${install:-${needs_install}}; then
 
   # mark that install has completed, so it won't run next time
   mark_installed
+
+  e_success "Installed dotfiles and system packages!"
 fi
 
 if ${update:-true}; then
@@ -74,4 +77,6 @@ if ${update:-true}; then
   # system-specific updates
   is_macos && ${DOTFILES_ROOT}/macos/bin/update
   is_ubuntu && ${DOTFILES_ROOT}/ubuntu/bin/update
+
+  e_success "Updated dotfiles and system packages!"
 fi
