@@ -34,3 +34,6 @@ export LANG="en_US"
 
 # Increase timeout for composer (for slow connections)
 export COMPOSER_PROCESS_TIMEOUT=4000
+
+# Set proper tty for GPG signing
+export GPG_TTY=$(tty)
