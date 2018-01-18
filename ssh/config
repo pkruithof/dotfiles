@@ -1,8 +1,8 @@
-UseKeychain yes
-
-ServerAliveInterval 300
-ServerAliveCountMax 3
-
-# only use IPv4
 Host *
-AddressFamily inet
+  AddKeysToAgent yes
+  UseKeychain yes
+  IdentityFile ~/.ssh/id_rsa
+  ServerAliveInterval 60
+  ServerAliveCountMax 3
+  AddressFamily inet
+
