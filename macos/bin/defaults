@@ -291,7 +291,7 @@ defaults write com.apple.safari ShowOverlayStatusBar -bool true
 #defaults write com.apple.safari ShowFullURLInSmartSearchField -bool true
 
 # Disable automatic spelling correction
-#defaults write com.apple.safari WebAutomaticSpellingCorrectionEnabled -bool false
+defaults write com.apple.safari WebAutomaticSpellingCorrectionEnabled -bool false
 
 # Send "Do-Not-Track" header
 defaults write com.apple.safari SendDoNotTrackHTTPHeader -bool true
