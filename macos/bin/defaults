@@ -138,8 +138,8 @@ e_info "==> dock settings"
 # Use the suck effect for window minimizing
 defaults write com.apple.dock mineffect suck
 
-# Minimize windows into application icon
-defaults write com.apple.dock minimize-to-application -bool true
+# Don't minimize windows into application icon
+defaults write com.apple.dock minimize-to-application -bool false
 
 # Make icons of hidden applications translucent
 defaults write com.apple.dock showhidden -bool true
