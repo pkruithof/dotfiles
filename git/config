@@ -145,6 +145,12 @@
 [push]
     default = simple
 
+[commit]
+    gpgsign = true
+
+[user]
+    signingkey = 20749FCFC8BF78A1
+
 # URL shorthands
 [url "git@github.com:"]
     insteadOf = "gh:"
