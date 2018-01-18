@@ -45,7 +45,7 @@ defaults write -g AppleMeasurementUnits -string "Centimeters"
 defaults write -g AppleMetricUnits -bool true
 
 # Disable auto-correct
-#defaults write -g NSAutomaticSpellingCorrectionEnabled -bool false
+defaults write -g NSAutomaticSpellingCorrectionEnabled -bool false
 
 # Disable smart quotes as they're annoying when typing code
 #defaults write -g NSAutomaticQuoteSubstitutionEnabled -bool false
