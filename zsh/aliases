@@ -65,6 +65,9 @@ if [[ "$OSTYPE" =~ ^darwin ]]; then
 
   # Flush Directory Service cache
   alias flushdns="dscacheutil -flushcache"
+
+  # Shortcut to GitHub Desktop
+  alias gh="github"
 fi
 
 

@@ -22,3 +22,5 @@ Thumbs.db
 *.vi
 *~
 *.sass-cache
+*.vault-password
+
