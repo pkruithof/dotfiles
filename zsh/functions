@@ -23,30 +23,3 @@ psgrep () {
 passgen () {
   head /dev/urandom | uuencode -m - | sed -n 2p | cut -c1-${1:-12};
 }
-
-# finds the nearest Symfony console
-_console ()
-{
-  if [ -x app/console ]; then
-    app/console $@
-  elif [ -x bin/console ]; then
-    bin/console $@
-  else
-    printf \"console not found or not executable\n\"
-    return 1
-  fi
-}
-
-# finds the nearest phpunit executable
-_phpunit ()
-{
-  for bin in ./bin/phpunit ./vendor/bin/phpunit; do
-    if [ -x "$bin" ]; then
-      "$bin" $@
-      return
-    fi
-  done
-
-  # fall back
-  phpunit $@
-}

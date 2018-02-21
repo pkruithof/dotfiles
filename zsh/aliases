@@ -106,10 +106,3 @@ if type -f 'pbcopy' > /dev/null; then
 else
   alias pubkey="more ~/.ssh/id_rsa.pub"
 fi
-
-
-# shortcut to Symfony console
-alias "console"="_console"
-
-# shortcut for PHPUnit executable
-alias "punit"="_phpunit"
