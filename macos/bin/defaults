@@ -176,21 +176,21 @@ e_info "==> mission control/hot corner settings"
 # 11: Launchpad
 # 12: Notification Center
 
-# Bottom left → Start screen saver
-defaults write com.apple.dock wvous-bl-corner -int 5
-defaults write com.apple.dock wvous-bl-modifier -int 0
-
-# Bottom right → Mission Control
-defaults write com.apple.dock wvous-br-corner -int 2
-defaults write com.apple.dock wvous-br-modifier -int 0
-
-# Top left → Show desktop
-defaults write com.apple.dock wvous-tl-corner -int 4
+# Top left → Mission Control
+defaults write com.apple.dock wvous-tl-corner -int 2
 defaults write com.apple.dock wvous-tl-modifier -int 0
 
-# Top right → Show application windows
-defaults write com.apple.dock wvous-tr-corner -int 3
+# Top right → Show desktop
+defaults write com.apple.dock wvous-tr-corner -int 4
 defaults write com.apple.dock wvous-tr-modifier -int 0
+
+# Bottom left → Show application windows
+defaults write com.apple.dock wvous-bl-corner -int 3
+defaults write com.apple.dock wvous-bl-modifier -int 0
+
+# Bottom right → Start screen saver
+defaults write com.apple.dock wvous-br-corner -int 5
+defaults write com.apple.dock wvous-br-modifier -int 0
 
 
 # Speed up animations
