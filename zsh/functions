@@ -23,3 +23,11 @@ psgrep () {
 passgen () {
   head /dev/urandom | uuencode -m - | sed -n 2p | cut -c1-${1:-12};
 }
+
+docker-ips() {
+  docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}} - {{.Name}}' $(docker ps -aq) | sort
+}
+
+docker-ip() {
+  docker inspect --format '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' "$@"
+}
