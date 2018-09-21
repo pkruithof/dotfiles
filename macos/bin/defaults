@@ -59,7 +59,7 @@ defaults write -g NSAutomaticSpellingCorrectionEnabled -bool false
 e_info "==> mouse settings"
 
 # Disable smart zoom (double-tap with one finger)
-#defaults write com.apple.driver.AppleBluetoothMultitouch.mouse MouseOneFingerDoubleTapGesture -int 0
+defaults write com.apple.driver.AppleBluetoothMultitouch.mouse MouseOneFingerDoubleTapGesture -int 0
 
 # Enable secondary click (click on right side)
 defaults write com.apple.driver.AppleBluetoothMultitouch.mouse MouseButtonMode -string "TwoButton"
