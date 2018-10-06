@@ -20,9 +20,6 @@ gem_install
 php_ensure
 php_ensure_apps
 
-# install sudoers file for automatic vagrant permissions
-install_vagrant_sudoers
-
 # copy ssh key from backup
 install_ssh_key
 install_custom_hosts

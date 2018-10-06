@@ -40,19 +40,6 @@ alias las="ls -FlahS"
 
 
 ##
-## Vagrant
-##
-if ! type -f 'vagrant' > /dev/null; then
-  alias vu='vagrant up'
-  alias vup='vagrant up --provision'
-  alias vssh='vagrant ssh -p'
-  alias vp='vagrant provision'
-  alias vr='vagrant reload'
-  alias vrp='vagrant reload --provision'
-fi
-
-
-##
 ## MacOS specific
 ##
 if [[ "$OSTYPE" =~ ^darwin ]]; then
@@ -68,29 +55,6 @@ if [[ "$OSTYPE" =~ ^darwin ]]; then
 
   # Shortcut to GitHub Desktop
   alias gh="github"
-fi
-
-
-##
-## systemd
-##
-if ! type -f 'systemctl' > /dev/null; then
-  alias start=" sudo systemctl start"
-  alias stop=" sudo systemctl stop"
-  alias status=" sudo systemctl status"
-  alias reload=" sudo systemctl reload"
-  alias restart=" sudo systemctl restart"
-fi
-
-
-##
-## aptitude
-##
-if ! type -f 'apt-get' > /dev/null; then
-  alias ag='sudo apt-get'
-  alias agi='sudo apt-get install'
-  alias agu='sudo apt-get update'
-  alias acs='apt-cache show'
 fi
 
 

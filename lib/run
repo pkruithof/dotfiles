@@ -97,9 +97,6 @@ mirror_files () {
     # SSH
     mkdir -p "${HOME}/.ssh"
     dotfile "ssh/config"          ".ssh/config"
-
-    # Tmux
-    dotfile "tmux/conf"           ".tmux.conf"
   fi
 }
 

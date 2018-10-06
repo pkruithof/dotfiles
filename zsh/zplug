@@ -8,14 +8,15 @@ zplug "mafredri/zsh-async"
 zplug "sindresorhus/pure"
 
 # input/search plugins
+zplug "junegunn/fzf-bin", from:gh-r, as:command, rename-to:fzf
+zplug "junegunn/fzf", use:shell/completion.zsh
+zplug "junegunn/fzf", use:shell/key-bindings.zsh
 zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-completions"
 zplug "djui/alias-tips"
-zplug "hcgraf/zsh-sudo"
 zplug "popstas/zsh-command-time"
 zplug "Seinh/git-prune"
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
-zplug "zsh-users/zsh-history-substring-search", defer:2
 
 if [[ "$OSTYPE" =~ ^darwin ]]; then
   zplug "the8/terminal-app.zsh"
@@ -32,15 +33,11 @@ fi
 # load plugins
 zplug load
 
-# autosuggestions config
-if zplug check zsh-users/zsh-autosuggestions; then
-  ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(history-substring-search-up history-substring-search-down) # Add history-substring-search-* widgets to list of widgets that clear the autosuggestion
-  ZSH_AUTOSUGGEST_CLEAR_WIDGETS=("${(@)ZSH_AUTOSUGGEST_CLEAR_WIDGETS:#(up|down)-line-or-history}") # Remove *-line-or-history widgets from list of widgets that clear the autosuggestion to avoid conflict with history-substring-search-* widgets
-fi
+zmodload zsh/terminfo
 
-# Bind UP and DOWN arrow keys for subsstring search.
-if zplug check zsh-users/zsh-history-substring-search; then
-  zmodload zsh/terminfo
-  bindkey "$terminfo[cuu1]" history-substring-search-up
-  bindkey "$terminfo[cud1]" history-substring-search-down
-fi
+# option+arrow-up for fuzzy history search
+bindkey '\e^[[A' fzf-history-widget
+
+# up/down for regular history traversal
+bindkey "$terminfo[cuu1]" up-line-or-history
+bindkey "$terminfo[cud1]" down-line-or-history

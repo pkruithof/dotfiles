@@ -19,14 +19,3 @@ install_custom_hosts () {
     e_info "==> added hosts from backup to /etc/hosts"
   fi
 }
-
-install_vagrant_sudoers () {
-  sudoers_file=/private/etc/sudoers.d/vagrant
-  teebin=$(which tee)
-  contents=$(sed -E "s|__tee__|$teebin|g" ${DOTFILES_ROOT}/macos/res/vagrant_sudoers)
-
-  if [[ ! -f $sudoers_file || $(sudo cat ${sudoers_file}) != "$contents" ]]; then
-    e_info "==> installing sudoers file for vagrant"
-    echo "${contents}" | (sudo sh -c 'VISUAL="tee" visudo -f /private/etc/sudoers.d/vagrant')
-  fi
-}
