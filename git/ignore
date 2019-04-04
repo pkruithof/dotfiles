@@ -10,6 +10,9 @@ Thumbs.db
 .Spotlight-V100
 .Trashes
 
+# k8s secrets
+*-secret.yaml
+
 # Always-ignore extensions
 *.idea
 *.diff
