@@ -2,6 +2,9 @@
 ## cd
 ##
 
+# cd without using cd
+setopt auto_cd
+
 # Easier navigation: .., ..., ...., ....., ~ and -
 alias ..="cd .."
 alias ...="cd ../.."
@@ -37,6 +40,15 @@ alias lm="ls -Flht"
 alias lam="ls -Flaht"
 # Order by file size, long form, all files
 alias las="ls -FlahS"
+
+
+##
+## Docker, Kubernetes, etc.
+##
+
+alias k="kubectl"
+alias kl="kubectl logs -f"
+alias dc="docker-compose"
 
 
 ##
