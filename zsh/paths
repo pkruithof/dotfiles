@@ -13,9 +13,9 @@ typeset -gUT INFOPATH infopath
 
 path=(
   /usr/local/opt/coreutils/libexec/gnubin
+  /usr/local/opt/ruby/bin
   /opt/local/bin
   /usr/local/{bin,sbin}
-  /usr/local/opt/ruby/bin
   # tmp until zplug is released with #460
   "$ZPLUG_HOME/bin"
   $path
