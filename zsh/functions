@@ -24,6 +24,10 @@ passgen () {
   head /dev/urandom | uuencode -m - | sed -n 2p | cut -c1-${1:-12};
 }
 
+uuid () {
+  echo "import uuid\nimport sys\nsys.stdout.write(str(uuid.uuid4()))" | python | pbcopy && echo -e 'generated uuid to clipboard'
+}
+
 docker-ips() {
   docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}} - {{.Name}}' $(docker ps -aq) | sort
 }
