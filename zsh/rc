@@ -5,9 +5,7 @@ sources+="$HOME/.zsh/functions"
 sources+="$HOME/.zsh/zplug"
 sources+="$HOME/.zsh/aliases"
 sources+="$HOME/.zsh/paths"
-
-# Check for phpbrew
-[[ -f "$HOME/.phpbrew/bashrc" ]] && sources+="$HOME/.phpbrew/bashrc"
+sources+="$HOME/.zsh/completion"
 
 # Check for a system-specific file
 [[ -f "$HOME/.systemrc" ]] && sources+="$HOME/.systemrc"

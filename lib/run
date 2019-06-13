@@ -75,6 +75,7 @@ mirror_files () {
     dotfile "zsh/history"         ".zsh/history"
     dotfile "zsh/input"           ".zsh/input"
     dotfile "zsh/paths"           ".zsh/paths"
+    dotfile "zsh/completion"      ".zsh/completion"
 
     # Bin
     mkdir -p "${HOME}/bin"
