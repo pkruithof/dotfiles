@@ -34,10 +34,6 @@ alias ll="l"
 alias la="ls -Flah"
 # List only directories
 alias lsd='ls -Flh | grep "^d"'
-# Order by last modified, long form
-alias lm="ls -Flht"
-# Order by last modified, long form, all files
-alias lam="ls -Flaht"
 # Order by file size, long form, all files
 alias las="ls -FlahS"
 
@@ -49,36 +45,21 @@ alias las="ls -FlahS"
 alias k="kubectl"
 alias kl="kubectl logs -f"
 alias dc="docker-compose"
-
-
-##
-## MacOS specific
-##
-if [[ "$OSTYPE" =~ ^darwin ]]; then
-  # Clean up LaunchServices to remove duplicates in the “Open With” menu
-  alias cleanup="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user && killall Finder"
-
-  # Empty the Trash on all mounted volumes and the main HDD
-  # Also, clear Apple’s System Logs to improve shell startup speed
-  alias emptytrash="sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo rm -rfv /private/var/log/asl/*.asl"
-
-  # Flush Directory Service cache
-  alias flushdns="dscacheutil -flushcache"
-
-  # Shortcut to GitHub Desktop
-  alias gh="github"
-fi
+alias dcl="docker-compose logs -f"
 
 
 ##
 ## various
 ##
+
+# quick hack to make watch work with aliases
+alias watch='watch '
+
 # IP addresses
 alias myip='dig +short myip.opendns.com @resolver1.opendns.com'
 
+# Shortcut to GitHub Desktop
+alias gh="github"
+
 # Get public key, and optionally copy it to clipboard
-if type -f 'pbcopy' > /dev/null; then
-  alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | echo '=> Public key copied to clipboard.'"
-else
-  alias pubkey="more ~/.ssh/id_rsa.pub"
-fi
+alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | echo '=> Public key copied to clipboard.'"

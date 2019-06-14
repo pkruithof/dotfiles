@@ -7,21 +7,6 @@
     branches = branch -a
     remotes = remote -v
 
-    # View the current working tree status using the short format
-    s = status -s
-
-    # View abbreviated SHA, description, and history graph of the latest 20 commits
-    l = log --pretty=oneline -n 20 --graph --abbrev-commit
-
-    # History
-    hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
-
-    # Show the diff between the latest commit and the current state
-    d = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
-
-    # `git di $number` shows the diff between the state `$number` revisions ago and the current state
-    di = !"d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d"
-
     # Pull using rebase
     p = pull --rebase
 
@@ -35,22 +20,19 @@
     co = checkout
 
     # Checkout master
-    com = checkout master
+    m = checkout master
 
     # Amend the currently staged files to the latest commit
     amend = commit --amend --reuse-message=HEAD
+
+    # Add everything and amend the last commit
+    aaa = !git add -A && git amend
 
     # Switch to a branch, creating it if necessary
     go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
 
     # shortcut for squashing commits
     squash = rebase -i
-
-    # create a snapshot of the working tree, and clean it
-    wip = stash push --include-untracked -m 'wip: $(date)'
-
-    # create a snapshot of the working tree, and keep working
-    snap = stash push --keep-index --include-untracked -m 'snapshot: $(date)'
 
     # Remove branches that have already been merged with master
     # a.k.a. ‘delete merged’
@@ -72,6 +54,8 @@
     attributesfile = ~/.gitattributes
     editor = vim
 
+    pager = diff-so-fancy | less --tabs=4 -RFX
+
     # Make `git rebase` safer on OS X
     # More info: <http://www.git-tower.com/blog/make-git-rebase-safe-on-osx/>
     trustctime = false
@@ -79,9 +63,6 @@
     # Speed up commands involving untracked files such as `git status`.
     # https://git-scm.com/docs/git-update-index#_untracked_cache
     untrackedCache = true
-
-[commit]
-    gpgsign = true
 
 [credential]
     helper = osxkeychain
@@ -120,6 +101,3 @@
     # ref: http://linux.die.net/man/1/git-log
     # Result: abc1234 Commit message (HEAD, origin/master, master) -- Nicolas Gallagher; 5 hours ago
     nice = "%C(yellow)%h%C(reset) %C(white)%s%C(cyan)%d%C(reset) -- %an; %ar"
-
-[user]
-    signingkey = 20749FCFC8BF78A1

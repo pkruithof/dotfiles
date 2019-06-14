@@ -1,12 +1,9 @@
-brew_ensure () {
-  if ! type_exists 'brew'; then
-    brew_install
-  fi
-}
-
 brew_install () {
   e_header "Installing Homebrew"
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+  e_info "==> installing formulae"
+  brew bundle --file="${DOTFILES_ROOT}/macos/Brewfile"
 }
 
 brew_update() {

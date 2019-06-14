@@ -1,7 +1,6 @@
-# Folder view configuration files
 .DS_Store
-Desktop.ini
 .vagrant
+
 # Thumbnail cache files
 ._*
 Thumbs.db

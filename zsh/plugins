@@ -1,0 +1,14 @@
+mafredri/zsh-async
+junegunn/fzf path:shell/key-bindings.zsh
+junegunn/fzf path:shell/completion.zsh kind:fpath
+
+zsh-users/zsh-autosuggestions
+zsh-users/zsh-completions
+popstas/zsh-command-time
+djui/alias-tips
+so-fancy/diff-so-fancy kind:path
+Seinh/git-prune
+
+# these should be last
+sindresorhus/pure
+zsh-users/zsh-syntax-highlighting

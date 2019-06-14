@@ -16,8 +16,6 @@ path=(
   /usr/local/opt/ruby/bin
   /opt/local/bin
   /usr/local/{bin,sbin}
-  # tmp until zplug is released with #460
-  "$ZPLUG_HOME/bin"
   $path
   /usr/{bin,sbin}
   $HOME/bin
@@ -37,5 +35,6 @@ manpath=(
 
 fpath=(
   $HOME/.zsh
+  /usr/local/share/zsh-completions
   $fpath
 )

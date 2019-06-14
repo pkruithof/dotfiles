@@ -1,11 +1,16 @@
 #!/usr/bin/env bash
 
-: ${INSTALL_DIR:="${HOME}/.dotfiles"}
+DOTFILES_ROOT=~/.dotfiles
 DOTFILES_REPO="https://github.com/pkruithof/dotfiles"
 
-if [ ! -d ${INSTALL_DIR} ]; then
-  printf "\n[ \033[00;34m..\033[0m ] Downloading dotfiles to ${INSTALL_DIR}\n"
-  git clone --recursive ${DOTFILES_REPO} ${INSTALL_DIR}
+if ! type -f git > /dev/null 2>&1; then
+  printf "\n[ \033[00;34m..\033[0m ] Install git first\n"
+  exit
 fi
 
-${INSTALL_DIR}/bin/dotfiles
+if [[ ! -d ${DOTFILES_ROOT} ]]; then
+  printf "\n[ \033[00;34m..\033[0m ] Downloading dotfiles to ${DOTFILES_ROOT}\n"
+  git clone --recursive ${DOTFILES_REPO} ${DOTFILES_ROOT}
+fi
+
+${DOTFILES_ROOT}/bin/install.sh

@@ -1,9 +1,14 @@
+# Word characters are alphanumeric characters only
+autoload -U select-word-style
+select-word-style bash
+
 zmodload zsh/terminfo
 
 # Use emacs key bindings
 bindkey -e
 
-bindkey "${terminfo[kpp]}"    up-line-or-history      # [PageUp] - Up a line of history
-bindkey "${terminfo[knp]}"    down-line-or-history    # [PageDown] - Down a line of history
-bindkey "${terminfo[kcbt]}"   reverse-menu-complete   # [Shift-Tab] - move through the completion menu backwards
-bindkey "${terminfo[kdch1]}"  delete-char             # [Delete] - delete forward
+bindkey '\e^[[A'              fzf-history-widget      # [Option-ArrowUp] for fuzzy history search
+bindkey "${terminfo[kpp]}"    up-line-or-history      # [PageUp] Up a line of history
+bindkey "${terminfo[knp]}"    down-line-or-history    # [PageDown] Down a line of history
+bindkey "${terminfo[kcbt]}"   reverse-menu-complete   # [Shift-Tab] move through the completion menu backwards
+bindkey "${terminfo[kdch1]}"  delete-char             # [Delete] delete forward

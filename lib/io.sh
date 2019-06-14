@@ -1,3 +1,27 @@
+confirm () {
+  if seek_confirmation "$@"; then
+    return 0
+  else
+    return 1
+  fi
+}
+
+# Ask for confirmation before proceeding
+seek_confirmation () {
+  # only do this in interactive shell
+  if [[ -t 0 ]]; then
+    printf "\n"
+    e_warning "$@"
+    read -p "Continue? (y/n) " -n 1
+    printf "\n"
+    if [[ "$REPLY" =~ ^[Yy]$ ]]; then
+      return 0
+    fi
+  fi
+
+  return 1
+}
+
 # Header logging
 e_header() {
   printf "\n$(tput setaf 4)%s$(tput sgr0)\n" "$@"

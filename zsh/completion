@@ -1,5 +1,24 @@
-setopt auto_menu         # show completion menu on successive tab press
+# zsh.sourceforge.net/Doc/Release/Completion-System.html
+autoload -Uz compinit
+if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then
+	compinit
+else
+	compinit -C
+fi
+
+# show completion menu on successive tab press
+setopt auto_menu
 setopt complete_in_word
 setopt always_to_end
 
+# matches case insensitive for lowercase
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z-_}={A-Za-z_-}' 'r:|=*' 'l:|=* r:|=*'
+
+# menu if nb items > 2
+zstyle ':completion:*' menu select=2
+
+# tag name as group name
+zstyle ':completion:*' group-name ''
+
+# format group names
+zstyle ':completion:*' format '%B---- %d%b'

@@ -1,0 +1,13 @@
+source "$HOME/.zsh/aliases"
+source "$HOME/.zsh/completion"
+source "$HOME/.zsh/functions"
+source "$HOME/.zsh/history"
+source "$HOME/.zsh/input"
+source "$HOME/.zsh/paths"
+source "$HOME/.zsh/plugins"
+
+# Check for a system-specific git config
+[[ -f "$HOME/.gitrc" ]] && source "$HOME/.gitrc"
+
+# use .localrc for settings specific to one system
+[[ -f "$HOME/.localrc" ]] && source "$HOME/.localrc"
