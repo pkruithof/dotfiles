@@ -10,6 +10,9 @@
     # Pull using rebase
     p = pull --rebase
 
+    # Rebase current branch
+    r = !git fetch && git rebase origin/master
+
     # Clone a repository including all submodules
     c = clone --recursive
 
@@ -21,6 +24,9 @@
 
     # Checkout master
     m = checkout master
+
+    # Checkout master and pull
+    mp = !git m && git p
 
     # Amend the currently staged files to the latest commit
     amend = commit --amend --reuse-message=HEAD
