@@ -23,13 +23,13 @@ if [[ $(scutil --get LocalHostName) != "mekboek" ]]; then sudo scutil --set Loca
 e_info "==> keyboard settings"
 
 # Set a blazingly fast repeat rate
-defaults.sh write -g KeyRepeat -int 2
+defaults write -g KeyRepeat -int 2
 
 # Set a shorter delay until key repeat
-defaults.sh write -g InitialKeyRepeat -int 15
+defaults write -g InitialKeyRepeat -int 15
 
 # Disable press-and-hold for keys in favor of key repeat
-defaults.sh write -g ApplePressAndHoldEnabled -bool false
+defaults write -g ApplePressAndHoldEnabled -bool false
 
 
 
@@ -37,15 +37,15 @@ defaults.sh write -g ApplePressAndHoldEnabled -bool false
 e_info "==> locale/i18n settings"
 
 # Set language and text formats
-defaults.sh write -g AppleLanguages -array "en-NL" "nl-NL"
-defaults.sh write -g AppleLocale -string "en_NL"
+defaults write -g AppleLanguages -array "en-NL" "nl-NL"
+defaults write -g AppleLocale -string "en_NL"
 
 # Units
-defaults.sh write -g AppleMeasurementUnits -string "Centimeters"
-defaults.sh write -g AppleMetricUnits -bool true
+defaults write -g AppleMeasurementUnits -string "Centimeters"
+defaults write -g AppleMetricUnits -bool true
 
 # Disable auto-correct
-defaults.sh write -g NSAutomaticSpellingCorrectionEnabled -bool false
+defaults write -g NSAutomaticSpellingCorrectionEnabled -bool false
 
 # Disable smart quotes as they're annoying when typing code
 #defaults write -g NSAutomaticQuoteSubstitutionEnabled -bool false
@@ -59,10 +59,10 @@ defaults.sh write -g NSAutomaticSpellingCorrectionEnabled -bool false
 e_info "==> mouse settings"
 
 # Disable smart zoom (double-tap with one finger)
-defaults.sh write com.apple.driver.AppleBluetoothMultitouch.mouse MouseOneFingerDoubleTapGesture -int 0
+defaults write com.apple.driver.AppleBluetoothMultitouch.mouse MouseOneFingerDoubleTapGesture -int 0
 
 # Enable secondary click (click on right side)
-defaults.sh write com.apple.driver.AppleBluetoothMultitouch.mouse MouseButtonMode -string "TwoButton"
+defaults write com.apple.driver.AppleBluetoothMultitouch.mouse MouseButtonMode -string "TwoButton"
 
 # Double-tap with two fingers for Mission Control
 #defaults write com.apple.driver.AppleBluetoothMultitouch.mouse MouseTwoFingerDoubleTapGesture -int 3
@@ -76,29 +76,29 @@ defaults.sh write com.apple.driver.AppleBluetoothMultitouch.mouse MouseButtonMod
 e_info "==> trackpad settings"
 
 # Enable tap to click for this user and for the login screen
-defaults.sh write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
 
 # Enable secondary click with two fingers
-defaults.sh write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick -bool true
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick -bool true
 
 # Drag with three fingers
-defaults.sh write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerDrag -bool true
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerDrag -bool true
 
 
 
 ## Menu bar
 e_info "==> menu bar settings"
 
-defaults.sh write com.apple.menuextra.clock DateFormat -string "EEE d MMM  HH:mm"
-defaults.sh write com.apple.menuextra.clock IsAnalog -bool false
-defaults.sh write com.apple.menuextra.clock FlashDateSeparators -bool true
+defaults write com.apple.menuextra.clock DateFormat -string "EEE d MMM  HH:mm"
+defaults write com.apple.menuextra.clock IsAnalog -bool false
+defaults write com.apple.menuextra.clock FlashDateSeparators -bool true
 
 # Show battery percentage
-defaults.sh write com.apple.menuextra.battery ShowPercent -bool true
+defaults write com.apple.menuextra.battery ShowPercent -bool true
 
 # Hide text input menu
-menus=$(echo $(defaults.sh read com.apple.systemuiserver menuExtras | sed 's/"\/System\/Library\/CoreServices\/Menu\ Extras\/TextInput\.menu"\,*//'))
-defaults.sh write com.apple.systemuiserver menuExtras "$menus"
+menus=$(echo $(defaults read com.apple.systemuiserver menuExtras | sed 's/"\/System\/Library\/CoreServices\/Menu\ Extras\/TextInput\.menu"\,*//'))
+defaults write com.apple.systemuiserver menuExtras "$menus"
 
 
 
@@ -106,28 +106,28 @@ defaults.sh write com.apple.systemuiserver menuExtras "$menus"
 e_info "==> dock settings"
 
 # Use the suck effect for window minimizing
-defaults.sh write com.apple.dock mineffect suck
+defaults write com.apple.dock mineffect suck
 
 # Don't minimize windows into application icon
-defaults.sh write com.apple.dock minimize-to-application -bool false
+defaults write com.apple.dock minimize-to-application -bool false
 
 # Make icons of hidden applications translucent
-defaults.sh write com.apple.dock showhidden -bool true
+defaults write com.apple.dock showhidden -bool true
 
 # Don’t animate opening applications
-defaults.sh write com.apple.dock launchanim -bool false
+defaults write com.apple.dock launchanim -bool false
 
 # Make tiles 45px
-defaults.sh write com.apple.dock tilesize -int 45
+defaults write com.apple.dock tilesize -int 45
 
 # Don't magnify tiles
-defaults.sh write com.apple.dock magnification -boolean false
+defaults write com.apple.dock magnification -boolean false
 
 # Automatically hide and show the Dock
-defaults.sh write com.apple.dock autohide -bool true
+defaults write com.apple.dock autohide -bool true
 
 # Remove the auto-hiding Dock delay
-defaults.sh write com.apple.dock autohide-delay -float 0
+defaults write com.apple.dock autohide-delay -float 0
 
 
 
@@ -147,27 +147,27 @@ e_info "==> mission control/hot corner settings"
 # 12: Notification Center
 
 # Top left → Mission Control
-defaults.sh write com.apple.dock wvous-tl-corner -int 2
-defaults.sh write com.apple.dock wvous-tl-modifier -int 0
+defaults write com.apple.dock wvous-tl-corner -int 2
+defaults write com.apple.dock wvous-tl-modifier -int 0
 
 # Top right → Show desktop
-defaults.sh write com.apple.dock wvous-tr-corner -int 4
-defaults.sh write com.apple.dock wvous-tr-modifier -int 0
+defaults write com.apple.dock wvous-tr-corner -int 4
+defaults write com.apple.dock wvous-tr-modifier -int 0
 
 # Bottom left → Show application windows
-defaults.sh write com.apple.dock wvous-bl-corner -int 3
-defaults.sh write com.apple.dock wvous-bl-modifier -int 0
+defaults write com.apple.dock wvous-bl-corner -int 3
+defaults write com.apple.dock wvous-bl-modifier -int 0
 
 # Bottom right → Start screen saver
-defaults.sh write com.apple.dock wvous-br-corner -int 5
-defaults.sh write com.apple.dock wvous-br-modifier -int 0
+defaults write com.apple.dock wvous-br-corner -int 5
+defaults write com.apple.dock wvous-br-modifier -int 0
 
 
 # Speed up animations
-defaults.sh write com.apple.dock expose-animation-duration -float 0.1
+defaults write com.apple.dock expose-animation-duration -float 0.1
 
 # Group windows by application
-defaults.sh write com.apple.dock expose-group-apps -bool true
+defaults write com.apple.dock expose-group-apps -bool true
 
 
 
@@ -175,32 +175,32 @@ defaults.sh write com.apple.dock expose-group-apps -bool true
 e_info "==> Finder settings"
 
 # Show status bar
-defaults.sh write com.apple.finder ShowStatusBar -bool true
+defaults write com.apple.finder ShowStatusBar -bool true
 
 # Show all filename extensions
-defaults.sh write -g AppleShowAllExtensions -bool true
+defaults write -g AppleShowAllExtensions -bool true
 
 # Disable the warning when changing a file extension
 #defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
 
 # Disable the warning before emptying the Trash
-defaults.sh write com.apple.finder WarnOnEmptyTrash -bool false
+defaults write com.apple.finder WarnOnEmptyTrash -bool false
 
 # Disable window and Get Info animations
 # defaults write com.apple.finder DisableAllAnimations -bool true
 
 # Allow quitting via ⌘ + Q; doing so will also hide desktop icons
-defaults.sh write com.apple.finder QuitMenuItem -bool true
+defaults write com.apple.finder QuitMenuItem -bool true
 
 # Display full POSIX path as window title
-defaults.sh write com.apple.finder _FXShowPosixPathInTitle -bool true
+defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
 
 # Use list view in all Finder windows by default
 # Four-letter codes for the other view modes: `icnv`, `clmv`, `Flwv`
-defaults.sh write com.apple.finder FXPreferredViewStyle -string "Nlsv"
+defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
 
 # Use current folder for search scope
-defaults.sh write com.apple.finder FXDefaultSearchScope -string "SCcf"
+defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
 
 # Adjust icon view settings for desktop, and other views
 for setting in 'DesktopViewSettings' 'FK_StandardViewSettings' 'StandardViewSettings'; do
@@ -223,13 +223,13 @@ done
 e_info "==> panels settings"
 
 # Expand save panel by default
-defaults.sh write -g NSNavPanelExpandedStateForSaveMode -bool true
+defaults write -g NSNavPanelExpandedStateForSaveMode -bool true
 
 # Disable the “Are you sure you want to open this application?” dialog
 #defaults write com.apple.LaunchServices LSQuarantine -bool false
 
 # Enable full keyboard access for all controls (e.g. enable Tab in modal dialogs)
-defaults.sh write -g AppleKeyboardUIMode -int 2
+defaults write -g AppleKeyboardUIMode -int 2
 
 
 
@@ -237,20 +237,20 @@ defaults.sh write -g AppleKeyboardUIMode -int 2
 e_info "==> Safari settings"
 
 # Enable debug menu
-defaults.sh write com.apple.safari IncludeDevelopMenu -bool true
+defaults write com.apple.safari IncludeDevelopMenu -bool true
 
 # Show status bar
-defaults.sh write com.apple.safari ShowOverlayStatusBar -bool true
+defaults write com.apple.safari ShowOverlayStatusBar -bool true
 
 # Disable automatic spelling correction
-defaults.sh write com.apple.safari WebAutomaticSpellingCorrectionEnabled -bool false
+defaults write com.apple.safari WebAutomaticSpellingCorrectionEnabled -bool false
 
 # Send "Do-Not-Track" header
-defaults.sh write com.apple.safari SendDoNotTrackHTTPHeader -bool true
+defaults write com.apple.safari SendDoNotTrackHTTPHeader -bool true
 
 # User stylesheet
-defaults.sh write com.apple.safari UserStyleSheetEnabled -bool true
-defaults.sh write com.apple.safari UserStyleSheetLocationURLString "${DOTFILES_ROOT}/macos/res/safari.css"
+defaults write com.apple.safari UserStyleSheetEnabled -bool true
+defaults write com.apple.safari UserStyleSheetLocationURLString "${DOTFILES_ROOT}/macos/res/safari.css"
 
 
 
@@ -259,12 +259,12 @@ e_info "==> terminal settings"
 
 # Use our own profile
 TERM_PROFILE='appsignal-dark';
-CURRENT_PROFILE="$(defaults.sh read com.apple.terminal 'Default Window Settings')";
+CURRENT_PROFILE="$(defaults read com.apple.terminal 'Default Window Settings')";
 if [ "${CURRENT_PROFILE}" != "${TERM_PROFILE}" ]; then
   open "${DOTFILES_ROOT}/macos/res/terminal/${TERM_PROFILE}.terminal";
   sleep 1; # Wait a bit to make sure the theme is loaded
-  defaults.sh write com.apple.terminal 'Default Window Settings' -string "${TERM_PROFILE}";
-  defaults.sh write com.apple.terminal 'Startup Window Settings' -string "${TERM_PROFILE}";
+  defaults write com.apple.terminal 'Default Window Settings' -string "${TERM_PROFILE}";
+  defaults write com.apple.terminal 'Startup Window Settings' -string "${TERM_PROFILE}";
 fi;
 
 
@@ -273,8 +273,8 @@ fi;
 e_info "==> textedit settings"
 
 # Use plain text mode for new documents
-defaults.sh write com.apple.TextEdit RichText -int 0
+defaults write com.apple.TextEdit RichText -int 0
 
 # Open and save files as UTF-8
-defaults.sh write com.apple.TextEdit PlainTextEncoding -int 4
-defaults.sh write com.apple.TextEdit PlainTextEncodingForWrite -int 4
+defaults write com.apple.TextEdit PlainTextEncoding -int 4
+defaults write com.apple.TextEdit PlainTextEncodingForWrite -int 4
