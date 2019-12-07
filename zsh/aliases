@@ -44,22 +44,24 @@ alias las="ls -FlahS"
 
 alias k="kubectl"
 alias kl="kubectl logs -f"
+alias kp="kubectl get pods"
 alias dc="docker-compose"
 alias dcl="docker-compose logs -f"
+alias cs="make cs-fix"
+alias gh="github"
 
 
 ##
 ## various
 ##
 
+alias afk="open -a /System/Library/CoreServices/ScreenSaverEngine.app"
+
 # quick hack to make watch work with aliases
 alias watch='watch '
 
 # IP addresses
 alias myip='dig +short myip.opendns.com @resolver1.opendns.com'
-
-# Shortcut to GitHub Desktop
-alias gh="github"
 
 # Get public key, and optionally copy it to clipboard
 alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | echo '=> Public key copied to clipboard.'"
