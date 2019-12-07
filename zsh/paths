@@ -19,6 +19,7 @@ path=(
   $path
   /usr/{bin,sbin}
   $HOME/bin
+  $HOME/.composer/bin
 )
 
 infopath=(
