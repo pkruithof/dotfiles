@@ -87,6 +87,7 @@ copy_ssh_key () {
   if [[ ! -f "${HOME}/.ssh/id_rsa" && ! -L "${HOME}/.ssh/id_rsa" ]]; then
     if seek_confirmation 'No existing SSH keypair found, should I install from backup?'; then
       SSH_DIR="${HOME}/Library/Mobile Documents/com~apple~CloudDocs/Settings/ssh"
+      mkdir -p "${HOME}/.ssh"
       cp "${SSH_DIR}/id_rsa" "${HOME}/.ssh/id_rsa"
       cp "${SSH_DIR}/id_rsa.pub" "${HOME}/.ssh/id_rsa.pub"
       chmod 600 "${HOME}/.ssh/id_rsa" "${HOME}/.ssh/id_rsa.pub"
