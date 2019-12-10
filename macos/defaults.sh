@@ -48,10 +48,10 @@ defaults write -g AppleMetricUnits -bool true
 defaults write -g NSAutomaticSpellingCorrectionEnabled -bool false
 
 # Disable smart quotes as they're annoying when typing code
-#defaults write -g NSAutomaticQuoteSubstitutionEnabled -bool false
+defaults write -g NSAutomaticQuoteSubstitutionEnabled -bool false
 
 # Disable smart dashes as they're annoying when typing code
-#defaults write -g NSAutomaticDashSubstitutionEnabled -bool false
+defaults write -g NSAutomaticDashSubstitutionEnabled -bool false
 
 
 
@@ -65,10 +65,10 @@ defaults write com.apple.driver.AppleBluetoothMultitouch.mouse MouseOneFingerDou
 defaults write com.apple.driver.AppleBluetoothMultitouch.mouse MouseButtonMode -string "TwoButton"
 
 # Double-tap with two fingers for Mission Control
-#defaults write com.apple.driver.AppleBluetoothMultitouch.mouse MouseTwoFingerDoubleTapGesture -int 3
+defaults write com.apple.driver.AppleBluetoothMultitouch.mouse MouseTwoFingerDoubleTapGesture -int 3
 
 # Swipe between full-screen apps with two fingers
-#defaults write com.apple.driver.AppleBluetoothMultitouch.mouse MouseTwoFingerHorizSwipeGesture -int 2
+defaults write com.apple.driver.AppleBluetoothMultitouch.mouse MouseTwoFingerHorizSwipeGesture -int 2
 
 
 
@@ -92,9 +92,6 @@ e_info "==> menu bar settings"
 defaults write com.apple.menuextra.clock DateFormat -string "EEE d MMM  HH:mm"
 defaults write com.apple.menuextra.clock IsAnalog -bool false
 defaults write com.apple.menuextra.clock FlashDateSeparators -bool true
-
-# Show battery percentage
-defaults write com.apple.menuextra.battery ShowPercent -bool true
 
 # Hide text input menu
 menus=$(echo $(defaults read com.apple.systemuiserver menuExtras | sed 's/"\/System\/Library\/CoreServices\/Menu\ Extras\/TextInput\.menu"\,*//'))
@@ -181,7 +178,7 @@ defaults write com.apple.finder ShowStatusBar -bool true
 defaults write -g AppleShowAllExtensions -bool true
 
 # Disable the warning when changing a file extension
-#defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
+defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
 
 # Disable the warning before emptying the Trash
 defaults write com.apple.finder WarnOnEmptyTrash -bool false
@@ -197,25 +194,25 @@ defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
 
 # Use list view in all Finder windows by default
 # Four-letter codes for the other view modes: `icnv`, `clmv`, `Flwv`
-defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
+#defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
 
 # Use current folder for search scope
-defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
+#defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
 
 # Adjust icon view settings for desktop, and other views
-for setting in 'DesktopViewSettings' 'FK_StandardViewSettings' 'StandardViewSettings'; do
-  # Enable snap-to-grid for icons and in other icon views
-  /usr/libexec/PlistBuddy -c "Set :$setting:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
-  # Show item info near icons and in other icon views
-  /usr/libexec/PlistBuddy -c "Set :$setting:IconViewSettings:showItemInfo true" ~/Library/Preferences/com.apple.finder.plist
-  # Increase grid spacing for icons on the desktop and in other icon views
-  /usr/libexec/PlistBuddy -c "Set :$setting:IconViewSettings:gridSpacing 100" ~/Library/Preferences/com.apple.finder.plist
-  # Increase the size of icons on the desktop and in other icon views
-  /usr/libexec/PlistBuddy -c "Set :$setting:IconViewSettings:iconSize 80" ~/Library/Preferences/com.apple.finder.plist
-done
+#for setting in 'DesktopViewSettings' 'FK_StandardViewSettings' 'StandardViewSettings'; do
+#  # Enable snap-to-grid for icons and in other icon views
+#  /usr/libexec/PlistBuddy -c "Set :$setting:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
+#  # Show item info near icons and in other icon views
+#  /usr/libexec/PlistBuddy -c "Set :$setting:IconViewSettings:showItemInfo true" ~/Library/Preferences/com.apple.finder.plist
+#  # Increase grid spacing for icons on the desktop and in other icon views
+#  /usr/libexec/PlistBuddy -c "Set :$setting:IconViewSettings:gridSpacing 100" ~/Library/Preferences/com.apple.finder.plist
+#  # Increase the size of icons on the desktop and in other icon views
+#  /usr/libexec/PlistBuddy -c "Set :$setting:IconViewSettings:iconSize 80" ~/Library/Preferences/com.apple.finder.plist
+#done
 
 # Show item info to the right of the icons
-/usr/libexec/PlistBuddy -c "Set DesktopViewSettings:IconViewSettings:labelOnBottom false" ~/Library/Preferences/com.apple.finder.plist
+#/usr/libexec/PlistBuddy -c "Set DesktopViewSettings:IconViewSettings:labelOnBottom false" ~/Library/Preferences/com.apple.finder.plist
 
 
 
@@ -237,20 +234,20 @@ defaults write -g AppleKeyboardUIMode -int 2
 e_info "==> Safari settings"
 
 # Enable debug menu
-defaults write com.apple.safari IncludeDevelopMenu -bool true
+#defaults write com.apple.Safari IncludeDevelopMenu -bool true
 
 # Show status bar
-defaults write com.apple.safari ShowOverlayStatusBar -bool true
+#defaults write com.apple.Safari ShowOverlayStatusBar -bool true
 
 # Disable automatic spelling correction
-defaults write com.apple.safari WebAutomaticSpellingCorrectionEnabled -bool false
+#defaults write com.apple.Safari WebAutomaticSpellingCorrectionEnabled -bool false
 
 # Send "Do-Not-Track" header
-defaults write com.apple.safari SendDoNotTrackHTTPHeader -bool true
+#defaults write com.apple.Safari SendDoNotTrackHTTPHeader -bool true
 
 # User stylesheet
-defaults write com.apple.safari UserStyleSheetEnabled -bool true
-defaults write com.apple.safari UserStyleSheetLocationURLString "${DOTFILES_ROOT}/macos/res/safari.css"
+#defaults write com.apple.Safari UserStyleSheetEnabled -bool true
+#defaults write com.apple.Safari UserStyleSheetLocationURLString "${DOTFILES_ROOT}/macos/res/safari.css"
 
 
 
@@ -259,13 +256,17 @@ e_info "==> terminal settings"
 
 # Use our own profile
 TERM_PROFILE='appsignal-dark';
-CURRENT_PROFILE="$(defaults read com.apple.terminal 'Default Window Settings')";
+CURRENT_PROFILE="$(defaults read com.apple.Terminal 'Default Window Settings')";
 if [ "${CURRENT_PROFILE}" != "${TERM_PROFILE}" ]; then
-  open "${DOTFILES_ROOT}/macos/res/terminal/${TERM_PROFILE}.terminal";
+  open "${DOTFILES_ROOT}/macos/terminal/${TERM_PROFILE}.terminal";
   sleep 1; # Wait a bit to make sure the theme is loaded
-  defaults write com.apple.terminal 'Default Window Settings' -string "${TERM_PROFILE}";
-  defaults write com.apple.terminal 'Startup Window Settings' -string "${TERM_PROFILE}";
+  defaults write com.apple.Terminal 'Default Window Settings' -string "${TERM_PROFILE}";
+  defaults write com.apple.Terminal 'Startup Window Settings' -string "${TERM_PROFILE}";
 fi;
+
+# New tabs reflect default settings rather than current
+defaults write com.apple.Terminal NewTabSettingsBehavior -bool true
+defaults write com.apple.Terminal NewTabWorkingDirectoryBehavior -bool true
 
 
 
@@ -273,8 +274,8 @@ fi;
 e_info "==> textedit settings"
 
 # Use plain text mode for new documents
-defaults write com.apple.TextEdit RichText -int 0
+#defaults write com.apple.TextEdit RichText -int 0
 
 # Open and save files as UTF-8
-defaults write com.apple.TextEdit PlainTextEncoding -int 4
-defaults write com.apple.TextEdit PlainTextEncodingForWrite -int 4
+#defaults write com.apple.TextEdit PlainTextEncoding -int 4
+#defaults write com.apple.TextEdit PlainTextEncodingForWrite -int 4
