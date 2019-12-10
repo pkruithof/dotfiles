@@ -13,6 +13,7 @@ typeset -gUT INFOPATH infopath
 
 path=(
   /usr/local/opt/coreutils/libexec/gnubin
+  /usr/local/opt/python/libexec/bin
   /usr/local/opt/ruby/bin
   /opt/local/bin
   /usr/local/{bin,sbin}
