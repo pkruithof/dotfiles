@@ -78,6 +78,9 @@ mirror_files () {
     # SSH
     mkdir -p "${HOME}/.ssh"
     dotfile "ssh/config"          ".ssh/config"
+
+    # K9S
+    dotfile "k9s/views.yml"      ".k9s/views.yml"
   fi
 }
 
