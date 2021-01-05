@@ -30,3 +30,10 @@ export LESS_TERMCAP_us=$(printf "\e[1;32m")
 #
 export LC_ALL="en_US.UTF-8"
 export LANG="en_US"
+
+
+#
+# Use buildkit for Docker/compose
+#
+export DOCKER_BUILDKIT=1
+export COMPOSE_DOCKER_CLI_BUILD=1
