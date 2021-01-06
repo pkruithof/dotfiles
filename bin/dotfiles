@@ -22,6 +22,5 @@ install_antibody
 copy_ssh_key
 copy_hosts_file
 
-echo "\n"
-e_success "Dotfiles setup complete"
-echo "\n"
+printf "\n"
+e_success "Dotfiles setup complete, you should close this shell and open a new one for the changes to take effect."
