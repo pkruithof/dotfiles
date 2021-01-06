@@ -8,8 +8,8 @@ source "${0:A:h}/utils"
 update_repo
 
 # install dependencies
-install_homebrew
-install_rubygems
+install_homebrew || true
+install_rubygems || true
 
 # copy/symlink configuration files
 install_dotfiles
