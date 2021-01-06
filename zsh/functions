@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+
 uuid () {
   echo "import uuid\nimport sys\nsys.stdout.write(str(uuid.uuid4()))" | python | pbcopy && echo -e 'generated uuid to clipboard'
 }

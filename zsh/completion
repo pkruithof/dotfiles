@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+
 # zsh.sourceforge.net/Doc/Release/Completion-System.html
 autoload -Uz compinit
 if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then

@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+
 ##
 ## cd
 ##
@@ -17,25 +19,12 @@ alias -- -="cd -"
 ##
 ## ls
 ##
-
-# use GNU coreutils
-if test -f /usr/local/bin/gls; then
-  alias ls='/usr/local/bin/gls'
-fi
-
-# colorize output
-alias ls='ls --color'
-
-
-# Long form
-alias l="ls -Flh"
+alias ls="ls --color" # colorize output
+alias l="ls -Flh" # Long form
 alias ll="l"
-# List all files
-alias la="ls -Flah"
-# List only directories
-alias lsd='ls -Flh | grep "^d"'
-# Order by file size, long form, all files
-alias las="ls -FlahS"
+alias la="ls -Flah" # List all files
+alias lsd='ls -Flh | grep "^d"' # List only directories
+alias las="ls -FlahS" # Order by file size, long form, all files
 
 
 ##

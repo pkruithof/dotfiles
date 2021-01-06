@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+
 # Word characters are alphanumeric characters only
 autoload -U select-word-style
 select-word-style bash

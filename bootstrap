@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 DOTFILES_ROOT=~/.dotfiles
 DOTFILES_REPO="https://github.com/pkruithof/dotfiles"
@@ -13,4 +13,4 @@ if [[ ! -d ${DOTFILES_ROOT} ]]; then
   git clone --recursive ${DOTFILES_REPO} ${DOTFILES_ROOT}
 fi
 
-${DOTFILES_ROOT}/bin/install.sh
+${DOTFILES_ROOT}/bin/dotfiles
