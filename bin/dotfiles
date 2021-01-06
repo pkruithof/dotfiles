@@ -5,7 +5,7 @@ set -e
 # include required utilities
 source "${0:A:h}/utils"
 
-#update_repo
+update_repo
 
 # install dependencies
 install_homebrew
