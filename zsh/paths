@@ -23,6 +23,7 @@ path=(
   /usr/local/{bin,sbin}
   $path
   /usr/{bin,sbin}
+  "${HOME}/bin"
   "${HOME}/.composer/bin"
 )
 
