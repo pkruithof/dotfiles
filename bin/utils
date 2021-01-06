@@ -111,6 +111,9 @@ install_dotfiles () {
   dotfile "zsh/paths"           ".zsh/paths"
   dotfile "zsh/zshrc"           ".zshrc"
 
+  # Powerlevel10k config
+  dotfile "zsh/p10k"            ".p10k.zsh"
+
   # Bin
   dotfile "bin/dotfiles"        "bin/dotfiles"
 
