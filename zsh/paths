@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+
 #
 # Paths
 #
@@ -10,18 +12,18 @@ typeset -gUT INFOPATH infopath
 # )
 
 # Set the list of directories that Zsh searches for programs.
-
 path=(
-  /usr/local/opt/coreutils/libexec/gnubin
-  /usr/local/opt/python/libexec/bin
-  /usr/local/opt/ruby/bin
-  /usr/local/lib/ruby/gems/2.6.0/bin
+  "${BREWPATH}/opt/coreutils/libexec/gnubin"
+  "${BREWPATH}/opt/findutils/libexec/gnubin"
+  "${BREWPATH}/opt/grep/libexec/gnubin"
+  "${BREWPATH}/opt/python/libexec/bin"
+  "${BREWPATH}/opt/ruby/bin"
+  "${BREWPATH}/bin"
   /opt/local/bin
   /usr/local/{bin,sbin}
   $path
   /usr/{bin,sbin}
-  $HOME/bin
-  $HOME/.composer/bin
+  "${HOME}/.composer/bin"
 )
 
 infopath=(
@@ -30,14 +32,16 @@ infopath=(
 )
 
 manpath=(
-  /usr/local/opt/coreutils/libexec/gnuman
-  /usr/local/share/man
+  "${BREWPATH}/opt/coreutils/libexec/gnuman"
+  "${BREWPATH}/opt/findutils/libexec/gnuman"
+  "${BREWPATH}/opt/grep/libexec/gnuman"
+  "${BREWPATH}/share/man"
   /usr/share/man
   $manpath
 )
 
 fpath=(
-  $HOME/.zsh
-  /usr/local/share/zsh-completions
+  "${HOME}/.zsh"
+  "${BREWPATH}/share/zsh-completions"
   $fpath
 )

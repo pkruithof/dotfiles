@@ -1,0 +1,27 @@
+#!/usr/bin/env zsh
+
+set -e
+
+# include required utilities
+source "${0:A:h}/utils"
+
+#update_repo
+
+# install dependencies
+install_homebrew
+install_rubygems
+
+# copy/symlink configuration files
+install_dotfiles
+install_git_config
+
+# configure shell plugins/prompt
+install_antibody
+
+# setup remote networking
+copy_ssh_key
+copy_hosts_file
+
+echo "\n"
+e_success "Dotfiles setup complete"
+echo "\n"
