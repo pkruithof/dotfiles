@@ -2,14 +2,52 @@
 
 set -e
 
+usage() {
+  echo "USAGE: dotfiles [--skip=<update|dependencies>]"
+  exit 1
+}
+
+# parse options
+update=true
+dependencies=true
+
+while getopts "-:" optchar; do
+ case "${optchar}" in
+   -)
+     case "${OPTARG}" in
+       skip*)
+         if [[ $OPTARG == *"="* ]]; then
+           val=${OPTARG#*=}
+         else
+           val="${!OPTIND}"; OPTIND=$(( OPTIND + 1 ))
+         fi
+
+          case $val in
+           update) update=false ;;
+           dependencies) dependencies=false ;;
+           *) usage "Warning: invalid skip value \"$val\"" ;;
+         esac
+       ;;
+       *) usage "Warning: invalid option \"$OPTARG\"" ;;
+     esac
+   ;;
+   *) usage "Warning: invalid option \"-$OPTARG\"" ;;
+ esac
+done
+
 # include required utilities
 source "${0:A:h}/utils"
 
-update_repo
+# update git repository
+if ${update}; then
+  update_repo
+fi
 
 # install dependencies
-install_homebrew || true
-install_rubygems || true
+if ${dependencies}; then
+  install_homebrew || true
+  install_rubygems || true
+fi
 
 # copy/symlink configuration files
 install_dotfiles
