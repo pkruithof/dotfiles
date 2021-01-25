@@ -39,7 +39,7 @@ brew 'yarn'
 
 brew 'docker-completion'
 brew 'docker-compose-completion'
-brew 'kubectl'
+brew 'kubernetes-cli'
 brew 'kubeval'
 brew 'kns'
 brew 'k9s'
