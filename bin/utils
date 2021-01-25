@@ -95,7 +95,7 @@ copy () {
 
 update_repo () {
   e_header "Updating dotfiles project"
-  (cd "${DOTFILES_ROOT}" && git pull --rebase origin master)
+  (cd "${DOTFILES_ROOT}" && git pull --rebase)
   e_success "done"
 }
 
