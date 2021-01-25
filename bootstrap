@@ -9,7 +9,7 @@ if ! type -f git > /dev/null 2>&1; then
 fi
 
 if [[ ! -d ${DOTFILES_ROOT} ]]; then
-  printf "\n[ \033[00;34m..\033[0m ] Downloading dotfiles to ${DOTFILES_ROOT}\n"
+  printf "\n[ \033[00;34m..\033[0m ] Downloading dotfiles to %s\n" ${DOTFILES_ROOT}
   git clone --recursive ${DOTFILES_REPO} ${DOTFILES_ROOT}
 fi
 

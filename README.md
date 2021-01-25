@@ -6,36 +6,27 @@ This is my collection of dotfiles. There are many like it but this one is mine.
 
 It does the following:
 
-* installs zsh as the default shell
+* configures zsh shell
 * installs antibody as plugin manager
 * installs some useful zsh plugins
-* sets up pure prompt
+* sets up powerlevel10k prompt
 * sets up configuration files for various programs like git, curl, ssh, etc.
-* performs OS-specific setup
+* includes optional macOS configuration
 
 
-## CAUTION
-**NOT FOR BASH USERS!**
+## ⚠️ CAUTION ⚠️
+**NOT INTENDED FOR OTHERS!**
 
-I recently switched to zsh as my default shell. Therefore the installation assumes you're using zsh. If you're using bash, chances are your environment could be messed up.
-
-Will overwrite existing dotfiles in your HOME and `.vim` directories.
-
-Use at your own risk.
+I use this repository for myself. While you are free to use it, or fork it, it is in no way intended as a general tool for all to use. It may break your setup, or change it in a way you don't like. Use at your own risk.
 
 
 ## Installation
-
-Installing will clone this repo, and symlink/copy files and directories to your home directory. It also determines the type of system you're using (Linux/OSX) and configures some things specific to that OS.
-
-The installation requires the [XCode Command Line
-Tools](https://developer.apple.com/downloads) if you're on a Mac.
 
 ### One line install
 This will download a shell script that clones the repository into `~/dotfiles`.
 
 ```bash
-bash -c "$(curl -fsSL raw.github.com/pkruithof/dotfiles/master/bootstrap)"
+bash -c "$(curl -fsSL raw.github.com/pkruithof/dotfiles/main/bootstrap)"
 ```
 
 ### Using Git
@@ -49,29 +40,13 @@ git clone https://github.com/pkruithof/dotfiles.git ~/.dotfiles && ~/.dotfiles/b
 You should run the update when:
 
 * You want to pull changes from the remote repository.
-* You want to update Homebrew formulae and Node packages.
+* You want to update Homebrew formulae and other dependencies.
 
-Run the dotfiles command:
+Run the dotfiles command (it should be part of your `$PATH` after installation):
 
-```bash
-~/.dotfiles/bin/dotfiles
+```sh
+dotfiles [--skip=<update|dependencies>]
 ```
-
-Options:
-
-<table>
-    <tr>
-        <td><code>--no-packages</code></td>
-        <td>Suppress package updates</td>
-    </tr>
-    <tr>
-        <td><code>--no-sync</code></td>
-        <td>Suppress pulling from the remote repository</td>
-    </tr>
-</table>
-
-## TODO
-Document local settings
 
 ## Acknowledgements
 Thanks to:
