@@ -103,6 +103,7 @@ install_dotfiles () {
   e_header "Symlinking dotfiles into home directory"
 
   # ZSH files
+  dotfile "zsh/options"         ".zsh/options"
   dotfile "zsh/aliases"         ".zsh/aliases"
   dotfile "zsh/completion"      ".zsh/completion"
   dotfile "zsh/env"             ".zshenv"

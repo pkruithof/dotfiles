@@ -8,11 +8,6 @@ else
 	compinit -C
 fi
 
-# show completion menu on successive tab press
-setopt auto_menu
-setopt complete_in_word
-setopt always_to_end
-
 # matches case insensitive for lowercase
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z-_}={A-Za-z_-}' 'r:|=*' 'l:|=* r:|=*'
 

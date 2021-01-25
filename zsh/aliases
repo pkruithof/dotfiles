@@ -4,9 +4,6 @@
 ## cd
 ##
 
-# cd without using cd
-setopt auto_cd
-
 # Easier navigation: .., ..., ...., ....., ~ and -
 alias ..="cd .."
 alias ...="cd ../.."
