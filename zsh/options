@@ -8,9 +8,9 @@ setopt auto_menu
 setopt complete_in_word
 setopt always_to_end
 
-# autocorrect
+# autocorrect commands. don't use correctall here because
+# it becomes too eager and annoying in suggestion corrections.
 setopt correct
-setopt correct_all
 
 # history options
 setopt append_history
