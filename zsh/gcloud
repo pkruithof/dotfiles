@@ -1,0 +1,7 @@
+#!/usr/bin/env zsh
+
+GCLOUD_PATH="${BREWPATH}/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
+GCLOUD_COMPLETION="${BREWPATH}/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
+
+[[ -f "${GCLOUD_PATH}" ]] && source "${GCLOUD_PATH}"
+[[ -f "${GCLOUD_COMPLETION}" ]] && source "${GCLOUD_COMPLETION}"

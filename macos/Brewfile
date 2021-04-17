@@ -20,6 +20,7 @@ brew 'httpstat'
 brew 'iproute2mac'
 brew 'libiconv'
 brew 'libxml2'
+brew 'mkcert'
 brew 'zlib'
 
 brew 'ncdu'

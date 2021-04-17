@@ -111,6 +111,7 @@ install_dotfiles () {
   dotfile "zsh/history"         ".zsh/history"
   dotfile "zsh/input"           ".zsh/input"
   dotfile "zsh/paths"           ".zsh/paths"
+  dotfile "zsh/gcloud"          ".zsh/gcloud"
   dotfile "zsh/zshrc"           ".zshrc"
 
   # Powerlevel10k config

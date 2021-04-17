@@ -15,6 +15,7 @@ source "$HOME/.zsh/functions"
 source "$HOME/.zsh/history"
 source "$HOME/.zsh/input"
 source "$HOME/.zsh/plugins"
+source "$HOME/.zsh/gcloud"
 
 # Check for a system-specific git config
 [[ -f "$HOME/.gitrc" ]] && source "$HOME/.gitrc"
