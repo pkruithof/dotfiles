@@ -21,6 +21,7 @@ brew 'iproute2mac'
 brew 'libiconv'
 brew 'libxml2'
 brew 'mkcert'
+brew 'nss'
 brew 'zlib'
 
 brew 'ncdu'
