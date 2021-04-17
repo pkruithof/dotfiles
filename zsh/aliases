@@ -31,11 +31,11 @@ alias las="ls -FlahS" # Order by file size, long form, all files
 alias k="kubectl"
 alias kl="kubectl logs -f"
 alias kp="kubectl get pods"
-alias dc="docker-compose"
-alias dcl="docker-compose logs -f"
+alias dc="docker compose"
+alias dcl="docker compose logs -f"
 alias cs="make cs-fix"
 alias gh="github"
-alias p="docker-compose run --rm php sh"
+alias p="docker compose run --rm php sh"
 alias pf="bin/phpunit --filter"
 
 
