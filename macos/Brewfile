@@ -1,4 +1,3 @@
-tap 'blendle/blendle'
 tap 'instrumenta/instrumenta'
 tap 'derailed/k9s'
 
@@ -44,7 +43,6 @@ brew 'docker-compose-completion'
 brew 'kubernetes-cli'
 brew 'kubeval'
 brew 'kubectx'
-brew 'kns'
 brew 'k9s'
 brew 'terraform'
 
