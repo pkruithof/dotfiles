@@ -18,6 +18,7 @@ path=(
   "${BREWPATH}/opt/grep/libexec/gnubin"
   "${BREWPATH}/opt/python/libexec/bin"
   "${BREWPATH}/opt/ruby/bin"
+  "${BREWPATH}/lib/ruby/gems/3.0.0/bin"
   "${BREWPATH}/bin"
   /opt/local/bin
   /usr/local/{bin,sbin}
