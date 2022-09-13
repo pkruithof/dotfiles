@@ -28,6 +28,7 @@ alias las="ls -FlahS" # Order by file size, long form, all files
 ## Docker, Kubernetes, etc.
 ##
 
+alias pstorm="open -na \"PhpStorm.app\" --args"
 alias k="kubectl"
 alias kl="kubectl logs -f"
 alias kp="kubectl get pods"
