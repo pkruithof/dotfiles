@@ -36,6 +36,7 @@
 
     # Switch to a branch, creating it if necessary
     go = "!f() { git switch \"$1\" 2>/dev/null || git switch -c \"$1\"; }; f"
+    feat = "!f() { git go feature/NVE-\"$1\"-\"$2\"; }; f"
 
     # shortcut for squashing commits
     squash = rebase -i
