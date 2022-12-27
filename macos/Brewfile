@@ -30,6 +30,7 @@ brew 'tree'
 brew 'watch'
 
 brew 'git'
+brew 'git-interactive-rebase-tool'
 brew 'hub'
 brew 'php'
 brew 'composer'

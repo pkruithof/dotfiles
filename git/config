@@ -99,6 +99,9 @@
 [difftool]
     prompt = false
 
+[fetch]
+    prune = true
+
 [merge]
     # Include summaries of merged commits in newly created merge commit messages
     log = true
@@ -108,3 +111,6 @@
     # ref: http://linux.die.net/man/1/git-log
     # Result: abc1234 Commit message (HEAD, origin/master, master) -- Nicolas Gallagher; 5 hours ago
     nice = "%C(yellow)%h%C(reset) %C(white)%s%C(cyan)%d%C(reset) -- %an; %ar"
+
+[sequence]
+    editor = interactive-rebase-tool
