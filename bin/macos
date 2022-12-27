@@ -11,23 +11,9 @@ e_warning "==> this may require sudo rights for some parts"
 ## System
 
 # Set computer name
-e_info "==> set computer name to $(tput bold)mekboek$(tput sgr0)"
-if [[ $(scutil --get ComputerName) != "mekboek" ]]; then sudo scutil --set ComputerName "mekboek"; fi
-if [[ $(scutil --get LocalHostName) != "mekboek" ]]; then sudo scutil --set LocalHostName "mekboek"; fi
-
-
-
-## Keyboard
-e_info "==> keyboard settings"
-
-# Set a blazingly fast repeat rate
-defaults write -g KeyRepeat -int 2
-
-# Set a shorter delay until key repeat
-defaults write -g InitialKeyRepeat -int 15
-
-# Disable press-and-hold for keys in favor of key repeat
-##defaults write -g ApplePressAndHoldEnabled -bool false
+read -q answer\?"==> enter computer name: "
+sudo scutil --set ComputerName "$answer"
+sudo scutil --set LocalHostName "$answer"
 
 
 
