@@ -47,6 +47,7 @@ alias pf="bin/phpunit --filter"
 ##
 
 alias afk="open -a /System/Library/CoreServices/ScreenSaverEngine.app"
+alias grep="ggrep"
 
 # quick hack to make watch work with aliases
 alias watch='watch '
