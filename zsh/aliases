@@ -32,14 +32,13 @@ alias pstorm="open -na \"PhpStorm.app\" --args"
 alias k="kubectl"
 alias kl="kubectl logs -f"
 alias kp="kubectl get pods"
-alias dc="${DOCKER_COMPOSE:-docker compose}"
-alias dcl="${DOCKER_COMPOSE:-docker compose} logs -f"
+alias dc="docker compose"
+alias dcl="docker compose logs -f"
 alias cs="make cs-fix"
 alias stan="make phpstan"
 alias gh="github"
 alias ci="cs && stan"
 alias p="dc run --rm php sh"
-alias pf="bin/phpunit --filter"
 
 
 ##
