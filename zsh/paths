@@ -44,5 +44,6 @@ manpath=(
 fpath=(
   "${HOME}/.zsh"
   "${BREWPATH}/share/zsh-completions"
+  "${BREWPATH}/share/zsh/site-functions"
   $fpath
 )

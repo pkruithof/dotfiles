@@ -37,7 +37,6 @@ brew 'ruby'
 brew 'yarn'
 
 brew 'docker-completion'
-brew 'docker-compose-completion'
 brew 'kubernetes-cli'
 brew 'kubeval'
 brew 'kubectx'
