@@ -42,3 +42,5 @@ brew 'kubeval'
 brew 'kubectx'
 brew 'derailed/k9s/k9s'
 brew 'terraform'
+
+cask 'google-cloud-sdk'
