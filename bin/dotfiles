@@ -57,7 +57,6 @@ install_git_config
 install_antibody
 
 # setup remote networking
-copy_ssh_key
 copy_hosts_file
 
 printf "\n"
