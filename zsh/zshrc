@@ -20,9 +20,5 @@ source "$HOME/.zsh/input"
 source "$HOME/.zsh/plugins"
 source "$HOME/.zsh/gcloud"
 
-# Check for a system-specific git config
-[[ -f "$HOME/.gitrc" ]] && source "$HOME/.gitrc"
-
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ -f "$HOME/.p10k.zsh" ]] && source "$HOME/.p10k.zsh"
-
