@@ -39,6 +39,7 @@ alias stan="make phpstan"
 alias gh="github"
 alias ci="cs && stan"
 alias p="dc run --rm php sh"
+alias t="dc run --rm test sh"
 
 
 ##
