@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-export DOTFILES_ROOT="${0:A:h:h}" # see https://unix.stackexchange.com/a/115431
+export DOTFILES_ROOT=~/.dotfiles
 export BREWPATH=$([[ -d /opt/homebrew ]] && echo "/opt/homebrew" || echo "/usr/local")
 
 #

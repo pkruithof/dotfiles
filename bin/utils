@@ -209,3 +209,12 @@ install_rubygems() {
   "$(brew --prefix ruby)/bin/bundle" update --gemfile "${DOTFILES_ROOT}/macos/Gemfile"
   e_success "done"
 }
+
+configure_docker() {
+  e_header "Configuring Docker"
+  if ! type_exists docker; then
+    e_warning "Docker not yet installed, run dotfiles again after installing"
+  else
+    docker completion zsh > "${DOTFILES_ROOT}/zsh/.completion/docker"
+  fi
+}

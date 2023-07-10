@@ -56,8 +56,9 @@ install_git_config
 # configure shell plugins/prompt
 install_antibody
 
-# setup remote networking
+# configure other stuff
 copy_hosts_file
+configure_docker
 
 printf "\n"
 e_success "Dotfiles setup complete, you should close this shell and open a new one for the changes to take effect."

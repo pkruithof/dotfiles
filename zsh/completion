@@ -19,3 +19,7 @@ zstyle ':completion:*' group-name ''
 
 # format group names
 zstyle ':completion:*' format '%B---- %d%b'
+
+for file in ${DOTFILES_ROOT}/zsh/.completion/*; do
+    source "$file"
+done
