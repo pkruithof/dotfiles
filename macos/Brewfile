@@ -42,6 +42,6 @@ brew 'kubernetes-cli'
 brew 'kubeval'
 brew 'kubectx'
 brew 'derailed/k9s/k9s'
-brew 'terraform'
+brew 'hashicorp/tap/terraform'
 
 cask 'google-cloud-sdk'
