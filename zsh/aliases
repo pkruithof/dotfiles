@@ -33,13 +33,15 @@ alias k="kubectl"
 alias kl="kubectl logs -f"
 alias kp="kubectl get pods"
 alias dc="docker compose"
-alias dcl="docker compose logs -f"
+alias dcl="dc logs -f"
+alias dcps="dc ps --format \"table {{.ID}}\t{{.Service}}\t{{.State}}\t{{.Status}}\t{{.RunningFor}}\t{{.Image}}\""
 alias cs="make cs-fix"
 alias stan="make phpstan"
 alias gh="github"
 alias ci="cs && stan"
 alias p="dc run --rm php sh"
 alias t="dc run --rm test sh"
+alias tf="dc run --rm test bin/phpunit --filter"
 
 
 ##
