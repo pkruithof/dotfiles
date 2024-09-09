@@ -46,7 +46,6 @@ fi
 # install dependencies
 if ${dependencies}; then
   install_homebrew || true
-  install_rubygems || true
 fi
 
 # copy/symlink configuration files

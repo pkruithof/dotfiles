@@ -131,9 +131,6 @@ install_dotfiles () {
   # Screen
   dotfile "screen/rc"           ".screenrc"
 
-  # Ruby
-  dotfile "ruby/gemrc"          ".gemrc"
-
   # SSH
   dotfile "ssh/config"          ".ssh/config"
 
@@ -197,17 +194,6 @@ install_antibody () {
   antibody bundle < "${DOTFILES_ROOT}/zsh/plugins" > ~/.zsh/plugins
   antibody update
   e_success "zsh plugins and prompt installed"
-}
-
-install_rubygems() {
-  e_header "Installing Ruby/gems"
-  if [ ! -f "$(brew --prefix ruby)/bin/bundle" ]; then
-    "$(brew --prefix ruby)/bin/gem" install bundler
-    "$(brew --prefix ruby)/bin/bundle" install --gemfile "${DOTFILES_ROOT}/macos/Gemfile"
-  fi
-
-  "$(brew --prefix ruby)/bin/bundle" update --gemfile "${DOTFILES_ROOT}/macos/Gemfile"
-  e_success "done"
 }
 
 configure_docker() {
