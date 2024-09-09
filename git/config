@@ -114,3 +114,7 @@
 
 [sequence]
     editor = interactive-rebase-tool
+
+[advice]
+    skippedCherryPicks = false
+
