@@ -200,7 +200,12 @@ configure_docker() {
   e_header "Configuring Docker"
   if ! type_exists docker; then
     e_warning "Docker not yet installed, run dotfiles again after installing"
-  else
-    docker completion zsh > "${DOTFILES_ROOT}/zsh/.completion/docker"
+    return 1
+  fi
+
+  docker completion zsh > "${DOTFILES_ROOT}/zsh/.completion/docker"
+  CONFIG="${HOME}/.docker/config.json"
+  if ! jq -e '.psFormat' < "${CONFIG}" &> /dev/null; then
+    jq --sort-keys '. += { psFormat: "table {{.ID}}\t{{.Service}}\t{{.State}}\t{{.Status}}\t{{.RunningFor}}\t{{.Image}}" }' < "${CONFIG}" > tmp && mv tmp "${CONFIG}"
   fi
 }
