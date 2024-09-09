@@ -206,6 +206,6 @@ configure_docker() {
   docker completion zsh > "${DOTFILES_ROOT}/zsh/.completion/docker"
   CONFIG="${HOME}/.docker/config.json"
   if ! jq -e '.psFormat' < "${CONFIG}" &> /dev/null; then
-    jq --sort-keys '. += { psFormat: "table {{.ID}}\t{{.Service}}\t{{.State}}\t{{.Status}}\t{{.RunningFor}}\t{{.Image}}" }' < "${CONFIG}" > tmp && mv tmp "${CONFIG}"
+    jq --sort-keys '. += { psFormat: "table {{.ID}}\t{{.Names}}\t{{.State}}\t{{.Status}}\t{{.RunningFor}}\t{{.Image}}" }' < "${CONFIG}" > tmp && mv tmp "${CONFIG}"
   fi
 }
