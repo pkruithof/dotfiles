@@ -22,6 +22,7 @@ setup-gcloud() {
   sudo mv cloud_sql_proxy /usr/local/bin
   gcloud auth login
   gcloud auth configure-docker
+  gcloud auth configure-docker europe-west4-docker.pkg.dev
   gcloud container clusters list
   echo "for each cluster run: gcloud container clusters get-credentials <name> --region <region>"
 }
