@@ -8,7 +8,7 @@
     remotes = remote -v
 
     # Pull using rebase
-    p = pull --rebase
+    p = pull
 
     # Rebase current branch
     r = !git fetch && git rebase origin/master
@@ -34,9 +34,11 @@
     # Add everything and amend the last commit
     aaa = !git add -A && git amend
 
+    # Force push with lease
+    pf = push --force-with-lease
+
     # Switch to a branch, creating it if necessary
     go = "!f() { git switch \"$1\" 2>/dev/null || git switch -c \"$1\"; }; f"
-    feat = "!f() { git go feature/NVE-\"$1\"-\"$2\"; }; f"
 
     # shortcut for squashing commits
     squash = rebase -i
@@ -54,6 +56,9 @@
 [apply]
     # Detect whitespace errors when applying a patch
     whitespace = fix
+
+[branch]
+    sort = committerdate
 
 [core]
     # Use custom `.gitignore` and `.gitattributes`
@@ -90,8 +95,13 @@
     changed = green
     untracked = cyan
 
+[column]
+    ui = auto
+
 [diff]
+    algorithm = histogram
     tool = vimdiff
+    mnemonicPrefix = true
 
     # Detect copies as well as renames
     renames = copies
@@ -100,7 +110,12 @@
     prompt = false
 
 [fetch]
+    all = true
     prune = true
+    pruneTags = true
+
+[help]
+    autocorrect = prompt
 
 [merge]
     # Include summaries of merged commits in newly created merge commit messages
@@ -112,9 +127,26 @@
     # Result: abc1234 Commit message (HEAD, origin/master, master) -- Nicolas Gallagher; 5 hours ago
     nice = "%C(yellow)%h%C(reset) %C(white)%s%C(cyan)%d%C(reset) -- %an; %ar"
 
+[pull]
+    rebase = true
+
+[push]
+    autoSetupRemote = true
+
+[rebase]
+    autoSquash = true
+    autoStash = true
+    updateRefs = true
+
+[rerere]
+    enabled = true
+    autoupdate = true
+
 [sequence]
     editor = interactive-rebase-tool
 
+[tag]
+    sort = version:refname
+
 [advice]
     skippedCherryPicks = false
-
