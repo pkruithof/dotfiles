@@ -102,6 +102,8 @@ defaults write com.apple.dock magnification -boolean false
 # Automatically hide and show the Dock
 defaults write com.apple.dock autohide -bool true
 
+# Reload Dock for changes to take effect
+killall Dock
 
 
 ## Mission Control & Hot Corners
@@ -118,20 +120,21 @@ e_info "==> mission control/hot corner settings"
 # 10: Put display to sleep
 # 11: Launchpad
 # 12: Notification Center
+# 13: Lock Screen
 
 # Top left → Mission Control
 defaults write com.apple.dock wvous-tl-corner -int 2
 defaults write com.apple.dock wvous-tl-modifier -int 0
 
-# Top right → Show desktop
-defaults write com.apple.dock wvous-tr-corner -int 12
+# Top right → Desktop
+defaults write com.apple.dock wvous-tr-corner -int 4
 defaults write com.apple.dock wvous-tr-modifier -int 0
 
-# Bottom left → Show application windows
-defaults write com.apple.dock wvous-bl-corner -int 4
+# Bottom left → Lock Screen
+defaults write com.apple.dock wvous-bl-corner -int 13
 defaults write com.apple.dock wvous-bl-modifier -int 0
 
-# Bottom right → Start screen saver
+# Bottom right → Start Screen Saver
 defaults write com.apple.dock wvous-br-corner -int 5
 defaults write com.apple.dock wvous-br-modifier -int 0
 
@@ -150,11 +153,23 @@ e_info "==> Finder settings"
 # Show status bar
 defaults write com.apple.finder ShowStatusBar -bool true
 
+# Show path bar
+defaults write com.apple.finder "ShowPathbar" -bool "true"
+
+# Set default view style to list
+defaults write com.apple.finder "FXPreferredViewStyle" -string "Nlsv"
+
+# Keep folders on top when sorting by name
+defaults write com.apple.finder "_FXSortFoldersFirst" -bool "true"
+
 # Show all filename extensions
 defaults write -g AppleShowAllExtensions -bool true
 
 # Disable the warning when changing a file extension
 defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
+
+# Automatically empty bin after 30 days
+defaults write com.apple.finder "FXRemoveOldTrashItems" -bool "true"
 
 # Disable the warning before emptying the Trash
 defaults write com.apple.finder WarnOnEmptyTrash -bool false
@@ -167,6 +182,11 @@ defaults write com.apple.finder QuitMenuItem -bool true
 
 # Display full POSIX path as window title
 defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
+
+# Set the default search scope to the current folder when performing a search
+defaults write com.apple.finder "FXDefaultSearchScope" -string "SCcf"
+
+killall Finder
 
 
 ## Panels
