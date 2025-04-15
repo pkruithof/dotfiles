@@ -1,4 +1,4 @@
-brew 'antibody'
+brew 'antidote'
 brew 'bash'
 brew 'bash-completion'
 brew 'zsh'

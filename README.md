@@ -7,7 +7,7 @@ This is my collection of dotfiles. There are many like it but this one is mine.
 It does the following:
 
 * configures zsh shell
-* installs antibody as plugin manager
+* installs antidote as plugin manager
 * installs some useful zsh plugins
 * sets up powerlevel10k prompt
 * sets up configuration files for various programs like git, curl, ssh, etc.

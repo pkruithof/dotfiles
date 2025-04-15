@@ -53,10 +53,9 @@ install_dotfiles
 install_git_config
 
 # configure shell plugins/prompt
-install_antibody
+install_antidote
 
 # configure other stuff
-copy_hosts_file
 configure_docker
 
 printf "\n"

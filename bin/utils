@@ -140,19 +140,6 @@ install_dotfiles () {
   e_success "dotfiles symlinked"
 }
 
-copy_hosts_file () {
-  e_header "Add custom hosts to /etc/hosts"
-
-  HEADER="### CUSTOM HOSTS ###"
-  if ! grep "${HEADER}" /etc/hosts > /dev/null 2>&1; then
-    hosts=$(cat "${HOME}/Library/Mobile Documents/com~apple~CloudDocs/Settings/etc/hosts")
-    echo -e "\n\n${HEADER}\n\n${hosts}\n" | (sudo sh -c 'tee -a /etc/hosts') > /dev/null 2>&1
-    e_success "added hosts from backup to /etc/hosts"
-  else
-    e_success "hosts already added"
-  fi
-}
-
 install_git_config () {
   e_header "Configuring git"
 
@@ -189,11 +176,10 @@ install_homebrew() {
   e_success "done"
 }
 
-install_antibody () {
-  e_header "Configuring antibody"
-  antibody bundle < "${DOTFILES_ROOT}/zsh/plugins" > ~/.zsh/plugins
-  antibody update
-  e_success "zsh plugins and prompt installed"
+install_antidote () {
+  e_header "Configuring antidote"
+  antidote update
+  e_success "done"
 }
 
 configure_docker() {
