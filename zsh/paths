@@ -3,34 +3,14 @@
 #
 # Paths
 #
-typeset -gU cdpath fpath mailpath manpath path
-typeset -gUT INFOPATH infopath
-
-# Set the the list of directories that cd searches.
-# cdpath=(
-#   $cdpath
-# )
+typeset -gU fpath manpath path
 
 # Set the list of directories that Zsh searches for programs.
 path=(
   "${BREWPATH}/opt/coreutils/libexec/gnubin"
   "${BREWPATH}/opt/findutils/libexec/gnubin"
-  "${BREWPATH}/opt/python/libexec/bin"
-  "${BREWPATH}/opt/ruby/bin"
-  "${BREWPATH}/lib/ruby/gems/3.1.0/bin"
-  "${BREWPATH}/bin"
-  /opt/local/bin
-  /usr/local/{bin,sbin}
   $path
-  /usr/{bin,sbin}
   "${HOME}/bin"
-  "${HOME}/.composer/bin"
-  "${HOME}/.docker/bin"
-)
-
-infopath=(
-  /usr/share/info
-  $infopath
 )
 
 manpath=(
@@ -44,7 +24,7 @@ manpath=(
 
 fpath=(
   "${HOME}/.zsh"
-  "${BREWPATH}/share/zsh-completions"
-  "${BREWPATH}/share/zsh/site-functions"
   $fpath
 )
+
+eval "$(${BREWPATH}/bin/brew shellenv)"
