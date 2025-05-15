@@ -11,6 +11,7 @@ path=(
   "${BREWPATH}/opt/findutils/libexec/gnubin"
   $path
   "${HOME}/bin"
+  /Applications/PhpStorm.app/Contents/MacOS
 )
 
 manpath=(
