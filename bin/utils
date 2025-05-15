@@ -178,6 +178,9 @@ install_homebrew() {
 
 install_antidote () {
   e_header "Configuring antidote"
+  if ! type_exists antidote; then
+    source "${BREWPATH}/opt/antidote/share/antidote/antidote.zsh"
+  fi
   antidote update
   e_success "done"
 }
@@ -186,7 +189,7 @@ configure_docker() {
   e_header "Configuring Docker"
   if ! type_exists docker; then
     e_warning "Docker not yet installed, run dotfiles again after installing"
-    return 1
+    return 0
   fi
 
   docker completion zsh > "${DOTFILES_ROOT}/zsh/.completion/docker"
