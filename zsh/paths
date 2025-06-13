@@ -11,6 +11,8 @@ path=(
   "${BREWPATH}/opt/findutils/libexec/gnubin"
   $path
   "${HOME}/bin"
+  "${HOME}/.local/bin"
+  "${HOME}/.docker/bin"
   /Applications/PhpStorm.app/Contents/MacOS
 )
 
