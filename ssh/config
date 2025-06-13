@@ -8,10 +8,15 @@ Host github.com
   UseKeychain yes
   IdentityFile ~/.ssh/id_ed25519
 
+Host gitlab.com
+  PreferredAuthentications publickey
+  AddKeysToAgent yes
+  UseKeychain yes
+  IdentityFile ~/.ssh/id_ed25519
+
 Host *
   AddKeysToAgent yes
   UseKeychain yes
   ServerAliveInterval 60
   ServerAliveCountMax 3
   AddressFamily inet
-
