@@ -7,11 +7,14 @@
     branches = branch -a
     remotes = remote -v
 
+    # Show default branch
+    default-branch = symbolic-ref --short refs/remotes/origin/HEAD
+
     # Pull using rebase
     p = pull
 
     # Rebase current branch
-    r = !git fetch && git rebase origin/master
+    r = !git fetch && git rebase $(git default-branch)
 
     # Clone a repository including all submodules
     c = clone --recursive
@@ -22,11 +25,13 @@
     # Just a shortcut for checkout
     co = checkout
 
-    # Checkout master
-    m = checkout master
+    # Checkout default branch (main/master/develop)
+    d = "!git default-branch | sed 's@^origin/@@' | xargs -n 1 git checkout"
+    m = d
 
-    # Checkout master and pull
-    mp = !git m && git p
+    # Checkout default branch and pull
+    dp = !git d && git p
+    mp = dp
 
     # Amend the currently staged files to the latest commit
     amend = commit --amend --reuse-message=HEAD
