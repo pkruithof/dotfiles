@@ -9,6 +9,10 @@ Host github.com
   IdentityFile ~/.ssh/id_ed25519
 
 Host gitlab.com
+  # https://about.gitlab.com/blog/gitlab-dot-com-now-supports-an-alternate-git-plus-ssh-port/
+  Hostname altssh.gitlab.com
+  User git
+  Port 443
   PreferredAuthentications publickey
   AddKeysToAgent yes
   UseKeychain yes
