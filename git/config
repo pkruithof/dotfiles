@@ -13,6 +13,9 @@
     # Pull using rebase
     p = pull
 
+    # Pull and push
+    pp = !git p && git push
+ 
     # Rebase current branch
     r = !git fetch && git rebase $(git default-branch)
 
