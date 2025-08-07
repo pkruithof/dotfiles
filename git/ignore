@@ -26,3 +26,5 @@ Thumbs.db
 *.sass-cache
 *.vault-password
 
+compose.override.yaml
+
