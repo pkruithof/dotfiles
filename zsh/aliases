@@ -42,6 +42,7 @@ alias gh="github"
 alias ci="cs && stan"
 alias p="dc run --rm php bash"
 alias t="yo test"
+alias ts="yo test:setup"
 alias behat="yo test:behat -fprogress"
 
 
