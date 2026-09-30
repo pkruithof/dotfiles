@@ -27,4 +27,4 @@ Thumbs.db
 *.vault-password
 
 compose.override.yaml
-
+**/.claude/.cc-writes/
