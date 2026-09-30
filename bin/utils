@@ -145,10 +145,11 @@ install_git_config () {
 
   GITRC_FILE="${DOTFILES_ROOT}/git/rc"
   if [[ ! -f "${GITRC_FILE}" ]]; then
-    if confirm "Would you like to specify your git username/email address?"; then
-      read "username?username: "
+    if confirm "Would you like to specify your git name/email address?"; then
+      read "name?name [Peter Kruithof]: "
+      name="${name:-Peter Kruithof}"
       read "email?email: "
-      echo -e "git config --global user.name \"${username}\"\ngit config --global user.email \"${email}\"" >> "${GITRC_FILE}"
+      echo -e "git config --global user.name \"${name}\"\ngit config --global user.email \"${email}\"" >> "${GITRC_FILE}"
     else
       echo -e "# put 'git config --global' commands here\n" > "${GITRC_FILE}"
     fi
@@ -156,9 +157,9 @@ install_git_config () {
 
   if ! git config --global --get user.name > /dev/null 2>&1; then
     source "${GITRC_FILE}"
-    e_success "git username/email is configured"
+    e_success "git name/email is configured"
   else
-    e_success "git username/email already configured"
+    e_success "git name/email already configured"
   fi
 }
 
