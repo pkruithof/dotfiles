@@ -39,10 +39,10 @@ brew 'python'
 brew 'ruby'
 
 brew 'cloud-sql-proxy'
-brew 'docker-completion'
+brew 'docker'
 brew 'kubernetes-cli'
 brew 'kubeconform'
 brew 'kubectx'
 brew 'derailed/k9s/k9s'
 
-cask 'google-cloud-sdk'
+cask 'gcloud-cli'
