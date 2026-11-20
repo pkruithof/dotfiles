@@ -23,7 +23,6 @@ brew 'zlib'
 
 brew 'ncdu'
 brew 'pgrep'
-brew 'tldr'
 brew 'tree'
 brew 'watch'
 
