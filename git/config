@@ -60,7 +60,7 @@
     dm = delete-merged
 
     # Removes gone and merged local branches, prunes the remote and optimizes the repository
-    trim = "!git d && git remote prune origin && git dm && git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d && git gc"
+    trim = "!git dm && git remote prune origin && git branch --merged | grep -v '\\*' | xargs -r -n 1 git branch -d && git gc"
 
     # Resets any changes made to the repository
     reset = !git clean -dfi && git reset --hard && git stash clear
