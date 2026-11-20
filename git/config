@@ -1,6 +1,6 @@
 [alias]
     # List aliases
-    aliases = config --get-regexp alias
+    aliases = config --get-regexp ^alias[.]
 
     # Show verbose output about tags, branches or remotes
     tags = tag -l
@@ -40,8 +40,9 @@
     sync = !git dp && git delete-merged
     s = sync
 
-    # Amend the currently staged files to the latest commit
+    # Change the latest commit
     amend = commit --amend --reuse-message=HEAD
+    undo = reset --soft HEAD^
 
     # Add everything and amend the last commit
     aaa = !git add -A && git amend
@@ -61,9 +62,6 @@
 
     # Removes gone and merged local branches, prunes the remote and optimizes the repository
     trim = "!git dm && git remote prune origin && git branch --merged | grep -v '\\*' | xargs -r -n 1 git branch -d && git gc"
-
-    # Resets any changes made to the repository
-    reset = !git clean -dfi && git reset --hard && git stash clear
 
 [apply]
     # Detect whitespace errors when applying a patch
@@ -114,6 +112,7 @@
     algorithm = histogram
     tool = vimdiff
     mnemonicPrefix = true
+    colorMoved = default
 
     # Detect copies as well as renames
     renames = copies
@@ -132,6 +131,7 @@
 [merge]
     # Include summaries of merged commits in newly created merge commit messages
     log = true
+    conflictStyle = zdiff3
 
 [pretty]
     # tut: http://gitimmersion.com/lab_10.html
