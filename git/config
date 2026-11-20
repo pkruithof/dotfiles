@@ -15,7 +15,7 @@
 
     # Pull and push
     pp = !git p && git push
- 
+
     # Rebase current branch
     r = !git fetch && git rebase $(git default-branch)
 
@@ -36,6 +36,10 @@
     dp = !git d && git p
     mp = dp
 
+    # Same as dp/mp but also deletes merged branches
+    sync = !git dp && git delete-merged
+    s = sync
+
     # Amend the currently staged files to the latest commit
     amend = commit --amend --reuse-message=HEAD
 
@@ -51,12 +55,12 @@
     # shortcut for squashing commits
     squash = rebase -i
 
-    # Remove branches that have already been merged with master
-    # a.k.a. ‘delete merged’
-    dm = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
+    # Delete local branches whose remote branch is gone, i.e. merged (best run after a fetch)
+    delete-merged = !git branch --format '%(refname:short) %(upstream:track)' | awk '$2 == \"[gone]\" { print $1 }' | xargs -r git branch -D
+    dm = delete-merged
 
-    # Removes obsolete files/branches and optimizes the local repository
-    trim = !git remote prune origin && git dm && git gc
+    # Removes gone and merged local branches, prunes the remote and optimizes the repository
+    trim = "!git d && git remote prune origin && git dm && git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d && git gc"
 
     # Resets any changes made to the repository
     reset = !git clean -dfi && git reset --hard && git stash clear
