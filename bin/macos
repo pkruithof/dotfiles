@@ -203,6 +203,9 @@ defaults write -g AppleKeyboardUIMode -int 2
 ## Safari
 e_info "==> Safari settings"
 
+# Disable "pull to refresh"
+#defaults write com.apple.Safari DebugDisableRefreshControl 1
+
 # Enable debug menu
 #defaults write com.apple.Safari IncludeDevelopMenu -bool true
 
