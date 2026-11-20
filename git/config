@@ -61,7 +61,7 @@
     dm = delete-merged
 
     # Removes gone and merged local branches, prunes the remote and optimizes the repository
-    trim = "!git dm && git remote prune origin && git branch --merged | grep -v '\\*' | xargs -r -n 1 git branch -d && git gc"
+    trim = "!git dp && git remote prune origin && git dm && git branch --merged | grep -v '\\*' | xargs -r -n 1 git branch -d && git gc"
 
 [apply]
     # Detect whitespace errors when applying a patch
