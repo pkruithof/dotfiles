@@ -7,7 +7,6 @@ path+=("$BREWPATH/bin")
 
 # ensure common directories
 mkdir -p "${HOME}/bin"
-mkdir -p "${HOME}/.k9s"
 mkdir -p "${HOME}/.ssh"
 mkdir -p "${HOME}/.zsh"
 
@@ -135,7 +134,7 @@ install_dotfiles () {
   dotfile "ssh/config"          ".ssh/config"
 
   # K9S
-  dotfile "k9s/views.yml"       ".k9s/views.yml"
+  dotfile "k9s/views.yml"       "Library/Application Support/k9s/views.yaml"
 
   e_success "dotfiles symlinked"
 }
